@@ -1,0 +1,21 @@
+.signup-main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-nav {
+  background-color: var(--bg-section-nav);
+}
+
+.signup-btn-back-container {
+  width: fit-content;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.signup-h1 {
+  color: var(--text-primary);
+  font-family: var(--font-tertiary);
+  text-align: center;
+  font-size: 3.5em;
+}

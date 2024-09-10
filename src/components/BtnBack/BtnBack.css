@@ -1,0 +1,17 @@
+.btn-back-container {
+  display: flex;
+  padding: 5px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.btn-back-icon {
+  font-size: 2em;
+  color: var(--text-primary);
+}
+
+.btn-back-span {
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 1.5em;
+}
