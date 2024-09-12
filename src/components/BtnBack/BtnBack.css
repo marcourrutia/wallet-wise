@@ -4,15 +4,26 @@
   gap: 5px;
   cursor: pointer;
   width: fit-content;
+  transition: 0.2s;
+}
+
+.btn-back-container:hover {
+  transform: scale(1.1);
+}
+
+.btn-back-container:active {
+  transform: scale(0.9);
 }
 
 .btn-back-icon {
   font-size: 2em;
   color: var(--text-primary);
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.4));
 }
 
 .btn-back-span {
   color: var(--text-primary);
   font-family: var(--font-primary);
   font-size: 1.5em;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
 }
