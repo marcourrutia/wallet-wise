@@ -3,6 +3,7 @@
   padding: 5px;
   gap: 5px;
   cursor: pointer;
+  width: fit-content;
 }
 
 .btn-back-icon {
