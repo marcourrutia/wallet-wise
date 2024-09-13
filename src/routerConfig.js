@@ -1,8 +1,8 @@
-import {} from "./views";
+import MantenedorMain from "./components/MantenedorMain";
 
 export const routes = [
   {
-    path: "/home",
-    element: <Home />,
+    path: "/MantenedorMain",
+    element: <MantenedorMain />,
   },
 ];
