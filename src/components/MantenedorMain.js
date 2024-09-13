@@ -104,7 +104,7 @@ function MantenedorMain() {
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                     >
-                      Launch demo modal
+                      Agrega ➕
                     </button>
   
                     <div
@@ -118,7 +118,7 @@ function MantenedorMain() {
                         <div class="modal-content">
                           <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
-                              Modal title
+                              Agrega una Categoria
                             </h1>
                             <button
                               type="button"
@@ -127,7 +127,32 @@ function MantenedorMain() {
                               aria-label="Close"
                             ></button>
                           </div>
-                          <div class="modal-body">...</div>
+                          <div className="modal-body">
+                            <div className="mb-3">
+                              <label
+                                for="exampleInputEmail1"
+                                className="form-label"
+                              >
+                                Nombre del Categoria:
+                              </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="formGroupExampleInput"
+                                placeholder="Agrega la Categoria"
+                              />
+                            </div>
+                            <div>
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                                <option selected>Selecciona una</option>
+                                <option value="1">Egreso</option>
+                                <option value="2">Ingreso</option>
+                              </select>
+                            </div>
+                          </div>
                           <div class="modal-footer">
                             <button
                               type="button"
@@ -151,13 +176,15 @@ function MantenedorMain() {
                       <thead class="table-light">
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Nombre</th>
+                          <th scope="col">Tipo de movimiento</th>
+                          <th scope="col">Nombre de la Categoria</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>1</td>
                           <td>Ingresos</td>
+                          <td>Ahorros</td>
                         </tr>
                       </tbody>
                     </table>
@@ -197,7 +224,7 @@ function MantenedorMain() {
                               className="modal-title fs-5"
                               id="staticBackdropLabel"
                             >
-                              Agrega un tipo de movimiento
+                              Agrega una Transaccion
                             </h1>
                             <button
                               type="button"
@@ -212,14 +239,26 @@ function MantenedorMain() {
                                 for="exampleInputEmail1"
                                 className="form-label"
                               >
-                                Nombre del movimiento:
+                                Nombre de la Transaccion:
                               </label>
                               <input
                                 type="text"
                                 class="form-control"
                                 id="formGroupExampleInput"
-                                placeholder="Agrega el movimiento"
+                                placeholder="Agrega la transaccion"
                               />
+                            </div>
+                            <div>
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                                <option selected>selecciona una</option>
+                                <option value="1">Ingresos</option>
+                                <option value="2">Gastos fijos</option>
+                                <option value="3">Gastos variables</option>
+                                <option value="3">Ahorro</option>
+                              </select>
                             </div>
                           </div>
                           <div className="modal-footer">
@@ -245,13 +284,15 @@ function MantenedorMain() {
                       <thead class="table-light">
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Nombre</th>
+                          <th scope="col">Nombre de categoria</th>
+                          <th scope="col">Nombre de la transaccion</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>Ingresos</td>
+                          <td>Gasto fijos</td>
+                          <td>Arriendo</td>
                         </tr>
                       </tbody>
                     </table>
