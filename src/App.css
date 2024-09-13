@@ -1,2 +1,79 @@
 .App {
+    text-align: center;
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+    z-index: 1030;
+    width: 100%;
+    position: fixed;
+   
+}
+
+.navbarStyle {
+    background: var(--bg-section-nav);
+    height: 90px;   
+}
+
+.navbar-link {
+    color: var(--text-primary);
+}
+
+.navbar-link:hover {
+    color: yellow;
+}
+
+.navbar-brand {
+    color: var(--text-primary);
+}
+
+.navbar-toggler{
+    color: var(--text-primary);
+}
+
+.img-home{
+    width: 100%;
+    height: 650px;
+    
+    padding: 0;
+}
+
+.card-main{
+    width: 60%;
+    height: 400px;
+    justify-content: center;
+    display: flex;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 8%;
+}
+
+.content-fluid-mission{
+    background: var(--bg-section-nav);
+    height: 500px;
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 100px;
+    z-index: 1000;
+}
+
+.container-fluid-principal{
+    padding-top: 90px;
+}
+
+.image-container{
+    position: relative;
+}
+
+.text-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(10, 10, 10, 10.7);
+  
 }

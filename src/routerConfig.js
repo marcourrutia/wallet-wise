@@ -1,8 +1,14 @@
-import {} from "./views";
+import {Principal} from "./views";
+import {Login} from "./views";
 
 export const routes = [
+  
   {
-    path: "/home",
-    element: <Home />,
+    path: "/",
+    element: <Principal />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ];
