@@ -1,1 +1,153 @@
+.signup-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
 
+.signup-nav {
+  background-color: var(--bg-section-nav);
+}
+
+.signup-btn-back-container {
+  width: fit-content;
+  margin-left: 50px;
+}
+
+.signup-h1 {
+  color: var(--text-primary);
+  font-family: var(--font-tertiary);
+  text-align: center;
+  font-size: 3.5em;
+  text-shadow: 5px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+  text-align: center;
+  margin: 0 8vw;
+}
+
+.divider::before {
+  margin-left: -50%;
+  right: 0;
+}
+
+.divider::after {
+  left: 0;
+  margin-right: -50%;
+}
+
+.divider::before,
+.divider::after {
+  background-color: var(--text-primary);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.divider span {
+  margin: 0 16px;
+  font-size: 1.2em;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.signup-form {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.signup-inputs-container {
+  display: grid;
+  width: 450px;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.xl {
+  grid-column: 1/3;
+}
+
+.login-inputs-container {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  gap: 15px;
+}
+
+@media (max-width: 500px) {
+  .signup-inputs-container,
+  .login-inputs-container {
+    width: 357px;
+  }
+}
+
+.signup-btn-form {
+  width: fit-content;
+  padding: 5px 20px;
+  align-self: center;
+  background-color: var(--btn-primary);
+  border: 3px solid var(--btn-primary);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-family: var(--font-tertiary);
+  font-size: 1.3em;
+  transition: 0.2s;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.signup-btn-form:hover {
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.signup-btn-form:active {
+  transform: scale(0.9);
+}
+
+.label-input-contain {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label-input-contain label,
+.login-span {
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: 1.3em;
+  width: fit-content;
+  transition: 0.2s;
+  text-shadow: 5px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+.login-span:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.login-span:active {
+  transform: scale(0.9);
+}
+
+.label-input-contain input {
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  border-radius: 7px;
+  width: 100%;
+  height: 2.5em;
+  color: var(--text-primary);
+  font-size: 1.3em;
+  padding: 0 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.signup-btn-google-contain {
+  width: fit-content;
+  align-self: center;
+}

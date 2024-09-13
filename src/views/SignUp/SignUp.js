@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BtnBack, BtnGoogle, MainLogo } from "../../components";
-import "./SignUp.css";
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +26,7 @@ export const SignUp = () => {
     e.preventDefault();
     if (hasEmptyFields(formData)) {
       alert("Debe completar todos los datos");
-    } else if (formData.password != formData.rePassword) {
+    } else if (formData.password !== formData.rePassword) {
       alert("Passwords do not match");
     } else {
       alert(JSON.stringify(formData));
