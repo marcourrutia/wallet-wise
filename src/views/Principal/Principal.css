@@ -1,0 +1,13 @@
+.img-home {
+    width: 100%;
+    height: 650px;
+    padding: 0;
+}
+
+.container-fluid-principal {
+    padding-top: 90px;
+}
+
+.image-container {
+    position: relative;
+}

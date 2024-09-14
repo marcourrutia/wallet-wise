@@ -1,6 +1,10 @@
-import { LogIn, SignUp } from "./views";
+import { Principal , LogIn, SignUp} from "./views";
 
 export const routes = [
+  {
+    path: "/",
+    element: <Principal />,
+  },
   {
     path: "/signup",
     element: <SignUp />,
