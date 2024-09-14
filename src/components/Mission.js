@@ -10,7 +10,6 @@ function Mission() {
   });
 
   useEffect(() => {
-    console.log("Mission component mounted");
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       let updatedColors = {

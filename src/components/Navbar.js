@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React from "react";
 
 function Navbar() {
@@ -47,7 +46,7 @@ function Navbar() {
                   <div className="dropdown">
                     <ul className="navbar-nav">
                       <Link
-                        typy="button"
+                        type="button"
                         className="nav-link navbar-link dropdown-toggle"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -64,9 +63,9 @@ function Navbar() {
                           <hr className="dropdown-divider" />
                         </li>
                         <li>
-                          <Link className="dropdown-item" href="#">
+                          <a className="dropdown-item" href="#service-view">
                             Services
-                          </Link>
+                          </a>
                         </li>
                       </ul>
                     </ul>

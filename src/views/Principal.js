@@ -1,10 +1,10 @@
-import { Mission, Vision, Support } from "../components";
-import React, { useRef } from "react";
+import { Mission, Service, Support } from "../components";
+import React from "react";
 
 function Principal() {
   return (
     <div className="container-fluid img-home container-fluid-principal">
-      <div class="image-container">
+      <div className="image-container">
         <img className="img-home" src="../home1.jpg" alt="logo" />
         <div className="text-img">
           <h1>Management your finances wisely</h1>
@@ -12,7 +12,7 @@ function Principal() {
         </div>
       </div>
       <Mission />
-
+      <Service />
       <Support />
     </div>
   );
