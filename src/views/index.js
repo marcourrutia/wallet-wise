@@ -1,2 +1,3 @@
-export {default as Principal} from "./Principal"
-export {default as Login} from "./Principal"
+export { Principal } from "./Principal/Principal"
+export { SignUp } from "./SignUp/SignUp";
+export { LogIn } from "./LogIn/LogIn";
