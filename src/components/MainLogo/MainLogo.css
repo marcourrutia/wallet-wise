@@ -1,0 +1,20 @@
+.main-logo-container {
+  display: flex;
+  padding: 10px;
+  gap: 15px;
+  align-items: center;
+  width: fit-content;
+}
+
+.main-logo-img-container {
+  width: 90px;
+}
+.main-logo-img {
+  width: 100%;
+}
+
+.main-logo-span {
+  font-family: var(--font-primary);
+  font-size: 1.6em;
+  color: var(--text-primary);
+}

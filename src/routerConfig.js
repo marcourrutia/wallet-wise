@@ -1,8 +1,12 @@
-import {} from "./views";
+import { LogIn, SignUp } from "./views";
 
 export const routes = [
   {
-    path: "/home",
-    element: <Home />,
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <LogIn />,
   },
 ];
