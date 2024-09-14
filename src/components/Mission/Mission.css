@@ -1,0 +1,14 @@
+.content-fluid-mission {
+    background: var(--bg-section-nav);
+    height: 500px;
+}
+
+.card-main {
+    width: 60%;
+    height: 400px;
+    justify-content: center;
+    display: flex;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 8%;
+  }

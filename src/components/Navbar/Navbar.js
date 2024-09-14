@@ -1,20 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
+import "./Navbar.css";
 
-function Navbar() {
+export const Navbar = () => {
   const location = useLocation();
   const isLoginView = location.pathname === "/login";
+  const isSignupView = location.pathname === "/signup";
+
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid navbarStyle d-flex justify-content-between align-items-center">
         <Link className="navbar-brand navbar-link" to="/">
           <div>
-            <img src="../logoWallet.jpeg" alt="logo" width="30" height="24" />
+            <img src="../logoWalletWise.png" alt="logo" width="30" height="24" />
             <span className="ms-2">WalletWise</span>
           </div>
         </Link>
-        {!isLoginView && (
+        {!isLoginView && !isSignupView && (
           <>
             <div className="d-lg-none ms-auto">
               <Link type="button" className="btn btn-light" to="/login">
@@ -39,7 +42,7 @@ function Navbar() {
                   <a
                     className="nav-link navbar-link"
                     aria-current="page"
-                    href="#"
+                    href="#support-view"
                   >
                     Support
                   </a>
@@ -70,9 +73,9 @@ function Navbar() {
                       </ul>
                     </ul>
                   </div>
-                  <a className="nav-link navbar-link" href="#">
+                  <Link className="nav-link navbar-link" to="/signup">
                     Sign up
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="d-none d-lg-flex">
@@ -86,6 +89,4 @@ function Navbar() {
       </div>
     </nav>
   );
-}
-
-export default Navbar;
+};

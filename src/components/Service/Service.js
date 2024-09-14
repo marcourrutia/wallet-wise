@@ -1,4 +1,7 @@
-function Service() {
+import React from "react";
+import "./Service.css"
+
+export const Service = () => {
   return (
     <div className="content-fluid content-fluid-carousel" id="service-view">
       <div
@@ -49,6 +52,4 @@ function Service() {
       </div>
     </div>
   );
-}
-
-export default Service;
+};

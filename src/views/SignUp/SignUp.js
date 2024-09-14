@@ -35,9 +35,6 @@ export const SignUp = () => {
 
   return (
     <div className="signup-main-container">
-      <div className="signup-nav">
-        <MainLogo />
-      </div>
       <div className="signup-btn-back-container">
         <BtnBack />
       </div>
@@ -45,13 +42,13 @@ export const SignUp = () => {
       <div className="signup-btn-google-contain">
         <BtnGoogle />
       </div>
-      <div class="divider">
+      <div className="divider">
         <span>OR</span>
       </div>
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="signup-inputs-container">
           <div className="label-input-contain xl">
-            <label for="inputEmail">Email</label>
+            <label htmlFor="inputEmail">Email</label>
             <input
               id="inputEmail"
               type="email"

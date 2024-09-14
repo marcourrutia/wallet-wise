@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "./Mission.css"
 
-function Mission() {
+export const Mission = () => {
   
   const [colorMap, setColorMap] = useState({
     word1: "#008384",
@@ -88,6 +89,5 @@ function Mission() {
       </div>
     </div>
   );
-}
+};
 
-export default Mission;

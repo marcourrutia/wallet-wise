@@ -1,7 +1,7 @@
-export {default as Mission} from "./Mission"
-export {default as Navbar} from "./Navbar"
-export {default as Service} from "./Service"
-export {default as Support} from "./Support"
+export { Mission } from "./Mission/Mission"
+export { Navbar } from "./Navbar/Navbar"
+export { Service } from "./Service/Service"
+export { Support } from "./Support/Support"
 
 export { MainLogo } from "./MainLogo/MainLogo";
 export { BtnBack } from "./BtnBack/BtnBack";

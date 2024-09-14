@@ -1,0 +1,28 @@
+.navbarStyle {
+  background: var(--bg-section-nav);
+  height: 90px;
+}
+
+.navbar-link {
+  color: var(--text-primary);
+}
+
+.navbar-link:hover {
+  color: rgb(231, 231, 118);
+}
+
+.navbar-brand {
+  color: var(--text-primary);
+}
+
+.navbar-toggler {
+  color: var(--text-primary);
+}
+
+.navbar {
+  margin: 0;
+  padding: 0;
+  z-index: 1030;
+  width: 100%;
+  position: fixed;
+}

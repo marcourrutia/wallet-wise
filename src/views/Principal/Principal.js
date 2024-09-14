@@ -1,7 +1,8 @@
-import { Mission, Service, Support } from "../components";
+import { Mission, Service, Support } from "../../components";
 import React from "react";
+import "./Principal.css";
 
-function Principal() {
+export const Principal = () => {
   return (
     <div className="container-fluid img-home container-fluid-principal">
       <div className="image-container">
@@ -16,6 +17,4 @@ function Principal() {
       <Support />
     </div>
   );
-}
-
-export default Principal;
+};
