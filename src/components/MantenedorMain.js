@@ -71,16 +71,25 @@ function MantenedorMain() {
                     <table class="table table-hover table-nowrap">
                       <thead class="table-light">
                         <tr>
+                        <th>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </th>
                           <th scope="col">ID</th>
                           <th scope="col">Nombre</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
+                        <td>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </td>
                           <td>1</td>
                           <td>Ingresos</td>
                         </tr>
                         <tr>
+                        <td>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </td>
                           <td>2</td>
                           <td>Egreso</td>
                         </tr>
@@ -142,6 +151,12 @@ function MantenedorMain() {
                                 placeholder="Agrega la Categoria"
                               />
                             </div>
+                            <label
+                                for="exampleInputEmail1"
+                                className="form-label"
+                              >
+                                Selecciona el tipo de movimiento asociado:
+                              </label>
                             <div>
                               <select
                                 class="form-select"
@@ -175,6 +190,9 @@ function MantenedorMain() {
                     <table class="table table-hover table-nowrap">
                       <thead class="table-light">
                         <tr>
+                        <th>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </th>
                           <th scope="col">ID</th>
                           <th scope="col">Tipo de movimiento</th>
                           <th scope="col">Nombre de la Categoria</th>
@@ -182,6 +200,9 @@ function MantenedorMain() {
                       </thead>
                       <tbody>
                         <tr>
+                        <td>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </td>
                           <td>1</td>
                           <td>Ingresos</td>
                           <td>Ahorros</td>
@@ -249,6 +270,12 @@ function MantenedorMain() {
                               />
                             </div>
                             <div>
+                            <label
+                                for="exampleInputEmail1"
+                                className="form-label"
+                              >
+                                Selecciona la categoria asociada:
+                              </label>
                               <select
                                 class="form-select"
                                 aria-label="Default select example"
@@ -283,6 +310,9 @@ function MantenedorMain() {
                     <table class="table table-hover table-nowrap">
                       <thead class="table-light">
                         <tr>
+                          <th>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </th>
                           <th scope="col">ID</th>
                           <th scope="col">Nombre de categoria</th>
                           <th scope="col">Nombre de la transaccion</th>
@@ -290,6 +320,9 @@ function MantenedorMain() {
                       </thead>
                       <tbody>
                         <tr>
+                        <th>
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched"/>
+                          </th>
                           <td>1</td>
                           <td>Gasto fijos</td>
                           <td>Arriendo</td>
