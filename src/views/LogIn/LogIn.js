@@ -23,9 +23,7 @@ export const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const emailError = validateEmail(formData.email);
-    const passwordEmpty = formData.password
-      ? false
-      : "Password cannot be empty.";
+    const passwordEmpty = formData.password ? "" : "Password cannot be empty.";
 
     if (emailError || passwordEmpty) {
       setModalMessage(emailError + "\n" + passwordEmpty);
@@ -37,7 +35,8 @@ export const LogIn = () => {
         setModalMessage("Login failed: " + error);
         setShowModal(true);
       } else {
-        console.log(data);
+        setModalMessage(data.msg);
+        setShowModal(true);
       }
     }
   };

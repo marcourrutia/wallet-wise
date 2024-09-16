@@ -4,7 +4,7 @@ export const validateEmail = (email) => {
     return "Email cannot be empty.";
   }
   if (!emailRegex.test(email)) {
-    return "Invalid email format. Make sure it follows: example@example.com";
+    return "Invalid email format. \nMake sure it follows: example@example.com";
   }
   return "";
 };
