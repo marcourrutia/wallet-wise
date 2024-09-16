@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { BtnBack, BtnGoogle, MainLogo } from "../../components";
+import { BtnBack, BtnGoogle, MsgModal } from "../../components";
+import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
 
 export const LogIn = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const closeModal = () => setShowModal(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     setFormData({
@@ -17,24 +20,30 @@ export const LogIn = () => {
     });
   };
 
-  const isEmpty = (value) => value === "";
-  const hasEmptyFields = (obj) => {
-    return Object.values(obj).some(isEmpty);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (hasEmptyFields(formData)) {
-      alert("Debe completar todos los datos");
-    } else if (formData.password != formData.rePassword) {
-      alert("Passwords do not match");
+    const emailError = validateEmail(formData.email);
+    const passwordEmpty = formData.password ? "" : "Password cannot be empty.";
+
+    if (emailError || passwordEmpty) {
+      setModalMessage(emailError + "\n" + passwordEmpty);
+      setShowModal(true);
     } else {
-      alert(JSON.stringify(formData));
+      const { data, error } = await post("/login", formData);
+
+      if (error) {
+        setModalMessage("Login failed: " + error);
+        setShowModal(true);
+      } else {
+        setModalMessage(data.msg);
+        setShowModal(true);
+      }
     }
   };
 
   return (
     <div className="signup-main-container">
+      {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
       <div className="signup-btn-back-container">
         <BtnBack />
       </div>
