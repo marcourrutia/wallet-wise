@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BtnBack, BtnGoogle, MainLogo } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -39,9 +41,10 @@ export const LogIn = () => {
         <BtnBack />
       </div>
       <span className="signup-h1">Log in</span>
-      <div className="signup-btn-google-contain">
-        <BtnGoogle />
-      </div>
+        <div className="signup-btn-google-contain">
+          <BtnGoogle />
+        </div>
+    
       <div className="divider">
         <span>OR</span>
       </div>

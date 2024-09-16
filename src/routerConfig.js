@@ -1,4 +1,4 @@
-import { Principal , LogIn, SignUp} from "./views";
+import { Home, Principal , LogIn, SignUp} from "./views";
 
 export const routes = [
   {
@@ -12,5 +12,9 @@ export const routes = [
   {
     path: "/login",
     element: <LogIn />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
 ];
