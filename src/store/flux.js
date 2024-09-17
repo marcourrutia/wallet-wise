@@ -1,12 +1,18 @@
-
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
       first_name: [],
       last_name: [],
-      email: [] 
+      email: [],
+      userId: "",
+      userFullName: "",
+      accessToken: "",
     },
     actions: {
+      setUserId: (id) => setStore({ userId: id }),
+      setUserFullName: (firstName, lastName) =>
+        setStore({ userFullName: firstName + " " + lastName }),
+      setAccessToken: (token) => setStore({ accessToken: token }),
       postToken: async (firstName, lastName, email) => {
         try {
           console.log(lastName);
@@ -18,14 +24,14 @@ const getState = ({ getActions, getStore, setStore }) => {
             body: JSON.stringify({
               first_name: firstName,
               last_name: lastName,
-              email: email 
+              email: email,
             }),
           });
 
           if (!response.ok) {
             throw new Error("There is an error");
           }
-        
+
           const data = await response.json();
           console.log("Respuesta del backend:", data);
         } catch (error) {

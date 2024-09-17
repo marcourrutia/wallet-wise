@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../../store/context";
 import { BtnBack, MsgModal } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ export const LogIn = () => {
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
+  const { actions } = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -36,8 +38,13 @@ export const LogIn = () => {
         setModalMessage("Login failed: " + error);
         setShowModal(true);
       } else {
-        setModalMessage(data.msg);
+        setModalMessage(
+          `Welcome ${data.user_first_name} ${data.user_last_name}`
+        );
         setShowModal(true);
+        actions.setUserId(data.user_id);
+        actions.setUserFullName(data.user_first_name, data.user_last_name);
+        actions.setAccessToken(data.access_token);
       }
     }
   };
@@ -76,6 +83,7 @@ export const LogIn = () => {
               name="email"
               value={formData.email}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
