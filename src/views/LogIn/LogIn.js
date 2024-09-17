@@ -32,12 +32,15 @@ export const LogIn = () => {
       setModalMessage(emailError + "\n" + passwordEmpty);
       setShowModal(true);
     } else {
-      const { data, error } = await post("/login", formData);
+      const { data, status, error } = await post("/login", formData);
 
       if (error) {
         setModalMessage("Login failed: " + error);
         setShowModal(true);
-      } else {
+      } else if (status === 400 || status === 401) {
+        setModalMessage("Login failed: " + data.msg);
+        setShowModal(true);
+      } else if (status === 200) {
         setModalMessage(
           `Welcome ${data.user_first_name} ${data.user_last_name}`
         );
