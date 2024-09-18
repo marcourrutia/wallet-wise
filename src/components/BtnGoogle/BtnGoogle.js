@@ -1,28 +1,28 @@
 import { FcGoogle } from "react-icons/fc";
 import "./BtnGoogle.css";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode }  from "jwt-decode";
-
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export const BtnGoogle = () => {
-  
+  const navigate = useNavigate();
+
   const responseGoogle = (credentialResponse) => {
-    try{
+    try {
       const decodedToken = jwtDecode(credentialResponse.credential);
+      navigate("/home");
       console.log("Información del usuario:", decodedToken);
-      console.log("por aqui entro");
-    }catch(error){
-      console.log("dio error");
+    } catch (error) {
+      console.log("Error al autenticar con Google:", error);
     }
   };
-  
+
   return (
     <div className="btn-google">
       <GoogleLogin
         onSuccess={(credentialResponse) => {
           responseGoogle(credentialResponse);
-          console.log("ingreso el usuario");
- }}
+        }}
         onError={() => {
           console.log("Login Failed");
         }}
@@ -31,6 +31,9 @@ export const BtnGoogle = () => {
             className="btn-google"
             onClick={renderProps.onClick}
             disabled={renderProps.disabled}
+            style={{
+              ...renderProps.style, // Mezcla los estilos existentes de Google con los tuyos
+            }}
           >
             <FcGoogle
               style={{
@@ -45,4 +48,3 @@ export const BtnGoogle = () => {
     </div>
   );
 };
-
