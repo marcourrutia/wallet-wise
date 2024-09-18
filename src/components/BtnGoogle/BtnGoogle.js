@@ -1,19 +1,28 @@
 import { FcGoogle } from "react-icons/fc";
 import "./BtnGoogle.css";
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode }  from "jwt-decode";
+
 
 export const BtnGoogle = () => {
-  const pruebalog=(respuesta) => {
-    console.log("respuesta paciencia");
-  }
+  
+  const responseGoogle = (credentialResponse) => {
+    try{
+      const decodedToken = jwtDecode(credentialResponse.credential);
+      console.log("Información del usuario:", decodedToken);
+      console.log("por aqui entro");
+    }catch(error){
+      console.log("dio error");
+    }
+  };
+  
   return (
     <div className="btn-google">
       <GoogleLogin
-        clientId = "866333680498-7o58cndhc6vk03g4hreeu89pga5nsd0j.apps.googleusercontent.com"
         onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-          console.log("Entrooo");
-        }}
+          responseGoogle(credentialResponse);
+          console.log("ingreso el usuario");
+ }}
         onError={() => {
           console.log("Login Failed");
         }}
@@ -36,3 +45,4 @@ export const BtnGoogle = () => {
     </div>
   );
 };
+
