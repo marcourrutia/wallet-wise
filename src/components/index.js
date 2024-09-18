@@ -1,1 +1,1 @@
-export { MantenedorMain } from "./MantenedorMain"
+export { MantenedorMain } from "../views/MantenedorMain"
