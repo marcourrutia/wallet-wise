@@ -1,6 +1,6 @@
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function MantenedorMain() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +12,15 @@ function MantenedorMain() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    // Esto es necesario para manejar el fondo oscuro del modal
+    if (isModalOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [isModalOpen]);
 
   return (
     <div className="container">
@@ -138,82 +147,78 @@ function MantenedorMain() {
                 <div className="hstack gap-2 justify-content-sm-end p-2">
                   <button
                     type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    className="btn btn-primary"
+                    onClick={openModal}
                   >
-                    Agrega ➕
+                    Agregaa
                   </button>
-                  <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            Agrega una Categoria
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          <div className="mb-3">
-                            <label
-                              for="exampleInputEmail1"
-                              className="form-label"
-                            >
-                              Nombre del Categoria:
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="formGroupExampleInput"
-                              placeholder="Agrega la Categoria"
-                            />
-                          </div>
+                </div>
+              </div>
+              {isModalOpen && (
+                <div
+                  className="modal show d-block"
+                  style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1
+                          className="modal-title fs-5"
+                          id="staticBackdropLabel"
+                        >
+                          Agrega una Categoria
+                        </h1>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          onClick={closeModal}
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <div className="mb-3">
                           <label
                             for="exampleInputEmail1"
                             className="form-label"
                           >
-                            Selecciona el tipo de movimiento asociado:
+                            Nombre del Categoria:
                           </label>
-                          <div>
-                            <select
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option selected>Selecciona una</option>
-                              <option value="1">Egreso</option>
-                              <option value="2">Ingreso</option>
-                            </select>
-                          </div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="formGroupExampleInput"
+                            placeholder="Agrega la Categoria"
+                          />
                         </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
+                        <label for="exampleInputEmail1" className="form-label">
+                          Selecciona el tipo de movimiento asociado:
+                        </label>
+                        <div>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
                           >
-                            Close
-                          </button>
-                          <button type="button" class="btn btn-primary">
-                            Save changes
-                          </button>
+                            <option selected>Selecciona una</option>
+                            <option value="1">Egreso</option>
+                            <option value="2">Ingreso</option>
+                          </select>
                         </div>
                       </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          onClick={closeModal}
+                        >
+                          Close
+                        </button>
+                        <button type="button" className="btn btn-primary">
+                          send
+                        </button>
+                      </div>
                     </div>
-                    ;
                   </div>
                 </div>
-              </div>
+              )}
               <div class="card">
                 <div class="table-responsive">
                   <table class="table table-hover table-nowrap">
@@ -228,8 +233,8 @@ function MantenedorMain() {
                           />
                         </th>
                         <th scope="col">ID</th>
-                        <th scope="col">Tipo de movimiento</th>
-                        <th scope="col">Nombre de la Categoria</th>
+                        <th scope="col">Movimiento</th>
+                        <th scope="col">Categoria</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -249,7 +254,7 @@ function MantenedorMain() {
                             <div class=" flex-grow-1">Gasto variable</div>
                             <div>
                               <spam>
-                                <FaPencilAlt />
+                              <FaPencilAlt onClick={openModal} />
                               </spam>
                               <spam>
                                 <MdDelete />
@@ -275,89 +280,79 @@ function MantenedorMain() {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
+                    onClick={openModal}
                   >
                     Agregaa
                   </button>
-                  <div
-                    className="modal fade"
-                    id="staticBackdrop"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true"
-                  >
-                   {isModalOpen && (
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h1
-                            className="modal-title fs-5"
-                            id="staticBackdropLabel"
-                          >
-                            Agrega una Transaccion
-                          </h1>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          <div className="mb-3">
-                            <label
-                              for="exampleInputEmail1"
-                              className="form-label"
-                            >
-                              Nombre de la Transaccion:
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="formGroupExampleInput"
-                              placeholder="Agrega la transaccion"
-                            />
-                          </div>
-                          <div>
-                            <label
-                              for="exampleInputEmail1"
-                              className="form-label"
-                            >
-                              Selecciona la categoria asociada:
-                            </label>
-                            <select
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option selected>selecciona una</option>
-                              <option value="1">Ingresos</option>
-                              <option value="2">Gastos fijos</option>
-                              <option value="3">Gastos variables</option>
-                              <option value="3">Ahorro</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button type="button" className="btn btn-primary">
-                            send
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                   )} 
-                  </div>
                 </div>
               </div>
+              {isModalOpen && (
+                <div
+                  className="modal show d-block"
+                  style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1
+                          className="modal-title fs-5"
+                          id="staticBackdropLabel"
+                        >
+                          Agrega una Categoria
+                        </h1>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          onClick={closeModal}
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <div className="mb-3">
+                          <label
+                            for="exampleInputEmail1"
+                            className="form-label"
+                          >
+                            Nombre del Categoria:
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="formGroupExampleInput"
+                            placeholder="Agrega la Categoria"
+                          />
+                        </div>
+                        <label for="exampleInputEmail1" className="form-label">
+                        Selecciona la categoria asociada:
+                        </label>
+                        <div>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                          >
+                            <option selected>Selecciona una</option>
+                            <option value="1">Ingresos</option>
+                            <option value="2">Gastos fijos</option>
+                            <option value="3">Gastos variables</option>
+                            <option value="3">Ahorro</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          onClick={closeModal}
+                        >
+                          Close
+                        </button>
+                        <button type="button" className="btn btn-primary">
+                          send
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div class="card">
                 <div class="table-responsive">
                   <table class="table table-hover table-nowrap">
@@ -372,8 +367,8 @@ function MantenedorMain() {
                           />
                         </th>
                         <th scope="col">ID</th>
-                        <th scope="col">Nombre de categoria</th>
-                        <th scope="col">Nombre de la transaccion</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Transaccion</th>
                       </tr>
                     </thead>
                     <tbody>
