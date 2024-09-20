@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { AppRouter } from "./Router";
 import injectContext from "./store/context";
-import { Navbar } from "./components";
+import { Navbar, NavMarco } from "./components";
 import React from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -18,8 +18,10 @@ function App() {
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
         <div className="App">
-          <Navbar />
-          <AppRouter />
+          <NavMarco />
+          <div style={{ marginTop: "94.2px", height: "100%" }}>
+            <AppRouter />
+          </div>
         </div>
       </BrowserRouter>
     </ClerkProvider>

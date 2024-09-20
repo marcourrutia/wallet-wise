@@ -8,3 +8,4 @@ export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnGoogle } from "./BtnGoogle/BtnGoogle";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { Layout } from "./Layout/Layout";
+export { NavMarco } from "./NavMarco/NavMarco";

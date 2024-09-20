@@ -1,10 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import "./Navbar.css";
-import {
-  SignOutButton,
-  useUser,
-} from "@clerk/clerk-react";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 
 export const Navbar = () => {
   const { user, isSignedIn, isLoaded } = useUser();

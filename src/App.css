@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .signup-main-container {
   display: flex;
@@ -130,7 +133,7 @@
 }
 
 .login-span:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
@@ -155,15 +158,11 @@
   align-self: center;
 }
 
-
-
-
 .dropdown-menu {
   background-color: rgba(0, 0, 0, 0.5);
   margin-top: 100px;
   z-index: 1000;
 }
-
 
 .text-img {
   position: absolute;
@@ -173,4 +172,3 @@
   color: white;
   text-shadow: 2px 2px 4px rgba(10, 10, 10, 10.7);
 }
-

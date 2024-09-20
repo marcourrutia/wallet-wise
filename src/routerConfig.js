@@ -1,4 +1,11 @@
-import { Home, Maintainer, Principal, LogIn, SignUp } from "./views";
+import {
+  Home,
+  Maintainer,
+  Principal,
+  LogIn,
+  SignUp,
+  PrincipalMarco,
+} from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
 
@@ -38,5 +45,9 @@ export const routes = [
         </Layout>
       </SignedIn>
     ),
+  },
+  {
+    path: "/principalm",
+    element: <PrincipalMarco />,
   },
 ];
