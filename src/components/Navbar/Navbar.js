@@ -2,13 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import "./Navbar.css";
 import {
-  SignedIn,
-  SignedOut,
   SignOutButton,
-  SignInButton,
   useUser,
 } from "@clerk/clerk-react";
-
 
 export const Navbar = () => {
   const { user, isSignedIn, isLoaded } = useUser();
@@ -18,11 +14,11 @@ export const Navbar = () => {
   const isSignupView = location.pathname === "/signup";
 
   if ((isLoginView || isSignupView) && !isSignedIn) {
-    return null; // No va a mostrar el navbar en login o signup si no está autenticado
+    return null;
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div className="container-fluid navbarStyle d-flex justify-content-between align-items-center">
         <Link className="navbar-brand navbar-link" to="/">
           <div>
@@ -37,12 +33,12 @@ export const Navbar = () => {
         </Link>
         {isSignedIn ? (
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span className="span-login" style={{ marginRight: 10 }}>Hello, {user?.firstName}!</span>
+            <span className="span-login" style={{ marginRight: 10 }}>
+              Hello, {user?.firstName}!
+            </span>
             <SignOutButton />
-            
           </div>
         ) : (
-
           <div>
             <div className="d-flex">
               <button

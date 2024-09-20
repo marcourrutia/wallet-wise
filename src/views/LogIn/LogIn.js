@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { BtnBack, BtnGoogle, MsgModal } from "../../components";
+import { BtnBack, MsgModal } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
-import { SignIn, useUser } from "@clerk/clerk-react";
+import { SignIn } from "@clerk/clerk-react";
 
 export const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
@@ -53,6 +52,7 @@ export const LogIn = () => {
 
       <div className="signup-btn-google-contain">
         <SignIn
+          forceRedirectUrl="/home"
           appearance={{
             elements: {
               footerAction: { display: "none" },

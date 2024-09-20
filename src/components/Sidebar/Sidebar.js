@@ -1,39 +1,37 @@
+import React from "react";
+import { Nav } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
+import "./Sidebar.css";
+import { FaHome } from "react-icons/fa";
+import { FaTable } from "react-icons/fa";
+
 export const Sidebar = () => {
+  const location = useLocation();
+
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-auto bg-light sticky-top">
-          <div className="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-            <ul className="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-              <li className="nav-item">
-                <a
-                  href="#"
-                  className="nav-link py-3 px-2"
-                  title=""
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="right"
-                  data-bs-original-title="Home"
-                >
-                  <i class="fa-regular fa-house"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="nav-link py-3 px-2"
-                  title=""
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="right"
-                  data-bs-original-title="Products"
-                >
-                  <i className="bi-heart fs-1"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-sm p-3 min-vh-100"></div>
-        </div>
-      </div>
+    <div className="sidebar">
+      <Nav className="flex-column">
+        <Nav.Item>
+          <Nav.Link
+            className="nav-sidebar-link"
+            as={Link}
+            to="/home"
+            active={location.pathname === "/home"}
+          >
+            <FaHome />
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            className="nav-sidebar-link"
+            as={Link}
+            to="/maintainer"
+            active={location.pathname === "/maintainer"}
+          >
+            <FaTable />
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { BtnBack, BtnGoogle, MainLogo } from "../../components";
-import { SignIn, useUser } from "@clerk/clerk-react";
+import { BtnBack } from "../../components";
+import { SignIn } from "@clerk/clerk-react";
 
 
 export const SignUp = () => {
@@ -44,6 +44,7 @@ export const SignUp = () => {
      
       <div className="signup-btn-google-contain">
         <SignIn
+          forceRedirectUrl="/home"
           appearance={{
             elements: {
               footerAction: { display: "none" },
