@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { BtnBack, BtnGoogle, MainLogo } from "../../components";
+import { SignIn, useUser } from "@clerk/clerk-react";
+
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -39,8 +41,19 @@ export const SignUp = () => {
         <BtnBack />
       </div>
       <span className="signup-h1">Sign up for free</span>
+     
       <div className="signup-btn-google-contain">
-        <BtnGoogle />
+        <SignIn
+          appearance={{
+            elements: {
+              footerAction: { display: "none" },
+              form: { display: "none" },
+              dividerRow: { display: "none" },
+              footer: { display: "none" },
+              
+            },
+          }}
+        />
       </div>
       <div className="divider">
         <span>OR</span>

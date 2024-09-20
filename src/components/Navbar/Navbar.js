@@ -1,30 +1,49 @@
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import "./Navbar.css";
+import {
+  SignedIn,
+  SignedOut,
+  SignOutButton,
+  SignInButton,
+  useUser,
+} from "@clerk/clerk-react";
+
 
 export const Navbar = () => {
+  const { user, isSignedIn, isLoaded } = useUser();
+
   const location = useLocation();
   const isLoginView = location.pathname === "/login";
   const isSignupView = location.pathname === "/signup";
 
+  if ((isLoginView || isSignupView) && !isSignedIn) {
+    return null; // No va a mostrar el navbar en login o signup si no está autenticado
+  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid navbarStyle d-flex justify-content-between align-items-center">
         <Link className="navbar-brand navbar-link" to="/">
           <div>
-            <img src="../logoWalletWise.png" alt="logo" width="30" height="24" />
+            <img
+              src="../logoWalletWise.png"
+              alt="logo"
+              width="30"
+              height="24"
+            />
             <span className="ms-2">WalletWise</span>
           </div>
         </Link>
-        {!isLoginView && !isSignupView && (
-          <>
-            <div className="d-lg-none ms-auto">
-              <Link type="button" className="btn btn-light" to="/login">
-                Log in
-              </Link>
-            </div>
+        {isSignedIn ? (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span className="span-login" style={{ marginRight: 10 }}>Hello, {user?.firstName}!</span>
+            <SignOutButton />
+            
+          </div>
+        ) : (
 
+          <div>
             <div className="d-flex">
               <button
                 className="navbar-toggler"
@@ -84,7 +103,7 @@ export const Navbar = () => {
                 </Link>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </nav>
