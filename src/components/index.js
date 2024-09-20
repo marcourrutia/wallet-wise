@@ -6,3 +6,5 @@ export { MsgModal } from "./MsgModal/MsgModal";
 export { MainLogo } from "./MainLogo/MainLogo";
 export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnGoogle } from "./BtnGoogle/BtnGoogle";
+export { Sidebar } from "./Sidebar/Sidebar";
+export { Layout } from "./Layout/Layout";

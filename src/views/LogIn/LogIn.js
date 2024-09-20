@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BtnBack, BtnGoogle, MsgModal } from "../../components";
+import { BtnBack, MsgModal } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
+import { SignIn } from "@clerk/clerk-react";
 
 export const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
@@ -48,8 +49,19 @@ export const LogIn = () => {
         <BtnBack />
       </div>
       <span className="signup-h1">Log in</span>
+
       <div className="signup-btn-google-contain">
-        <BtnGoogle />
+        <SignIn
+          forceRedirectUrl="/home"
+          appearance={{
+            elements: {
+              footerAction: { display: "none" },
+              form: { display: "none" },
+              dividerRow: { display: "none" },
+              footer: { display: "none" },
+            },
+          }}
+        />
       </div>
       <div className="divider">
         <span>OR</span>

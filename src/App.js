@@ -4,16 +4,26 @@ import { AppRouter } from "./Router";
 import injectContext from "./store/context";
 import { Navbar } from "./components";
 import React from "react";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 function App() {
+  const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+  console.log("Publishable Key:", PUBLISHABLE_KEY);
+
+  if (!PUBLISHABLE_KEY) {
+    throw new Error("Missing Publishable Key");
+  }
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <AppRouter />
-      </div>
-    </BrowserRouter>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <AppRouter />
+        </div>
+      </BrowserRouter>
+    </ClerkProvider>
   );
 }
 
