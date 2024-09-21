@@ -18,7 +18,6 @@ function App() {
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
         <div className="App">
-          <Navbar />
           <AppRouter />
         </div>
       </BrowserRouter>

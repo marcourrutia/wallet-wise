@@ -5,11 +5,13 @@ import {
   misionLeftImg,
   visionLogo,
 } from "../../assets";
+import { NavMarco } from "../../components";
 import "./PrincipalMarco.css";
 
 export const PrincipalMarco = () => {
   return (
     <div className="principal-container">
+      <NavMarco />
       <div class="background-video">
         <video autoPlay muted loop src={backgroundHomeVideo}></video>
       </div>

@@ -4,13 +4,10 @@ import { SignIn } from "@clerk/clerk-react";
 import { validateEmail, validatePassword, post } from "../../services";
 
 export const SignUp = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const closeModal = () => setShowModal(false);
   const [formData, setFormData] = useState({
     email: "",
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     password: "",
     rePassword: "",
   });
@@ -22,17 +19,17 @@ export const SignUp = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const emailError = validateEmail(formData.email);
-    const passwordError = validatePassword(formData.password);
+  const isEmpty = (value) => value === "";
+  const hasEmptyFields = (obj) => {
+    return Object.values(obj).some(isEmpty);
+  };
 
-    if (emailError || passwordError) {
-      setModalMessage(emailError + "\n" + passwordError);
-      setShowModal(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (hasEmptyFields(formData)) {
+      alert("Debe completar todos los datos");
     } else if (formData.password !== formData.rePassword) {
-      setModalMessage("Passwords do not match.");
-      setShowModal(true);
+      alert("Passwords do not match");
     } else {
       const { data, status, error } = await post("/user", formData);
 
@@ -100,8 +97,8 @@ export const SignUp = () => {
             <label for="inputFirstName">First Name</label>
             <input
               id="inputFirstName"
-              name="first_name"
-              value={formData.first_name}
+              name="firstName"
+              value={formData.firstName}
               onChange={handleOnChange}
             />
           </div>
@@ -109,8 +106,8 @@ export const SignUp = () => {
             <label for="inputLastName">Last Name</label>
             <input
               id="inputLastName"
-              name="last_name"
-              value={formData.last_name}
+              name="lastName"
+              value={formData.lastName}
               onChange={handleOnChange}
             />
           </div>
