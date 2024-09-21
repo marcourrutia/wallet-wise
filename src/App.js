@@ -18,10 +18,8 @@ function App() {
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
         <div className="App">
-          <NavMarco />
-          <div style={{ marginTop: "94.2px", height: "100%" }}>
-            <AppRouter />
-          </div>
+          <Navbar />
+          <AppRouter />
         </div>
       </BrowserRouter>
     </ClerkProvider>

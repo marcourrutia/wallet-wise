@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { logoWalletWise } from "../../assets";
 import "./MainLogo.css";
 
 export const MainLogo = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="main-logo-container">
+    <div className="main-logo-container" onClick={() => navigate("/")}>
       <div className="main-logo-img-container">
         <img
           className="main-logo-img"
