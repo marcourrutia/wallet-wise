@@ -9,7 +9,6 @@ import { ClerkProvider } from "@clerk/clerk-react";
 
 function App() {
   const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-  console.log("Publishable Key:", PUBLISHABLE_KEY);
 
   if (!PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
