@@ -1,7 +1,6 @@
 import "./Home";
 import React from "react";
-import { jwtDecode } from "jwt-decode";
-import { useUser, useAuth } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { Context } from "../../store/context";
 import { useEffect, useContext } from "react";
 

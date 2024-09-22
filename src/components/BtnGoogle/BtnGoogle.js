@@ -19,7 +19,7 @@ export const BtnGoogle = () => {
 
   return (
     <div className="btn-google">
-      {/* <GoogleLogin
+      <GoogleLogin
         onSuccess={(credentialResponse) => {
           responseGoogle(credentialResponse);
         }}
@@ -44,7 +44,7 @@ export const BtnGoogle = () => {
             Continue with Google
           </button>
         )}
-      /> */}
+      />
     </div>
   );
 };
