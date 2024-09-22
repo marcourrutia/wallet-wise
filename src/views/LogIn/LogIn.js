@@ -3,7 +3,7 @@ import { Context } from "../../store/context";
 import { BtnBack, MsgModal, NavDash } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
-import { SignIn } from "@clerk/clerk-react";
+import { SignIn, useUser } from "@clerk/clerk-react";
 
 export const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,6 +11,7 @@ export const LogIn = () => {
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
   const { actions } = useContext(Context);
+  const { user, isSignedIn } = useUser();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,6 +49,8 @@ export const LogIn = () => {
         actions.setUserId(data.user_id);
         actions.setUserFullName(data.user_first_name, data.user_last_name);
         actions.setAccessToken(data.access_token);
+        actions.setIsAuthenticated(true);
+        navigate("/dashboard");
       }
     }
   };
@@ -63,7 +66,7 @@ export const LogIn = () => {
 
       <div className="signup-btn-google-contain">
         <SignIn
-          forceRedirectUrl="/home"
+          forceRedirectUrl="/loadingsignin"
           appearance={{
             elements: {
               footerAction: { display: "none" },

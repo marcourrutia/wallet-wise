@@ -8,15 +8,15 @@ import {
 } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
-import { PrivateRoute, PublicRoute } from "./services";
+import { LoadingSignIn, PrivateRoute, PublicRoute } from "./services";
 
 export const routes = [
   {
     path: "/",
     element: (
-      <SignedOut>
+      <PublicRoute>
         <PrincipalMarco />
-      </SignedOut>
+      </PublicRoute>
     ),
   },
   {
@@ -36,30 +36,44 @@ export const routes = [
     ),
   },
   {
-    path: "/home",
+    path: "/loadingsignin",
     element: (
       <SignedIn>
-        <Layout>
-          <Home />
-        </Layout>
+        <LoadingSignIn />
       </SignedIn>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <PrivateRoute>
+        <SignedIn>
+          <Layout>
+            <Home />
+          </Layout>
+        </SignedIn>
+      </PrivateRoute>
     ),
   },
   {
     path: "/maintainer",
     element: (
-      <SignedIn>
-        <Layout>
-          <Maintainer />
-        </Layout>
-      </SignedIn>
+      <PrivateRoute>
+        <SignedIn>
+          <Layout>
+            <Maintainer />
+          </Layout>
+        </SignedIn>
+      </PrivateRoute>
     ),
   },
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <DashBoard />
+        <SignedIn>
+          <DashBoard />
+        </SignedIn>
       </PrivateRoute>
     ),
   },

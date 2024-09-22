@@ -4,7 +4,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       first_name: [],
       last_name: [],
       email: [],
-      isAuthenticated: false,
+      isAuthenticated: null,
       userId: "",
       userFullName: "",
       accessToken: "",

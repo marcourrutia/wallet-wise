@@ -5,18 +5,19 @@ import { Context } from "../../store/context";
 import { useEffect, useContext } from "react";
 
 export const Home = () => {
-  const state = useContext(Context);
+  const { actions } = useContext(Context);
   const { user, isSignedIn } = useUser();
 
   const sendToken = async () => {
-    const {firstName, lastName, emailAddresses} = user;
+    const { firstName, lastName, emailAddresses } = user;
     const email = emailAddresses[0].emailAddress;
-    state.actions.postToken(firstName, lastName, email);
+    actions.postToken(firstName, lastName, email);
   };
 
   useEffect(() => {
     if (isSignedIn) {
       sendToken();
+      actions.setIsAuthenticated(true);
     }
   }, [isSignedIn]);
 
