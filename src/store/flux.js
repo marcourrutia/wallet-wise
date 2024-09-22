@@ -4,11 +4,13 @@ const getState = ({ getActions, getStore, setStore }) => {
       first_name: [],
       last_name: [],
       email: [],
+      isAuthenticated: false,
       userId: "",
       userFullName: "",
       accessToken: "",
     },
     actions: {
+      setIsAuthenticated: (value) => setStore({ isAuthenticated: value }),
       setUserId: (id) => setStore({ userId: id }),
       setUserFullName: (firstName, lastName) =>
         setStore({ userFullName: firstName + " " + lastName }),

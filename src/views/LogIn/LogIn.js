@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Context } from "../../store/context";
-import { BtnBack, MsgModal } from "../../components";
+import { BtnBack, MsgModal, NavDash } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
 import { SignIn } from "@clerk/clerk-react";
@@ -55,6 +55,7 @@ export const LogIn = () => {
   return (
     <div className="signup-main-container">
       {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
+      <NavDash />
       <div className="signup-btn-back-container">
         <BtnBack />
       </div>
