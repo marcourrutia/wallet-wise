@@ -1,15 +1,10 @@
 
 const getState = ({ getActions, getStore, setStore }) => {
   return {
-    store: {
-      first_name: [],
-      last_name: [],
-      email: [] 
-    },
+    store: {},
     actions: {
       postToken: async (firstName, lastName, email) => {
         try {
-          console.log(lastName);
           const response = await fetch("http://localhost:5050/login_google", {
             method: "POST",
             headers: {
@@ -27,7 +22,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           }
         
           const data = await response.json();
-          console.log("Respuesta del backend:", data);
         } catch (error) {
           console.error("Error al enviar el token:", error);
         }
