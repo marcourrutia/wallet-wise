@@ -2,10 +2,9 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { AppRouter } from "./Router";
 import injectContext from "./store/context";
-import { Navbar } from "./components";
-import React from "react";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import React, { useContext } from "react";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { Context } from "./store/context";
 
 function App() {
   const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
@@ -18,7 +17,6 @@ function App() {
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
         <div className="App">
-          <Navbar />
           <AppRouter />
         </div>
       </BrowserRouter>

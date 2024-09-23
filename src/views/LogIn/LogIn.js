@@ -1,14 +1,17 @@
-import { useState } from "react";
-import { BtnBack, MsgModal } from "../../components";
+import { useContext, useState } from "react";
+import { Context } from "../../store/context";
+import { BtnBack, MsgModal, NavDash } from "../../components";
 import { validateEmail, post } from "../../services";
 import { useNavigate } from "react-router-dom";
-import { SignIn } from "@clerk/clerk-react";
+import { SignIn, useUser } from "@clerk/clerk-react";
 
 export const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
+  const { store, actions } = useContext(Context);
+  const { user, isSignedIn } = useUser();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -30,14 +33,25 @@ export const LogIn = () => {
       setModalMessage(emailError + "\n" + passwordEmpty);
       setShowModal(true);
     } else {
-      const { data, error } = await post("/login", formData);
+      const { data, status, error } = await post("/login", formData);
 
       if (error) {
+        console.log(error);
         setModalMessage("Login failed: " + error);
         setShowModal(true);
-      } else {
-        setModalMessage(data.msg);
+      } else if (status === 400 || status === 401) {
+        setModalMessage("Login failed: " + data.msg);
         setShowModal(true);
+      } else if (status === 200) {
+        setModalMessage(
+          `Welcome ${data.user_first_name} ${data.user_last_name}`
+        );
+        setShowModal(true);
+        actions.setUserId(data.user_id);
+        actions.setUserFullName(data.user_first_name, data.user_last_name);
+        actions.setAccessToken(data.access_token);
+        actions.setIsAuthenticated(true);
+        navigate("/home");
       }
     }
   };
@@ -45,6 +59,7 @@ export const LogIn = () => {
   return (
     <div className="signup-main-container">
       {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
+      <NavDash />
       <div className="signup-btn-back-container">
         <BtnBack />
       </div>
@@ -52,7 +67,7 @@ export const LogIn = () => {
 
       <div className="signup-btn-google-contain">
         <SignIn
-          forceRedirectUrl="/home"
+          forceRedirectUrl="/loadingsignin"
           appearance={{
             elements: {
               footerAction: { display: "none" },
@@ -76,6 +91,7 @@ export const LogIn = () => {
               name="email"
               value={formData.email}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
