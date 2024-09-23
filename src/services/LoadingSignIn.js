@@ -18,7 +18,7 @@ export const LoadingSignIn = () => {
     if (isSignedIn) {
       sendToken();
       actions.setIsAuthenticated(true);
-      navigate("/dashboard");
+      navigate("/home");
     }
   }, [isSignedIn]);
 

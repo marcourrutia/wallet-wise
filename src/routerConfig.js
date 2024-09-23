@@ -1,4 +1,4 @@
-import { Maintainer, LogIn, SignUp, PrincipalMarco, DashBoard } from "./views";
+import { Maintainer, LogIn, SignUp, PrincipalMarco, Home } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
 import {
@@ -53,19 +53,19 @@ export const routes = [
     path: "/maintainer",
     element: (
       <PrivateRoute>
-        <SignedIn>
-          <Layout>
-            <Maintainer />
-          </Layout>
-        </SignedIn>
+        <Layout>
+          <Maintainer />
+        </Layout>
       </PrivateRoute>
     ),
   },
   {
-    path: "/dashboard",
+    path: "/home",
     element: (
       <PrivateRoute>
-        <DashBoard />
+        <Layout>
+          <Home />
+        </Layout>
       </PrivateRoute>
     ),
   },

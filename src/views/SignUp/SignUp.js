@@ -64,7 +64,7 @@ export const SignUp = () => {
         actions.setUserFullName(data.user_first_name, data.user_last_name);
         actions.setAccessToken(data.access_token);
         actions.setIsAuthenticated(true);
-        navigate("/dashboard");
+        navigate("/home");
       }
     }
   };

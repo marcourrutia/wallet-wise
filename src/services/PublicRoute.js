@@ -9,7 +9,7 @@ export const PublicRoute = ({ children }) => {
   const navigate = useNavigate();
 
   if (store.isAuthenticated || isSignedIn) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/home" />;
   }
 
   return children;
