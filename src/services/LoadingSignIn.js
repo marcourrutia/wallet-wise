@@ -1,10 +1,10 @@
 import { useUser } from "@clerk/clerk-react";
 import { Context } from "../store/context";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const LoadingSignIn = () => {
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const { user, isSignedIn } = useUser();
   const navigate = useNavigate();
 

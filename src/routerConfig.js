@@ -1,14 +1,12 @@
-import {
-  Home,
-  Maintainer,
-  LogIn,
-  SignUp,
-  PrincipalMarco,
-  DashBoard,
-} from "./views";
+import { Maintainer, LogIn, SignUp, PrincipalMarco, DashBoard } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
-import { LoadingSignIn, PrivateRoute, PublicRoute } from "./services";
+import {
+  LoadingSignIn,
+  LoadingSignOut,
+  PrivateRoute,
+  PublicRoute,
+} from "./services";
 
 export const routes = [
   {
@@ -44,15 +42,11 @@ export const routes = [
     ),
   },
   {
-    path: "/home",
+    path: "/loadingsignout",
     element: (
-      <PrivateRoute>
-        <SignedIn>
-          <Layout>
-            <Home />
-          </Layout>
-        </SignedIn>
-      </PrivateRoute>
+      <SignedOut>
+        <LoadingSignOut />
+      </SignedOut>
     ),
   },
   {
@@ -71,9 +65,7 @@ export const routes = [
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <SignedIn>
-          <DashBoard />
-        </SignedIn>
+        <DashBoard />
       </PrivateRoute>
     ),
   },

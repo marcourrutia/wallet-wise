@@ -11,9 +11,8 @@ export const BtnGoogle = () => {
     try {
       const decodedToken = jwtDecode(credentialResponse.credential);
       navigate("/home");
-      console.log("Información del usuario:", decodedToken);
     } catch (error) {
-      console.log("Error al autenticar con Google:", error);
+      const errors = error;
     }
   };
 

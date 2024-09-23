@@ -7,7 +7,8 @@
 .signup-main-container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
+  padding-bottom: 30px;
 }
 
 .signup-nav {

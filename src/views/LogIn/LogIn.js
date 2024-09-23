@@ -10,7 +10,7 @@ export const LogIn = () => {
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const { user, isSignedIn } = useUser();
   const [formData, setFormData] = useState({
     email: "",
@@ -36,6 +36,7 @@ export const LogIn = () => {
       const { data, status, error } = await post("/login", formData);
 
       if (error) {
+        console.log(error);
         setModalMessage("Login failed: " + error);
         setShowModal(true);
       } else if (status === 400 || status === 401) {

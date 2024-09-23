@@ -4,17 +4,31 @@ const getState = ({ getActions, getStore, setStore }) => {
       first_name: [],
       last_name: [],
       email: [],
-      isAuthenticated: null,
-      userId: "",
-      userFullName: "",
-      accessToken: "",
+      isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated")),
+      userId: JSON.parse(localStorage.getItem("userId")),
+      userFullName: JSON.parse(localStorage.getItem("userFullName")),
+      accessToken: JSON.parse(localStorage.getItem("accessToken")),
     },
     actions: {
-      setIsAuthenticated: (value) => setStore({ isAuthenticated: value }),
-      setUserId: (id) => setStore({ userId: id }),
-      setUserFullName: (firstName, lastName) =>
-        setStore({ userFullName: firstName + " " + lastName }),
-      setAccessToken: (token) => setStore({ accessToken: token }),
+      setIsAuthenticated: (value) => {
+        setStore({ isAuthenticated: value });
+        localStorage.setItem("isAuthenticated", JSON.stringify(value));
+      },
+      setUserId: (value) => {
+        setStore({ userId: value });
+        localStorage.setItem("userId", JSON.stringify(value));
+      },
+      setUserFullName: (firstName, lastName) => {
+        setStore({ userFullName: firstName + "" + lastName });
+        localStorage.setItem(
+          "userFullName",
+          JSON.stringify(firstName + " " + lastName)
+        );
+      },
+      setAccessToken: (value) => {
+        setStore({ accessToken: value });
+        localStorage.setItem("accessToken", JSON.stringify(value));
+      },
       postToken: async (firstName, lastName, email) => {
         try {
           console.log(lastName);

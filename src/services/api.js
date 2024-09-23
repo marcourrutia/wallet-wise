@@ -13,12 +13,15 @@ const handleFetch = async (endpoint, method, body) => {
     const response = await fetch(url, options);
     const data = await response.json();
     const status = response.status;
-    console.log(status);
+
+    if (!response) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
     return { data, status, error: null };
   } catch (error) {
     console.log(error);
-    return { data: null, status: null, error: error.msg };
+    return { data: null, status: null, error: error };
   }
 };
 

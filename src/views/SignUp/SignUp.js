@@ -2,11 +2,16 @@ import { useState } from "react";
 import { BtnBack, MsgModal, NavDash } from "../../components";
 import { SignIn } from "@clerk/clerk-react";
 import { validateEmail, validatePassword, post } from "../../services";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../../store/context";
 
 export const SignUp = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
+  const navigate = useNavigate();
+  const { store, actions } = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     first_name: "",
@@ -55,6 +60,11 @@ export const SignUp = () => {
           password: "",
           rePassword: "",
         });
+        actions.setUserId(data.user_id);
+        actions.setUserFullName(data.user_first_name, data.user_last_name);
+        actions.setAccessToken(data.access_token);
+        actions.setIsAuthenticated(true);
+        navigate("/dashboard");
       }
     }
   };
@@ -70,7 +80,7 @@ export const SignUp = () => {
 
       <div className="signup-btn-google-contain">
         <SignIn
-          forceRedirectUrl="/home"
+          forceRedirectUrl="/loadingsignin"
           appearance={{
             elements: {
               footerAction: { display: "none" },
