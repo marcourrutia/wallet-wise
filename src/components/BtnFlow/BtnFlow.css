@@ -1,0 +1,22 @@
+.btn-flow {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: var(--btn-primary);
+  border: 3px solid var(--btn-primary);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-family: var(--font-tertiary);
+  font-size: 1em;
+  transition: 0.2s;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn-flow:hover {
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.btn-flow:active {
+  transform: scale(0.9);
+}
