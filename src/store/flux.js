@@ -4,10 +4,11 @@ const getState = ({ getActions, getStore, setStore }) => {
       first_name: [],
       last_name: [],
       email: [],
-      isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated")),
-      userId: JSON.parse(localStorage.getItem("userId")),
-      userFullName: JSON.parse(localStorage.getItem("userFullName")),
-      accessToken: JSON.parse(localStorage.getItem("accessToken")),
+      isAuthenticated:
+        JSON.parse(localStorage.getItem("isAuthenticated")) || false,
+      userId: JSON.parse(localStorage.getItem("userId")) || null,
+      userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
+      accessToken: JSON.parse(localStorage.getItem("accessToken")) || null,
     },
     actions: {
       setIsAuthenticated: (value) => {

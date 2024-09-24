@@ -113,6 +113,7 @@ export const SignUp = () => {
               name="first_name"
               value={formData.first_name}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
@@ -122,6 +123,7 @@ export const SignUp = () => {
               name="last_name"
               value={formData.last_name}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
