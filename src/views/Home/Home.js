@@ -3,13 +3,16 @@ import React from "react";
 import { useUser } from "@clerk/clerk-react";
 import { Context } from "../../store/context";
 import { useEffect, useContext } from "react";
+import { Flow } from "../../components/Flow/Flow";
 
 export const Home = () => {
   const state = useContext(Context);
   const { user, isSignedIn } = useUser();
 
+  console.log(user);
+
   const sendToken = async () => {
-    const {firstName, lastName, emailAddresses} = user;
+    const { firstName, lastName, emailAddresses } = user;
     const email = emailAddresses[0].emailAddress;
     state.actions.postToken(firstName, lastName, email);
   };
@@ -20,15 +23,21 @@ export const Home = () => {
     }
   }, [isSignedIn]);
 
+
+
   return (
-    <div className="container-fluid">
-      <ul className="list-group">
-        <li className="list-group-item">An item</li>
-        <li className="list-group-item">A second item</li>
-        <li className="list-group-item">A third item</li>
-        <li className="list-group-item">A fourth item</li>
-        <li className="list-group-item">And a fifth one</li>
-      </ul>
+    <div className="container container-home">
+      <div className="graph-section">
+        <div className="financial-overview">
+          {/* Gráfica de ingresos y gastos  */}
+        </div>
+        <div className="add-movement">{/* Aqui va el añadir movimiento */}</div>
+      </div>
+      <div className="options-section">
+        <div className="financial-flows">
+          <Flow />
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,69 @@
+.style-flow-general{
+    margin-top: 2cm;
+    width: 40%;
+    height: 300px;
+    display: flex;
+    overflow-y: auto;
+    background-color: #e9ecef;
+
+}
+
+.financial-flow-title{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--bg-section-nav);
+    margin: 0;
+}
+
+.span-title{
+    color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 1cm;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.group-flow{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.li-flow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-flow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-circle{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: var(--btn-primary);
+    color: white;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.3cm;
+}
+
+.icon-circle:hover {
+    background-color: var(--bg-section-nav);
+    transform: scale(1.1);
+  }
+  
+  .icon-circle:active {
+    transform: scale(0.9);
+  }
+  
+.input-flow{
+    width: 100%;
+    
+}

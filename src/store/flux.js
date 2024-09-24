@@ -1,7 +1,8 @@
-
 const getState = ({ getActions, getStore, setStore }) => {
   return {
-    store: {},
+    store: {
+      accounts: [],
+    },
     actions: {
       postToken: async (firstName, lastName, email) => {
         try {
@@ -13,18 +14,97 @@ const getState = ({ getActions, getStore, setStore }) => {
             body: JSON.stringify({
               first_name: firstName,
               last_name: lastName,
-              email: email 
+              email: email,
             }),
           });
 
           if (!response.ok) {
             throw new Error("There is an error");
           }
-        
           const data = await response.json();
+          if (data.access_token) {
+            localStorage.setItem("jwt-token", data.access_token);
+          } else {
+            console.error("Token not received in response");
+          }
         } catch (error) {
           console.error("Error al enviar el token:", error);
         }
+      },
+      postFlow: async (nameFlow) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try {
+          const response = await fetch("http://localhost:5050/account", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: nameFlow,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          getActions().getFlow();
+        } catch (error) {
+          console.error("Error al enviar el token post:", error);
+        }
+      },
+      getFlow: async () => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try {
+          const response = await fetch("http://localhost:5050/account", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          setStore({
+            accounts: data,
+          });
+          console.log(data);
+        } catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
+      },
+      deleteFlow: (flowId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/account/${flowId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          if(response.ok){
+            getActions().getFlow();
+          }
+        })
+        .catch((error) => console.log(error));
       },
     },
   };
