@@ -72,7 +72,7 @@ export const SignUp = () => {
             />
           </div>
           <div className="label-input-contain">
-            <label for="inputFirstName">First Name</label>
+            <label htmlFor="inputFirstName">First Name</label>
             <input
               id="inputFirstName"
               name="firstName"
