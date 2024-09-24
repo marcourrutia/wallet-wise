@@ -1,42 +1,72 @@
-import { Home, Maintainer, Principal, LogIn, SignUp } from "./views";
+import { Maintainer, LogIn, SignUp, PrincipalMarco, Home } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
+import {
+  LoadingSignIn,
+  LoadingSignOut,
+  PrivateRoute,
+  PublicRoute,
+} from "./services";
 
 export const routes = [
   {
     path: "/",
     element: (
-      <SignedOut>
-        <Principal />
-      </SignedOut>
+      <PublicRoute>
+        <PrincipalMarco />
+      </PublicRoute>
     ),
   },
   {
     path: "/signup",
-    element: <SignUp />,
+    element: (
+      <PublicRoute>
+        <SignUp />
+      </PublicRoute>
+    ),
   },
   {
     path: "/login",
-    element: <LogIn />,
+    element: (
+      <PublicRoute>
+        <LogIn />
+      </PublicRoute>
+    ),
   },
   {
-    path: "/home",
+    path: "/loadingsignin",
     element: (
       <SignedIn>
-        <Layout>
-          <Home />
-        </Layout>
+        <LoadingSignIn />
       </SignedIn>
+    ),
+  },
+  {
+    path: "/loadingsignout",
+    element: (
+      <SignedOut>
+        <LoadingSignOut />
+      </SignedOut>
     ),
   },
   {
     path: "/maintainer",
     element: (
-      <SignedIn>
+      <PrivateRoute>
         <Layout>
           <Maintainer />
         </Layout>
-      </SignedIn>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <Home />
+        </Layout>
+      </PrivateRoute>
     ),
   },
 ];

@@ -2,8 +2,33 @@ const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
       accounts: [],
+      isAuthenticated:
+        JSON.parse(localStorage.getItem("isAuthenticated")) || false,
+      userId: JSON.parse(localStorage.getItem("userId")) || null,
+      userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
+      accessToken: JSON.parse(localStorage.getItem("accessToken")) || null,
     },
     actions: {
+      setIsAuthenticated: (value) => {
+        setStore({ isAuthenticated: value });
+        localStorage.setItem("isAuthenticated", JSON.stringify(value));
+      },
+      setUserId: (value) => {
+        setStore({ userId: value });
+        localStorage.setItem("userId", JSON.stringify(value));
+      },
+      setUserFullName: (firstName, lastName) => {
+        setStore({ userFullName: firstName + "" + lastName });
+        localStorage.setItem(
+          "userFullName",
+          JSON.stringify(firstName + " " + lastName)
+        );
+      },
+
+      setAccessToken: (value) => {
+        setStore({ accessToken: value });
+        localStorage.setItem("jwt-token", value);
+      },
       postToken: async (firstName, lastName, email) => {
         try {
           const response = await fetch("http://localhost:5050/login_google", {
@@ -21,6 +46,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           if (!response.ok) {
             throw new Error("There is an error");
           }
+
           const data = await response.json();
           if (data.access_token) {
             localStorage.setItem("jwt-token", data.access_token);
@@ -34,10 +60,13 @@ const getState = ({ getActions, getStore, setStore }) => {
       postFlow: async (nameFlow) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
-          console.error("Token not found. User might not be authenticated.");
+          console.error(
+            "Token not found. User might not be authenticated.POST"
+          );
           return;
         }
         try {
+          console.log("entro al try");
           const response = await fetch("http://localhost:5050/account", {
             method: "POST",
             headers: {
@@ -48,11 +77,9 @@ const getState = ({ getActions, getStore, setStore }) => {
               name: nameFlow,
             }),
           });
-
           if (!response.ok) {
             throw new Error("There is an error");
           }
-          const data = await response.json();
           getActions().getFlow();
         } catch (error) {
           console.error("Error al enviar el token post:", error);
@@ -98,13 +125,12 @@ const getState = ({ getActions, getStore, setStore }) => {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((response) => {
-          console.log(response);
-          if(response.ok){
-            getActions().getFlow();
-          }
-        })
-        .catch((error) => console.log(error));
+          .then((response) => {
+            if (response.ok) {
+              getActions().getFlow();
+            }
+          })
+          .catch((error) => console.log(error));
       },
     },
   };
