@@ -31,6 +31,7 @@ export const Flow = (props) => {
       state.actions.deleteFlow(flowId);
     }
   };
+  
 
   useEffect(() => {
     state.actions.getFlow();
