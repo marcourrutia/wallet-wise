@@ -14,7 +14,7 @@ export const NavDash = () => {
       <MainLogo />
       {store.isAuthenticated && !isSignedIn ? (
         <div className="nav-dash-btns-container">
-          <span className="login-span">Welcome, {store.userFullName}</span>
+          <span className="login-span">Hello! {store.userFullName}</span>
           <BtnLogOut />
         </div>
       ) : (
@@ -22,7 +22,7 @@ export const NavDash = () => {
       )}
       {isSignedIn && (
         <div className="nav-dash-btns-container">
-          <span className="login-span">Welcome, {user.fullName}</span>
+          <span className="login-span">Hello! {user.fullName}</span>
           <SignOutButton
             redirectUrl="/loadingsignout"
             className="signup-btn-form"

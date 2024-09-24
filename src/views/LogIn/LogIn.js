@@ -44,7 +44,7 @@ export const LogIn = () => {
         setShowModal(true);
       } else if (status === 200) {
         setModalMessage(
-          `Welcome ${data.user_first_name} ${data.user_last_name}`
+          `Hello! ${data.user_first_name} " " ${data.user_last_name}`
         );
         setShowModal(true);
         actions.setUserId(data.user_id);
