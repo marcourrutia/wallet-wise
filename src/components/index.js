@@ -1,6 +1,8 @@
 export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnFlow } from "./BtnFlow/BtnFlow";
 export { BtnLogOut } from "./BtnLogOut/BtnLogOut";
+export { Flow } from "./Flow/Flow";
+export { FlowItem } from "./FlowItem/FlowItem";
 export { Layout } from "./Layout/Layout";
 export { MainLogo } from "./MainLogo/MainLogo";
 export { Mission } from "./Mission/Mission";
