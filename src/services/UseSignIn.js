@@ -21,6 +21,4 @@ export const UseSignIn = () => {
       sendToken();
     }
   }, [isSignedIn]); 
-
-  return <h1>Loading...</h1>;
 };
