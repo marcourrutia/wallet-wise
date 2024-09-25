@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { MainLogo } from "../MainLogo/MainLogo";
-import "./NavMarco.css";
+import "./NavOption.css";
 
-export const NavMarco = () => {
+export const NavOption = () => {
   const navigate = useNavigate();
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({

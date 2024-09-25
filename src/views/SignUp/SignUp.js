@@ -11,7 +11,7 @@ export const SignUp = () => {
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     first_name: "",
@@ -107,25 +107,27 @@ export const SignUp = () => {
             />
           </div>
           <div className="label-input-contain">
-            <label for="inputFirstName">First Name</label>
+            <label htmlFor="inputFirstName">First Name</label>
             <input
               id="inputFirstName"
               name="first_name"
               value={formData.first_name}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
-            <label for="inputLastName">Last Name</label>
+            <label htmlFor="inputLastName">Last Name</label>
             <input
               id="inputLastName"
               name="last_name"
               value={formData.last_name}
               onChange={handleOnChange}
+              required
             />
           </div>
           <div className="label-input-contain">
-            <label for="inputPassword">Password</label>
+            <label htmlFor="inputPassword">Password</label>
             <input
               id="inputPassword"
               type="password"
@@ -135,7 +137,7 @@ export const SignUp = () => {
             />
           </div>
           <div className="label-input-contain">
-            <label for="inputRePassword">Confirm Password</label>
+            <label htmlFor="inputRePassword">Confirm Password</label>
             <input
               id="inputRePassword"
               type="password"

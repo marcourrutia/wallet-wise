@@ -4,7 +4,7 @@ import "./Navbar.css";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 
 export const Navbar = () => {
-  const { user, isSignedIn, isLoaded } = useUser();
+  const { user, isSignedIn } = useUser();
 
   const location = useLocation();
   const isLoginView = location.pathname === "/login";

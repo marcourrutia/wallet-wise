@@ -4,7 +4,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const LoadingSignIn = () => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
   const { user, isSignedIn } = useUser();
   const navigate = useNavigate();
 
