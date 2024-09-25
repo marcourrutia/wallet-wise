@@ -1,0 +1,8 @@
+.disabled-item {
+    color: gray;
+    opacity: 0.5;
+  }
+  
+  .disabled-icon {
+    cursor: not-allowed;
+  }

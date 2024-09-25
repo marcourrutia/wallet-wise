@@ -1,0 +1,25 @@
+.content-fluid-carousel {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-style {
+    margin-bottom: 20px;
+    height: 450px;
+    width: 100%;
+}
+
+.img-caroulel {
+    height: 500px;
+}
+  
+.text-img-carousel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(10, 10, 10, 10.7);
+}
+  

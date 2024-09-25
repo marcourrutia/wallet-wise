@@ -1,0 +1,12 @@
+.container-home {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.graph-section {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 20px;
+}

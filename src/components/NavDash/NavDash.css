@@ -1,0 +1,15 @@
+.nav-dash-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+  background-color: var(--bg-section-nav);
+  align-items: center;
+  width: 100%;
+}
+
+.nav-dash-btns-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  align-items: center;
+}

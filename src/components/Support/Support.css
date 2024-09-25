@@ -1,0 +1,9 @@
+.container-support{
+    height: 5cm;
+}
+
+.text-support{
+    color: var(--text-primary);
+    text-justify: left;
+    margin-top: 1cm;
+}
