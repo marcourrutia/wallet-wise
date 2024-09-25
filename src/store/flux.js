@@ -107,7 +107,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           setStore({
             accounts: data,
           });
-          console.log(data);
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
@@ -131,6 +130,34 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .catch((error) => console.log(error));
+      },
+      updateStateFlow: (flowId, stateAccount) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/account/state/${flowId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to update flow state");
+            }
+          })
+          .then((data) => {
+            console.log("Flow state updated successfully", data);
+            getActions().getFlow();
+          })
+          .catch((error) => {
+            console.error("Error updating flow state:", error);
+          });
       },
     },
   };

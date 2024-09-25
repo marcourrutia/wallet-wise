@@ -3,7 +3,7 @@ import { Context } from "../store/context";
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const LoadingSignIn = () => {
+export const UseSignIn = () => {
   const { actions } = useContext(Context);
   const { user, isSignedIn } = useUser();
   const navigate = useNavigate();
@@ -11,16 +11,16 @@ export const LoadingSignIn = () => {
   const sendToken = async () => {
     const { firstName, lastName, emailAddresses } = user;
     const email = emailAddresses[0].emailAddress;
-    actions.postToken(firstName, lastName, email);
+    await actions.postToken(firstName, lastName, email);
+    actions.setIsAuthenticated(true);
+    navigate("/home");
   };
 
   useEffect(() => {
     if (isSignedIn) {
       sendToken();
-      actions.setIsAuthenticated(true);
-      navigate("/home");
     }
-  }, [isSignedIn]);
+  }, [isSignedIn]); 
 
   return <h1>Loading...</h1>;
 };

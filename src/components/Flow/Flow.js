@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Flow.css";
 import { BtnFlow } from "../BtnFlow/BtnFlow";
-import { BsTrash } from "react-icons/bs";
-import { CgUnavailable } from "react-icons/cg";
 import { Context } from "../../store/context";
+import { FlowItem } from "../FlowItem/FlowItem";
 
-export const Flow = (props) => {
+export const Flow = () => {
   const state = useContext(Context);
 
   const [isAdding, setIsAdding] = useState(false);
@@ -21,17 +20,14 @@ export const Flow = (props) => {
     setIsAdding(!isAdding);
   };
 
-  const deleteFlow = () => {
-
-  } 
-
   const handleDeleteFlow = (flowId) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete this flow?");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this flow?"
+    );
     if (isConfirmed) {
       state.actions.deleteFlow(flowId);
     }
   };
-  
 
   useEffect(() => {
     state.actions.getFlow();
@@ -61,19 +57,15 @@ export const Flow = (props) => {
               {state.store.accounts.length > 0 ? (
                 state.store.accounts.map((item, index) => {
                   return (
-                    <div key={index}>
-                      <li className="list-group-item li-flow">
-                        <span>{item.name}</span>
-                        <div className="icon-flow">
-                          <div className="icon-circle">
-                            <CgUnavailable />
-                          </div>
-                          <div className="icon-circle">
-                            <BsTrash onClick={() => handleDeleteFlow(item.id)}/>
-                          </div>
-                        </div>
-                      </li>
-                    </div>
+                    <FlowItem
+                      key={item.id}
+                      flow={item}
+                      isDisabled={!item.state}
+                      onDeleteFlow={handleDeleteFlow}
+                      onDisableFlow={() =>
+                        state.actions.updateStateFlow(item.id)
+                      }
+                    />
                   );
                 })
               ) : (

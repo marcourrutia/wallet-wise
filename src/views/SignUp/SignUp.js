@@ -80,7 +80,7 @@ export const SignUp = () => {
 
       <div className="signup-btn-google-contain">
         <SignIn
-          forceRedirectUrl="/loadingsignin"
+          forceRedirectUrl="/usesignin"
           appearance={{
             elements: {
               footerAction: { display: "none" },
