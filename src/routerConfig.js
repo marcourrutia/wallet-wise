@@ -1,4 +1,4 @@
-import { Maintainer, LogIn, SignUp, Principal, Home, DetailFlow } from "./views";
+import { Maintainer, LogIn, SignUp, Principal, Home, DetailFlow, FormMaintainer, Home } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout, OptionDetailFlow } from "./components";
 import {
@@ -54,7 +54,7 @@ export const routes = [
     element: (
       <PrivateRoute>
         <Layout>
-          <Maintainer />
+          <FormMaintainer />
         </Layout>
       </PrivateRoute>
     ),

@@ -4,11 +4,15 @@ const getState = ({ getActions, getStore, setStore }) => {
       accounts: [],
       movementByAccount: [],
       categorySave: [],
+      first_name: [],
+      last_name: [],
+      email: [],
       isAuthenticated:
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
       accessToken: localStorage.getItem("jwt-token") || null,
+      movements:[]},
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -192,6 +196,37 @@ const getState = ({ getActions, getStore, setStore }) => {
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
+      getMovements: () => {
+        fetch('http://localhost:5050/type_of_movements', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+            setStore({
+              movements:data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      createMovements: (movements) => {
+        console.log(movements)
+        fetch('http://localhost:5050/type_of_movement', {
+          method:"POST",
+          headers:{
+            "content-type":"application/json",
+            "accept": "application/json"
+          },
+          body: JSON.stringify(movements)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          })
+        .catch((error) => console.log(error));
       },
     },
   };
