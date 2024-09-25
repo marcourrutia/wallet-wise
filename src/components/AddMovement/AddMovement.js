@@ -67,9 +67,9 @@ export const AddMovement = () => {
               ) : null}
 
               <div>
-                <label>Category:</label>
+                <label>Type of transaction:</label>
                 <select name="category" required>
-                  <option value="">Select a category</option>
+                  <option value="">Select type</option>
                   {activeTab === "expense" && (
                     <>
                       <option value="alimentacion">Alimentación</option>
