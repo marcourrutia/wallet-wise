@@ -1,9 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { get, post } from "../../services";
 import "./AddMovement.css";
 
 export const AddMovement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("expense");
+  const [accounts, setAccounts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [formData, setFormData] = useState({
+    amount: "",
+    accountId: "",
+    date: "",
+    categoryId: "",
+  });
+
+  useEffect(() => {
+    const fetchAccountsAndCategories = async () => {
+      try {
+        const { data: accountsData } = await get("/accounts");
+        setAccounts(accountsData);
+
+        const { data: categoriesData } = await get("/transactions");
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error fetching accounts or categories:", error);
+      }
+    };
+
+    if (isModalOpen) {
+      fetchAccountsAndCategories();
+    }
+  }, [isModalOpen]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -13,8 +40,33 @@ export const AddMovement = () => {
     setActiveTab(tab);
   };
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const movementData = {
+      amount: formData.amount,
+      account_id: formData.accountId,
+      transaction_date: formData.date,
+      transaction_id: formData.categoryId,
+    };
+
+    try {
+      const { data, status } = await post("/movements", movementData);
+      if (status === 201) {
+        console.log("Movement added successfully:", data);
+        toggleModal();
+      }
+    } catch (error) {
+      console.error("Error adding movement:", error);
+    }
   };
 
   return (
@@ -47,43 +99,57 @@ export const AddMovement = () => {
             <form onSubmit={handleSubmit}>
               <div>
                 <label>Amount:</label>
-                <input type="number" name="amount" required />
+                <input
+                  type="number"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div>
                 <label>Account:</label>
-                <select name="account" required>
+                <select
+                  name="accountId"
+                  value={formData.accountId}
+                  onChange={handleInputChange}
+                  required
+                >
                   <option value="">Select an account</option>
-                  <option value="cuenta1">Cuenta 1</option>
-                  <option value="cuenta2">Cuenta 2</option>
+                  {accounts?.map((account) => (
+                    <option key={account.id} value={account.id}>
+                      {account.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              {activeTab === "expense" || activeTab === "income" ? (
-                <div>
-                  <label>Transaction Date:</label>
-                  <input type="date" name="date" required />
-                </div>
-              ) : null}
+              <div>
+                <label>Transaction Date:</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
               <div>
                 <label>Type of transaction:</label>
-                <select name="category" required>
+                <select
+                  name="categoryId"
+                  value={formData.categoryId}
+                  onChange={handleInputChange}
+                  required
+                >
                   <option value="">Select type</option>
-                  {activeTab === "expense" && (
-                    <>
-                      <option value="alimentacion">Alimentación</option>
-                      <option value="transporte">Transporte</option>
-                      <option value="entretenimiento">Entretenimiento</option>
-                    </>
-                  )}
-                  {activeTab === "income" && (
-                    <>
-                      <option value="sueldo">Sueldo</option>
-                      <option value="freelance">Freelance</option>
-                      <option value="inversiones">Inversiones</option>
-                    </>
-                  )}
+                  {categories?.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -93,9 +159,7 @@ export const AddMovement = () => {
                     ? "Add Expense"
                     : activeTab === "income"
                     ? "Add Income"
-                    : activeTab === "saving"
-                    ? "Add Savings"
-                    : "Add"}
+                    : "Add Savings"}
                 </button>
                 <button onClick={toggleModal}>Cancel</button>
               </div>
