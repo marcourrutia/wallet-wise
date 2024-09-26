@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../../store/context";
 import { get, post } from "../../services";
 import "./AddMovement.css";
 
@@ -7,6 +8,7 @@ export const AddMovement = () => {
   const [activeTab, setActiveTab] = useState("expense");
   const [accounts, setAccounts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { store } = useContext(Context);
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",
@@ -17,7 +19,10 @@ export const AddMovement = () => {
   useEffect(() => {
     const fetchAccountsAndCategories = async () => {
       try {
-        const { data: accountsData } = await get("/accounts");
+        const { data: accountsData } = await get(
+          "/account",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNzM4NjM4NCwianRpIjoiMDNjOWVkYWYtMWI5YS00MGU0LTkxYjMtYWI5ZGJhOTlkMzc5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im0udXJydXRpYTE5OTFAZ21haWwuY29tIiwibmJmIjoxNzI3Mzg2Mzg0LCJjc3JmIjoiMjIwMmY2NjktOTg0OS00ZTRiLWI5YmEtZTU3OTY5MDc1NmU0IiwiZXhwIjoxNzI3NjQ1NTg0LCJ1c2VyX2lkIjoxfQ.lyYD4i53aibTxcWhnL8eQR-PnruZwaXTQqtnuaM3E0s"
+        );
         setAccounts(accountsData);
 
         const { data: categoriesData } = await get("/transactions");
