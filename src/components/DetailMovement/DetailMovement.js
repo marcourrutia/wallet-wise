@@ -1,6 +1,6 @@
 import { Context } from "../../store/context";
 import "./DetailMovement.css";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 export const DetailMovement = ({ accountId }) => {
   const state = useContext(Context);
@@ -16,7 +16,7 @@ export const DetailMovement = ({ accountId }) => {
   return (
     <div className="container mt-4 mb-4">
       <div className="style-movement">
-        <table className="table table-head">
+        {/* <table className="table table-head">
           <thead>
             <tr>
               <th scope="col">Category</th>
@@ -24,31 +24,30 @@ export const DetailMovement = ({ accountId }) => {
               <th scope="col">Date</th>
             </tr>
           </thead>
-        </table>
-        {state.store.movementByAccount.length > 0 ? (
-          state.store.movementByAccount.map((item, index) => {
-            return (
-              <table className="table table-body-transaction">
-                <thead>
-                  <tr>
-                    <th scope="col">{item.category_id?.name}</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody className="table-group-divider">
-                  <tr>
-                    <th scope="row">{item.transaction_id?.name}</th>
-                    <td>{item?.amount}</td>
-                    <td>{item?.transaction_date}</td>
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })
-        ) : (
-          <h4>Nada que decir</h4>
-        )}
+        </table> */}
+
+        {state.store.categorySave.map((category, index) => {
+          return (
+            <div>
+              <h2>{category.name}</h2>
+              {state.store.movementByAccount.map((item, index) => {
+                if (item.category == category.name) {
+                  return (
+                    <table className="table table-body-transaction">
+                      <tbody>
+                        <tr>
+                          <th scope="col">{item.transaction}</th>
+                          <td>{item?.amount}</td>
+                          <td>{item?.transaction_date}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  );
+                }
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
