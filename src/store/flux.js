@@ -8,11 +8,10 @@ const getState = ({ getActions, getStore, setStore }) => {
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
-      accessToken: JSON.parse(localStorage.getItem("accessToken")) || null,
+      accessToken: localStorage.getItem("jwt-token") || null,
       movements: [],
       categories: [],
       transaction: [],
-      accessToken: localStorage.getItem("jwt-token") || null,
     },
     actions: {
       setIsAuthenticated: (value) => {
