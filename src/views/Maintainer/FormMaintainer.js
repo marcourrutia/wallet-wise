@@ -1,15 +1,9 @@
 import { CategoryTab } from "../../components/Maintainer/CategoryTab";
 import { MovemenTab } from "../../components/Maintainer/MovemenTab";
 import { TransactionTab } from "../../components/Maintainer/TransactionTab";
-import { useContext, useEffect } from "react";
-import { Context } from "../../store/context"
 
 export const FormMaintainer = () => {
-  const { actions } = useContext(Context);
 
-  useEffect(() => {
-    actions.getMovements();
-  }, []);
   return (
     <div className="container">
       <div className="row">
