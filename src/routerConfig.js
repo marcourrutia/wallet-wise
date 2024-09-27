@@ -58,7 +58,7 @@ export const routes = [
         </Layout>
       </PrivateRoute>
     ),
-  },,
+  },
   {
     path: "/home",
     element: (
