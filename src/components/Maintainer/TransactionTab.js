@@ -4,6 +4,8 @@ import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
 
 export const TransactionTab = () => {
+  const [selectedOption, setSelectedOption] = useState("Opción 1");
+
   const { store, actions } = useContext(Context);
   const [username, setUsername] = useState({
     name: "",
@@ -66,25 +68,27 @@ export const TransactionTab = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label className="col-form-label">Agrega una Categoría:</label>
+                    <label className="col-form-label">
+                      Agrega una Categoría:
+                    </label>
                     <input
-                    className="form-control"
-                    type="text"
-                    name="name"
-                    onChange={handleonChange}
-                    placeholder="Agrega un nombre"
-                    value={username.name}
+                      className="form-control"
+                      type="text"
+                      name="name"
+                      onChange={handleonChange}
+                      placeholder="Agrega un nombre"
+                      value={username.name}
                     />
                   </div>
                   <div className="mb-3">
                     <label className="col-form-label">Categoría:</label>
                     <select
-                      class="form-select"
-                      aria-label="Default select example"
+                      value={selectedOption}
+                      onChange={(e) => setSelectedOption(e.target.value)}
                     >
-                      <option selected>Open this select menu</option>
-                      <option value="1">Gasto fijos</option>
-                      <option value="2">Gastos variable</option>
+                      <option value="Opción 1">Rent Payment</option>
+                      <option value="Opción 2">Electricity Bill</option>
+                      <option value="Opción 3">Water Bill</option>
                     </select>
                   </div>
                 </form>
@@ -97,7 +101,11 @@ export const TransactionTab = () => {
                 >
                   Close
                 </button>
-                <button onClick={handleSubmit} type="button" className="btn btn-primary">
+                <button
+                  onClick={handleSubmit}
+                  type="button"
+                  className="btn btn-primary"
+                >
                   Send message
                 </button>
               </div>
@@ -123,7 +131,7 @@ export const TransactionTab = () => {
               </tr>
             </thead>
             <tbody>
-            {Array.isArray(store.transaction) &&
+              {Array.isArray(store.transaction) &&
                 store.transaction.map((movement, index) => (
                   <tr key={index}>
                     <td>
@@ -138,7 +146,9 @@ export const TransactionTab = () => {
                     <td>{movement.name}</td>
                     <td>
                       <div className="d-flex">
-                        <div className="flex-grow-1">{movement.category_id}</div>
+                        <div className="flex-grow-1">
+                          {movement.category_id}
+                        </div>
                         <div>
                           <span className="p-2">
                             <TbEdit />
