@@ -1,4 +1,4 @@
-import { Maintainer, LogIn, SignUp, Principal, Home } from "./views";
+import { LogIn, SignUp, Principal, Home, Maintainer } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
 import {

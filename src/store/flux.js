@@ -1,3 +1,5 @@
+import { TransactionTab } from "../components/Maintainer/TransactionTab";
+
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
@@ -7,6 +9,9 @@ const getState = ({ getActions, getStore, setStore }) => {
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
       accessToken: localStorage.getItem("jwt-token") || null,
+      movements: [],
+      categories: [],
+      transaction: [],
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -57,6 +62,98 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Error al enviar el token:", error);
         }
       },
+      getMovements: () => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/type_of_movements", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              movements: data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      getCategory: () => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/categorys", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data, "hola data")
+            setStore({
+              categories: data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      getTransaction: () => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/transactions", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data, "hola data")
+            setStore({
+              transaction: data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      createMovements: (movements) => {
+        console.log(movements);
+        const token = localStorage.getItem("jwt-token");
+        console.log(token);
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/type_of_movement", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(movements),
+        })
+          .then((response) => {
+            response.json();
+            console.log(response);
+            getActions().getMovements();
+          })
+          .then((data) => {
+            getActions().getMovements();
+          })
+          .catch((error) => console.log(error));
+      },
       postFlow: async (nameFlow) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
@@ -87,6 +184,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       getFlow: async () => {
         const token = localStorage.getItem("jwt-token");
+        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -113,6 +211,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       deleteFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
+        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
