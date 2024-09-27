@@ -17,7 +17,7 @@ export const FlowItem = ({ flow, onDeleteFlow, onDisableFlow, isDisabled }) => {
       {isDisabled ? (
         <span className="flow-name">{flow.name}</span>
       ) : (
-        <Link to="/DetailAccount" className="flow-name">
+        <Link to="/detailflow" className="flow-name">
           {flow.name}
         </Link>
       )}
