@@ -4,7 +4,7 @@ import { CgUnavailable } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import "./FlowItem.css";
 
-export const FlowItem = ({ flow, onDeleteFlow, onDisableFlow, isDisabled }) => {
+export const FlowItem = ({ flow, onDeleteFlow, onDisableFlow, isDisabled, onFlowClick }) => {
   const handleDisableClick = () => {
     console.log("Disabling/enabling flow with ID: ", flow.id);
     onDisableFlow(flow.id);
@@ -15,9 +15,9 @@ export const FlowItem = ({ flow, onDeleteFlow, onDisableFlow, isDisabled }) => {
       className={`list-group-item li-flow ${isDisabled ? "disabled-item" : ""}`}
     >
       {isDisabled ? (
-        <span className="flow-name">{flow.name}</span>
+        <span className="flow-name" onClick={() => onFlowClick(flow.id)}>{flow.name}</span>
       ) : (
-        <Link to="/detailflow" className="flow-name">
+        <Link to={`/detailflow/${flow.id}`} className="flow-name">
           {flow.name}
         </Link>
       )}

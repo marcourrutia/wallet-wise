@@ -2,6 +2,7 @@ const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
       accounts: [],
+      movementByAccount: [],
       isAuthenticated:
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
@@ -158,6 +159,38 @@ const getState = ({ getActions, getStore, setStore }) => {
           .catch((error) => {
             console.error("Error updating flow state:", error);
           });
+      },
+      getMovements: (accountId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        console.log("Antes del account Id");
+        console.log(accountId);
+        try {
+          const response = fetch(
+            `http://localhost:5050/movement/${accountId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            console.log(response);
+            console.log("Dentro del error");
+
+            throw new Error("There is an error");
+          }
+          const data = response.json();
+          console.log(data);
+          setStore({ movementByAccount: data });
+        } catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
       },
     },
   };
