@@ -2,7 +2,7 @@ import { CategoryTab } from "../../components/Maintainer/CategoryTab";
 import { MovemenTab } from "../../components/Maintainer/MovemenTab";
 import { TransactionTab } from "../../components/Maintainer/TransactionTab";
 
-export const FormMaintainer = () => {
+export const Maintainer = () => {
   return (
     <div className="container">
       <div className="row">
