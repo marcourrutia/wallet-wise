@@ -1,7 +1,6 @@
-import "./Home";
+import "./Home.css";
 import React from "react";
-import { Flow } from "../../components/Flow/Flow";
-
+import { AddMovement, Flow } from "../../components";
 
 export const Home = () => {
   return (
@@ -10,7 +9,9 @@ export const Home = () => {
         <div className="financial-overview">
           {/* Gráfica de ingresos y gastos  */}
         </div>
-        <div className="add-movement">{/* Aqui va el añadir movimiento */}</div>
+        <div className="add-movement">
+          <AddMovement />
+        </div>
       </div>
       <div className="options-section">
         <div className="financial-flows">

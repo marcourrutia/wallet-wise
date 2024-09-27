@@ -1,11 +1,14 @@
 const baseUrl = "http://localhost:5050";
 
-const handleFetch = async (endpoint, method, body) => {
+const handleFetch = async (endpoint, method, body, token) => {
   const url = `${baseUrl}${endpoint}`;
 
   const options = {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     ...(body && { body: JSON.stringify(body) }),
   };
 
@@ -25,7 +28,8 @@ const handleFetch = async (endpoint, method, body) => {
   }
 };
 
-export const get = (endpoint) => handleFetch(endpoint, "GET");
-export const post = (endpoint, body) => handleFetch(endpoint, "POST", body);
+export const get = (endpoint, token) => handleFetch(endpoint, "GET", "", token);
+export const post = (endpoint, body, token) =>
+  handleFetch(endpoint, "POST", body, token);
 export const put = (endpoint, body) => handleFetch(endpoint, "PUT", body);
 export const del = (endpoint) => handleFetch(endpoint, "DELETE");

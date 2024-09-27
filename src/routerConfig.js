@@ -2,7 +2,7 @@ import { Maintainer, LogIn, SignUp, Principal, Home, FormMaintainer } from "./vi
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
 import {
-  LoadingSignIn,
+  UseSignIn,
   LoadingSignOut,
   PrivateRoute,
   PublicRoute,
@@ -34,10 +34,10 @@ export const routes = [
     ),
   },
   {
-    path: "/loadingsignin",
+    path: "/usesignin",
     element: (
       <SignedIn>
-        <LoadingSignIn />
+        <UseSignIn />
       </SignedIn>
     ),
   },

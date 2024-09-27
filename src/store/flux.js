@@ -12,6 +12,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       movements: [],
       categories: [],
       transaction: [],
+      accessToken: localStorage.getItem("jwt-token") || null,
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -54,6 +55,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           const data = await response.json();
           if (data.access_token) {
             localStorage.setItem("jwt-token", data.access_token);
+            setStore(data.accessToken);
           } else {
             console.error("Token not received in response");
           }
@@ -204,7 +206,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           setStore({
             accounts: data,
           });
-          console.log(data);
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
@@ -229,6 +230,34 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .catch((error) => console.log(error));
+      },
+      updateStateFlow: (flowId, stateAccount) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/account/state/${flowId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to update flow state");
+            }
+          })
+          .then((data) => {
+            console.log("Flow state updated successfully", data);
+            getActions().getFlow();
+          })
+          .catch((error) => {
+            console.error("Error updating flow state:", error);
+          });
       },
     },
   };
