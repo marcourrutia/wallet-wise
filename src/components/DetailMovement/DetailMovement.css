@@ -1,0 +1,16 @@
+.style-movement{
+    border-radius: 10px;
+}
+
+.table:not(:last-of-type) {
+    margin-bottom: 1px; 
+}
+
+.table{
+    table-layout: fixed;
+}
+
+.table-head th {
+    background-color: #052145;
+    color: white; 
+}

@@ -1,4 +1,4 @@
-import { Maintainer, LogIn, SignUp, Principal, Home } from "./views";
+import { Maintainer, LogIn, SignUp, Principal, Home, DetailFlow } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout } from "./components";
 import {
@@ -65,6 +65,16 @@ export const routes = [
       <PrivateRoute>
         <Layout>
           <Home />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/detailflow",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <DetailFlow />
         </Layout>
       </PrivateRoute>
     ),
