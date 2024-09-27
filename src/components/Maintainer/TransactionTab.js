@@ -4,8 +4,11 @@ import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
 
 export const TransactionTab = () => {
+<<<<<<< HEAD
   const [selectedOption, setSelectedOption] = useState("Opción 1");
 
+=======
+>>>>>>> dcf5dc5 (goaa)
   const { store, actions } = useContext(Context);
   const [username, setUsername] = useState({
     name: "",
@@ -68,6 +71,7 @@ export const TransactionTab = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
+<<<<<<< HEAD
                     <label className="col-form-label">
                       Agrega una Categoría:
                     </label>
@@ -78,17 +82,36 @@ export const TransactionTab = () => {
                       onChange={handleonChange}
                       placeholder="Agrega un nombre"
                       value={username.name}
+=======
+                    <label className="col-form-label">Agrega una Categoría:</label>
+                    <input
+                    className="form-control"
+                    type="text"
+                    name="name"
+                    onChange={handleonChange}
+                    placeholder="Agrega un nombre"
+                    value={username.name}
+>>>>>>> dcf5dc5 (goaa)
                     />
                   </div>
                   <div className="mb-3">
                     <label className="col-form-label">Categoría:</label>
                     <select
+<<<<<<< HEAD
                       value={selectedOption}
                       onChange={(e) => setSelectedOption(e.target.value)}
                     >
                       <option value="Opción 1">Rent Payment</option>
                       <option value="Opción 2">Electricity Bill</option>
                       <option value="Opción 3">Water Bill</option>
+=======
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected>Open this select menu</option>
+                      <option value="1">Gasto fijos</option>
+                      <option value="2">Gastos variable</option>
+>>>>>>> dcf5dc5 (goaa)
                     </select>
                   </div>
                 </form>
@@ -101,11 +124,15 @@ export const TransactionTab = () => {
                 >
                   Close
                 </button>
+<<<<<<< HEAD
                 <button
                   onClick={handleSubmit}
                   type="button"
                   className="btn btn-primary"
                 >
+=======
+                <button onClick={handleSubmit} type="button" className="btn btn-primary">
+>>>>>>> dcf5dc5 (goaa)
                   Send message
                 </button>
               </div>
@@ -131,7 +158,11 @@ export const TransactionTab = () => {
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {Array.isArray(store.transaction) &&
+=======
+            {Array.isArray(store.transaction) &&
+>>>>>>> dcf5dc5 (goaa)
                 store.transaction.map((movement, index) => (
                   <tr key={index}>
                     <td>
@@ -146,9 +177,13 @@ export const TransactionTab = () => {
                     <td>{movement.name}</td>
                     <td>
                       <div className="d-flex">
+<<<<<<< HEAD
                         <div className="flex-grow-1">
                           {movement.category_id}
                         </div>
+=======
+                        <div className="flex-grow-1">{movement.category_id}</div>
+>>>>>>> dcf5dc5 (goaa)
                         <div>
                           <span className="p-2">
                             <TbEdit />

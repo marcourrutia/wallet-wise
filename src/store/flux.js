@@ -13,7 +13,11 @@ const getState = ({ getActions, getStore, setStore }) => {
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
+<<<<<<< HEAD
       accessToken: localStorage.getItem("jwt-token") || null,
+=======
+      accessToken: localStorage.getItem("accessToken") || null,
+>>>>>>> dcf5dc5 (goaa)
       movements: [],
       categories: [],
       transaction: [],
@@ -293,7 +297,12 @@ const getState = ({ getActions, getStore, setStore }) => {
           setStore({ movementByAccount: data.movement, categorySave: data.category});
         } catch (error) {
           console.error("Error al enviar el token get:", error);
+<<<<<<< HEAD
         }  },
+=======
+        }
+      },
+>>>>>>> dcf5dc5 (goaa)
       getMovements: () => {
         fetch('http://localhost:5050/type_of_movements', {
           method: "GET",
