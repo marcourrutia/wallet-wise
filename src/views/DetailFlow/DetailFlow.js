@@ -6,7 +6,6 @@ export const DetailFlow = () => {
     return (
         <div className="container-fluid">
             <OptionDetailFlow/>
-    
         </div>
     )
 }
