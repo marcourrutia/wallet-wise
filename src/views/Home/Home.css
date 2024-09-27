@@ -1,4 +1,4 @@
-.container-home {
+/* .container-home {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 20px;
@@ -9,4 +9,8 @@
   display: grid;
   grid-template-rows: auto;
   gap: 20px;
+} */
+
+.add-movement {
+  position: absolute;
 }

@@ -5,14 +5,7 @@ export const MsgModal = ({ message, onClose, action }) => {
     <div className="modal-overlay">
       <div className="modal-container">
         <p>{message}</p>
-        <button
-          onClick={() => {
-            onClose();
-            action();
-          }}
-        >
-          Close
-        </button>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );

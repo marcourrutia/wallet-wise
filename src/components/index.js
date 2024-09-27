@@ -1,3 +1,4 @@
+export { AddMovement } from "./AddMovement/AddMovement";
 export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnFlow } from "./BtnFlow/BtnFlow";
 export { BtnLogOut } from "./BtnLogOut/BtnLogOut";
