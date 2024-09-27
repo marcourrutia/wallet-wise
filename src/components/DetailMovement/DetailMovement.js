@@ -2,17 +2,16 @@ import { Context } from "../../store/context";
 import "./DetailMovement.css";
 import { useContext, useEffect } from "react";
 
-
 export const DetailMovement = ({ accountId }) => {
   const state = useContext(Context);
 
   console.log(accountId);
 
   useEffect(() => {
-    if (accountId) { 
-        state.actions.getMovements(accountId); 
-      }
-  },[accountId]);
+    if (accountId) {
+      state.actions.getMovements(accountId);
+    }
+  }, [accountId]);
 
   return (
     <div className="container mt-4 mb-4">
