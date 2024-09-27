@@ -4,6 +4,8 @@ import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
 
 export const CategoryTab = () => {
+  const [selectedOption, setSelectedOption] = useState("Opción 1");
+
   const { store, actions } = useContext(Context);
   const [username, setUsername] = useState({
     name: "",
@@ -81,12 +83,11 @@ export const CategoryTab = () => {
                   <div className="mb-3">
                     <label className="col-form-label">Movimiento:</label>
                     <select
-                      class="form-select"
-                      aria-label="Default select example"
+                      value={selectedOption}
+                      onChange={(e) => setSelectedOption(e.target.value)}
                     >
-                      <option selected>Open this select menu</option>
-                      <option value="1">Egreso</option>
-                      <option value="2">Ingreso</option>
+                      <option value="Opción 1">Expense</option>
+                      <option value="Opción 2">Income</option>
                     </select>
                   </div>
                 </form>
@@ -99,7 +100,11 @@ export const CategoryTab = () => {
                 >
                   Close
                 </button>
-                <button type="button" onClick={handleSubmit} className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="btn btn-primary"
+                >
                   Send message
                 </button>
               </div>
@@ -125,7 +130,7 @@ export const CategoryTab = () => {
               </tr>
             </thead>
             <tbody>
-            {Array.isArray(store.categories) &&
+              {Array.isArray(store.categories) &&
                 store.categories.map((movement, index) => (
                   <tr key={index}>
                     <td>
@@ -140,7 +145,9 @@ export const CategoryTab = () => {
                     <td>{movement.name}</td>
                     <td>
                       <div className="d-flex">
-                        <div className="flex-grow-1">{movement.type_of_movement_id}</div>
+                        <div className="flex-grow-1">
+                          {movement.type_of_movement_id}
+                        </div>
                         <div>
                           <span className="p-2">
                             <TbEdit />

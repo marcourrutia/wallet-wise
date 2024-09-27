@@ -9,7 +9,7 @@ export const MovemenTab = () => {
     name: "",
   });
   const handleSubmit = () => {
-    actions.createMovements(username)
+    actions.createMovements(username);
     console.log("hola");
   };
 
@@ -20,7 +20,7 @@ export const MovemenTab = () => {
     });
   };
   console.log(username);
-  
+
   useEffect(() => {
     actions.getMovements();
   }, []);
