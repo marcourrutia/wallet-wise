@@ -11,6 +11,7 @@ export const OptionDetailFlow = () => {
   const [activeTab, setActiveTab] = useState("expense");
   const { accountId } = useParams();
 
+<<<<<<< HEAD
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
 
@@ -25,6 +26,9 @@ import "./OptionDetailFlow.css";
 export const OptionDetailFlow = () => {
   const [activeTab, setActiveTab] = useState("expense");
 >>>>>>> 5ad8dd0 (First change)
+=======
+  console.log(accountId);
+>>>>>>> 57ccb23 (Second change)
 
   return (
     <div className="container">
@@ -104,6 +108,7 @@ export const OptionDetailFlow = () => {
         {activeTab === "expense" && (
           <>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <ExpenseSumary accountId={accountId} />
             <DetailMovement
               accountId={accountId}
@@ -113,6 +118,10 @@ export const OptionDetailFlow = () => {
 =======
             <ExpenseSumary />
             <DetailMovement />
+=======
+            <ExpenseSumary accountId={accountId} />
+            <DetailMovement accountId={accountId}/>
+>>>>>>> 57ccb23 (Second change)
             
 >>>>>>> 5ad8dd0 (First change)
           </>
