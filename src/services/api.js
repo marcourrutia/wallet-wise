@@ -15,9 +15,7 @@ const handleFetch = async (endpoint, method, body, token) => {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
     const status = response.status;
-    console.log(status);
 
     if (!response) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,6 +29,7 @@ const handleFetch = async (endpoint, method, body, token) => {
 };
 
 export const get = (endpoint, token) => handleFetch(endpoint, "GET", "", token);
-export const post = (endpoint, body) => handleFetch(endpoint, "POST", body);
+export const post = (endpoint, body, token) =>
+  handleFetch(endpoint, "POST", body, token);
 export const put = (endpoint, body) => handleFetch(endpoint, "PUT", body);
 export const del = (endpoint) => handleFetch(endpoint, "DELETE");

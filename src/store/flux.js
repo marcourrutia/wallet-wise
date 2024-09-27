@@ -6,7 +6,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
-      accessToken: JSON.parse(localStorage.getItem("accessToken")) || null,
+      accessToken: localStorage.getItem("jwt-token") || null,
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -24,7 +24,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           JSON.stringify(firstName + " " + lastName)
         );
       },
-
       setAccessToken: (value) => {
         setStore({ accessToken: value });
         localStorage.setItem("jwt-token", value);
@@ -50,6 +49,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           const data = await response.json();
           if (data.access_token) {
             localStorage.setItem("jwt-token", data.access_token);
+            setStore(data.accessToken);
           } else {
             console.error("Token not received in response");
           }

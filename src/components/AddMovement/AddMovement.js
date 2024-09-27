@@ -2,43 +2,76 @@ import { useEffect, useState, useContext } from "react";
 import { Context } from "../../store/context";
 import { get, post } from "../../services";
 import "./AddMovement.css";
+import { MsgModal } from "../MsgModal/MsgModal";
 
 export const AddMovement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("expense");
   const [accounts, setAccounts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [transaction, setTransaction] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const { store } = useContext(Context);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const closeModal = () => setShowModal(false);
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",
     date: "",
-    categoryId: "",
+    transactionId: "",
   });
 
   useEffect(() => {
-    const fetchAccountsAndCategories = async () => {
+    const fetchAccountsAndTransaction = async () => {
       try {
-        const { data: accountsData } = await get(
-          "/account",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNzM4NjM4NCwianRpIjoiMDNjOWVkYWYtMWI5YS00MGU0LTkxYjMtYWI5ZGJhOTlkMzc5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im0udXJydXRpYTE5OTFAZ21haWwuY29tIiwibmJmIjoxNzI3Mzg2Mzg0LCJjc3JmIjoiMjIwMmY2NjktOTg0OS00ZTRiLWI5YmEtZTU3OTY5MDc1NmU0IiwiZXhwIjoxNzI3NjQ1NTg0LCJ1c2VyX2lkIjoxfQ.lyYD4i53aibTxcWhnL8eQR-PnruZwaXTQqtnuaM3E0s"
-        );
-        setAccounts(accountsData);
+        const { data: accountsData } = await get("/account", store.accessToken);
+        const accountsTrue = accountsData.filter((item) => item.state === true);
+        accountsTrue.sort((a, b) => a.name.localeCompare(b.name));
+        setAccounts(accountsTrue);
 
-        const { data: categoriesData } = await get("/transactions");
-        setCategories(categoriesData);
+        const { data: transactionData } = await get("/transactions");
+        setTransaction(transactionData);
+
+        filterTransactions(transactionData);
       } catch (error) {
-        console.error("Error fetching accounts or categories:", error);
+        setModalMessage("Error fetching accounts or transaction: " + error);
+        setShowModal(true);
       }
     };
 
     if (isModalOpen) {
-      fetchAccountsAndCategories();
+      fetchAccountsAndTransaction();
     }
   }, [isModalOpen]);
 
+  useEffect(() => {
+    filterTransactions(transaction);
+  }, [activeTab, transaction]);
+
+  const filterTransactions = (transactions) => {
+    const filtered =
+      activeTab === "expense"
+        ? transactions.filter((t) => t.category_id === 1 || t.category_id === 2)
+        : activeTab === "income"
+        ? transactions.filter((t) => t.category_id === 3 || t.category_id === 4)
+        : activeTab === "saving"
+        ? transactions.filter((t) => t.category_id === 3 || t.category_id === 4)
+        : [];
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+    setFilteredTransactions(filtered);
+  };
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const clearForm = () => {
+    setFormData({
+      amount: "",
+      accountId: "",
+      date: "",
+      transactionId: "",
+    });
   };
 
   const handleTabChange = (tab) => {
@@ -60,13 +93,19 @@ export const AddMovement = () => {
       amount: formData.amount,
       account_id: formData.accountId,
       transaction_date: formData.date,
-      transaction_id: formData.categoryId,
+      transaction_id: formData.transactionId,
     };
 
     try {
-      const { data, status } = await post("/movements", movementData);
+      const { data, status } = await post(
+        "/add-movement",
+        movementData,
+        store.accessToken
+      );
       if (status === 201) {
-        console.log("Movement added successfully:", data);
+        setModalMessage("Movement added successfully");
+        setShowModal(true);
+        clearForm();
         toggleModal();
       }
     } catch (error) {
@@ -76,6 +115,7 @@ export const AddMovement = () => {
 
   return (
     <>
+      {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
       <button onClick={toggleModal}>Add Movement</button>
 
       {isModalOpen && (
@@ -131,7 +171,7 @@ export const AddMovement = () => {
               </div>
 
               <div>
-                <label>Transaction Date:</label>
+                <label>Transaction date:</label>
                 <input
                   type="date"
                   name="date"
@@ -144,15 +184,15 @@ export const AddMovement = () => {
               <div>
                 <label>Type of transaction:</label>
                 <select
-                  name="categoryId"
-                  value={formData.categoryId}
+                  name="transactionId"
+                  value={formData.transactionId}
                   onChange={handleInputChange}
                   required
                 >
                   <option value="">Select type</option>
-                  {categories?.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
+                  {filteredTransactions?.map((transaction) => (
+                    <option key={transaction.id} value={transaction.id}>
+                      {transaction.name}
                     </option>
                   ))}
                 </select>
@@ -161,12 +201,19 @@ export const AddMovement = () => {
               <div className="btn-container">
                 <button type="submit">
                   {activeTab === "expense"
-                    ? "Add Expense"
+                    ? "Add expense"
                     : activeTab === "income"
-                    ? "Add Income"
-                    : "Add Savings"}
+                    ? "Add income"
+                    : "Add savings"}
                 </button>
-                <button onClick={toggleModal}>Cancel</button>
+                <button
+                  onClick={() => {
+                    toggleModal();
+                    clearForm();
+                  }}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
