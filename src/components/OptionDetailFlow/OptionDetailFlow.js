@@ -3,7 +3,6 @@ import { DetailMovement } from "../DetailMovement/DetailMovement";
 import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
 import { Mission } from "../Mission/Mission";
 import "./OptionDetailFlow.css";
-<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 
 export const OptionDetailFlow = () => {
@@ -11,11 +10,6 @@ export const OptionDetailFlow = () => {
   const { accountId } = useParams();
 
   console.log(accountId);
-=======
-
-export const OptionDetailFlow = () => {
-  const [activeTab, setActiveTab] = useState("expense");
->>>>>>> 6fd70f0 (First change)
 
   return (
     <div className="container">
@@ -64,13 +58,8 @@ export const OptionDetailFlow = () => {
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>
-<<<<<<< HEAD
             <ExpenseSumary accountId={accountId} />
             <DetailMovement accountId={accountId}/>
-=======
-            <ExpenseSumary />
-            <DetailMovement />
->>>>>>> 6fd70f0 (First change)
             
           </>
         )}

@@ -9,22 +9,13 @@ export const DetailMovement = ({ accountId }) => {
 
   useEffect(() => {
     if (accountId) {
-      state.actions.getMovements(accountId);
+      state.actions.getMovementsFlow(accountId);
     }
   }, [accountId]);
 
   return (
     <div className="container mt-4 mb-4">
       <div className="style-movement">
-        {/* <table className="table table-head">
-          <thead>
-            <tr>
-              <th scope="col">Category</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-        </table> */}
 
         {state.store.categorySave.map((category, index) => {
           return (

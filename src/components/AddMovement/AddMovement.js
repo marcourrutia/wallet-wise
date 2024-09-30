@@ -119,7 +119,7 @@ export const AddMovement = () => {
       <button onClick={toggleModal}>Add Movement</button>
 
       {isModalOpen && (
-        <div className="modal">
+        <div className="modal-mv">
           <div className="modal-content">
             <div className="tabs">
               <button

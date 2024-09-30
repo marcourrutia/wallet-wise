@@ -263,7 +263,7 @@ const getState = ({ getActions, getStore, setStore }) => {
             console.error("Error updating flow state:", error);
           });
       },
-      getMovements: async (accountId) => {
+      getMovementsFlow: async (accountId) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
