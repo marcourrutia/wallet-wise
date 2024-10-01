@@ -2,6 +2,14 @@
     border-radius: 10px;
 }
 
+.first-table-head{
+    border-radius: 100px;
+}
+.style-table-head th{
+    background-color: #008384;
+    color: white;
+}
+  
 .table:not(:last-of-type) {
     margin-bottom: 1px; 
 }
@@ -13,4 +21,32 @@
 .table-head th {
     background-color: #052145;
     color: white; 
+}
+
+.accordion-style{
+    background-color: rgb(216, 225, 235);
+}
+
+.button-style-category{
+    height: 30px;
+    margin-bottom: 1px;
+    display: flex;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    
+}
+
+.icon-accordion{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.icon-colap{
+    transition: transform 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) .icon-colap {
+    transform: rotate(180deg);
 }
