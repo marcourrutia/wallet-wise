@@ -14,17 +14,13 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
 
 
   const handleChange = (date) => {
-    
-    if (
-      value.getMonth() !== date.getMonth() ||
-      value.getFullYear() !== date.getFullYear()
-    ) {
-      setValue(date);
-      const monthYear = `${date.getMonth() + 1}-${date.getFullYear()}`;
-      setInputValue(monthYear);
-      setShowCalendar(false);
-      onMonthSelect(monthYear);
-    }
+    const selectedMonth = date.getMonth() + 1;
+    const selectedYear = date.getFullYear();
+    setValue(date);
+    const monthYear = `${selectedMonth}-${selectedYear}`;
+    setInputValue(monthYear);
+    setShowCalendar(false);
+    onMonthSelect(selectedMonth, selectedYear);
   };
 
   return (

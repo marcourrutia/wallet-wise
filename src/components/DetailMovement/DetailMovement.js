@@ -3,7 +3,7 @@ import "./DetailMovement.css";
 import React, { useContext, useEffect } from "react";
 import { ImCircleUp } from "react-icons/im";
 
-export const DetailMovement = ({ accountId }) => {
+export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
   const state = useContext(Context);
 
   const formatDate = (dateString) => {
@@ -13,8 +13,6 @@ export const DetailMovement = ({ accountId }) => {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   };
-
-  console.log(accountId);
 
   useEffect(() => {
     if (accountId) {
@@ -57,7 +55,12 @@ export const DetailMovement = ({ accountId }) => {
               <div id={collapseId} className="accordion-collapse collapse show">
                 <div className="accordion-body">
                   {state.store.movementByAccount.map((item, index2) => {
-                    if (item.category == category.name) {
+                    const transactionMonth = new Date(item.transaction_date).getMonth() + 1;
+                    const transactionYear = new Date(item.transaction_date).getFullYear();
+                    
+                    if (item.category == category.name &&
+                      (selectedMonth == null || transactionMonth === selectedMonth) &&
+                      (selectedYear == null || transactionYear === selectedYear)) {
                       totalAmount += item.amount;
                       const formattedAmount = item.amount.toLocaleString(
                         "es-CL",
