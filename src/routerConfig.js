@@ -54,11 +54,11 @@ export const routes = [
     element: (
       <PrivateRoute>
         <Layout>
-          <FormMaintainer />
+          <Maintainer />
         </Layout>
       </PrivateRoute>
     ),
-  },
+  },,
   {
     path: "/home",
     element: (
