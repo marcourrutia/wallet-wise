@@ -1,5 +1,5 @@
 import "./CalendarExpense.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { CiCalendar } from "react-icons/ci";
@@ -10,8 +10,20 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
   const [value, setValue] = useState(new Date());
 
   const today = new Date();
-  const lastDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  const lastDayOfCurrentMonth = new Date(
+    today.getFullYear(),
+    today.getMonth() + 1,
+    0
+  );
 
+  const currentMonth = today.getMonth() + 1;
+  const currentYear = today.getFullYear();
+
+  useEffect(() => {
+    const monthYear = `${currentMonth}-${currentYear}`;
+    setInputValue(monthYear);
+    onMonthSelect(currentMonth, currentYear);
+  }, []);
 
   const handleChange = (date) => {
     const selectedMonth = date.getMonth() + 1;
@@ -48,7 +60,7 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
             minDetail="year"
             maxDetail="year"
             showNavigation={true}
-            maxDate={lastDayOfCurrentMonth} 
+            maxDate={lastDayOfCurrentMonth}
             className="calendar-style"
           />
         </div>
