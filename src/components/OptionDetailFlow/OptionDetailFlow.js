@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
 import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
+import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
 import { Mission } from "../Mission/Mission";
 import "./OptionDetailFlow.css";
 import { useParams } from "react-router-dom";
@@ -31,6 +32,8 @@ export const OptionDetailFlow = () => {
         </ol>
       </nav>
       <ul className="nav nav-tabs nav-option-ul">
+        <div className="d-flex">
+
         <li className="nav-item nav-option-detail">
           <a
             className={`nav-link ${
@@ -54,13 +57,16 @@ export const OptionDetailFlow = () => {
             Finance Overview & Suggestions
           </a>
         </li>
+        </div>
+        <li className="calendar-expense-container">
+          <CalendarExpense />
+        </li>
       </ul>
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>
             <ExpenseSumary accountId={accountId} />
-            <DetailMovement accountId={accountId}/>
-            
+            <DetailMovement accountId={accountId} />
           </>
         )}
         {activeTab === "finance" && <Mission />}
