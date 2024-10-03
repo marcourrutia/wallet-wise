@@ -4,11 +4,8 @@ import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
 
 export const CategoryTab = () => {
-<<<<<<< HEAD
   const [selectedOption, setSelectedOption] = useState("Opción 1");
 
-=======
->>>>>>> dcf5dc5 (goaa)
   const { store, actions } = useContext(Context);
   const [username, setUsername] = useState({
     name: "",
@@ -86,20 +83,11 @@ export const CategoryTab = () => {
                   <div className="mb-3">
                     <label className="col-form-label">Movimiento:</label>
                     <select
-<<<<<<< HEAD
                       value={selectedOption}
                       onChange={(e) => setSelectedOption(e.target.value)}
                     >
                       <option value="Opción 1">Expense</option>
                       <option value="Opción 2">Income</option>
-=======
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option selected>Open this select menu</option>
-                      <option value="1">Egreso</option>
-                      <option value="2">Ingreso</option>
->>>>>>> dcf5dc5 (goaa)
                     </select>
                   </div>
                 </form>
@@ -112,15 +100,11 @@ export const CategoryTab = () => {
                 >
                   Close
                 </button>
-<<<<<<< HEAD
                 <button
                   type="button"
                   onClick={handleSubmit}
                   className="btn btn-primary"
                 >
-=======
-                <button type="button" onClick={handleSubmit} className="btn btn-primary">
->>>>>>> dcf5dc5 (goaa)
                   Send message
                 </button>
               </div>
@@ -146,11 +130,7 @@ export const CategoryTab = () => {
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
               {Array.isArray(store.categories) &&
-=======
-            {Array.isArray(store.categories) &&
->>>>>>> dcf5dc5 (goaa)
                 store.categories.map((movement, index) => (
                   <tr key={index}>
                     <td>
@@ -165,13 +145,9 @@ export const CategoryTab = () => {
                     <td>{movement.name}</td>
                     <td>
                       <div className="d-flex">
-<<<<<<< HEAD
                         <div className="flex-grow-1">
                           {movement.type_of_movement_id}
                         </div>
-=======
-                        <div className="flex-grow-1">{movement.type_of_movement_id}</div>
->>>>>>> dcf5dc5 (goaa)
                         <div>
                           <span className="p-2">
                             <TbEdit />
