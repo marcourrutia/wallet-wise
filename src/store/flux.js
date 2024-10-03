@@ -293,7 +293,38 @@ const getState = ({ getActions, getStore, setStore }) => {
           setStore({ movementByAccount: data.movement, categorySave: data.category});
         } catch (error) {
           console.error("Error al enviar el token get:", error);
-        }
+        }  },
+      getMovements: () => {
+        fetch('http://localhost:5050/type_of_movements', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+            setStore({
+              movements:data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      createMovements: (movements) => {
+        console.log(movements)
+        fetch('http://localhost:5050/type_of_movement', {
+          method:"POST",
+          headers:{
+            "content-type":"application/json",
+            "accept": "application/json"
+          },
+          body: JSON.stringify(movements)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          })
+        .catch((error) => console.log(error));
       },
       getMovements: () => {
         fetch('http://localhost:5050/type_of_movements', {
