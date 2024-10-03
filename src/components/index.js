@@ -2,7 +2,10 @@ export { AddMovement } from "./AddMovement/AddMovement";
 export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnFlow } from "./BtnFlow/BtnFlow";
 export { BtnLogOut } from "./BtnLogOut/BtnLogOut";
+<<<<<<< HEAD
 export { CalendarExpense} from "./CalendarExpense/CalendarExpense";
+=======
+>>>>>>> 5ad8dd0 (First change)
 export { DetailMovement } from "./DetailMovement/DetailMovement";
 export { ExpenseSumary } from "./ExpenseSumary/ExpenseSumary";
 export { Flow } from "./Flow/Flow";

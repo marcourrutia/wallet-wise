@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
 import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
+<<<<<<< HEAD
 import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
 import { Mission } from "../Mission/Mission";
 import "./OptionDetailFlow.css";
@@ -17,6 +18,13 @@ export const OptionDetailFlow = () => {
     setSelectedMonth(month);
     setSelectedYear(year);
   };
+=======
+import { Mission } from "../Mission/Mission";
+import "./OptionDetailFlow.css";
+
+export const OptionDetailFlow = () => {
+  const [activeTab, setActiveTab] = useState("expense");
+>>>>>>> 5ad8dd0 (First change)
 
   return (
     <div className="container">
@@ -38,6 +46,7 @@ export const OptionDetailFlow = () => {
         </ol>
       </nav>
       <ul className="nav nav-tabs nav-option-ul">
+<<<<<<< HEAD
         <div className="d-flex">
           <li className="nav-item nav-option-detail">
             <a
@@ -65,17 +74,47 @@ export const OptionDetailFlow = () => {
         </div>
         <li className="calendar-expense-container">
           <CalendarExpense onMonthSelect={handleMonthSelect} />
+=======
+        <li className="nav-item nav-option-detail">
+          <a
+            className={`nav-link ${
+              activeTab === "expense" ? "active" : ""
+            } nav-option-detail-a`}
+            aria-current="page"
+            href="#"
+            onClick={() => setActiveTab("expense")}
+          >
+            Expense Tracker
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            className={`nav-link ${
+              activeTab === "finance" ? "active" : ""
+            } nav-option-detail-a`}
+            href="#"
+            onClick={() => setActiveTab("finance")}
+          >
+            Finance Overview & Suggestions
+          </a>
+>>>>>>> 5ad8dd0 (First change)
         </li>
       </ul>
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>
+<<<<<<< HEAD
             <ExpenseSumary accountId={accountId} />
             <DetailMovement
               accountId={accountId}
               selectedMonth={selectedMonth}
               selectedYear={selectedYear}
             />
+=======
+            <ExpenseSumary />
+            <DetailMovement />
+            
+>>>>>>> 5ad8dd0 (First change)
           </>
         )}
         {activeTab === "finance" && <Mission />}

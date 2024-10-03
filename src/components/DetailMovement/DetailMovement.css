@@ -2,6 +2,7 @@
     border-radius: 10px;
 }
 
+<<<<<<< HEAD
 .first-table-head{
     border-radius: 100px;
 }
@@ -10,6 +11,8 @@
     color: white;
 }
   
+=======
+>>>>>>> 5ad8dd0 (First change)
 .table:not(:last-of-type) {
     margin-bottom: 1px; 
 }
@@ -22,6 +25,7 @@
     background-color: #052145;
     color: white; 
 }
+<<<<<<< HEAD
 
 .accordion-style{
     background-color: rgb(216, 225, 235);
@@ -50,3 +54,5 @@
 .accordion-button:not(.collapsed) .icon-colap {
     transform: rotate(180deg);
 }
+=======
+>>>>>>> 5ad8dd0 (First change)

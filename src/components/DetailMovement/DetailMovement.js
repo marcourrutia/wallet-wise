@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Context } from "../../store/context";
 import "./DetailMovement.css";
 import React, { useContext, useEffect } from "react";
@@ -24,10 +25,20 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
     <div className="container mt-4 mb-4">
       <div className="style-movement">
         <table className="table style-table-head mb-1">
+=======
+import "./DetailMovement.css";
+
+export const DetailMovement = () => {
+  return (
+    <div className="container mt-4 mb-4">
+      <div className="style-movement">
+        <table className="table table-head">
+>>>>>>> 5ad8dd0 (First change)
           <thead>
             <tr>
               <th scope="col">Category</th>
               <th scope="col">Amount</th>
+<<<<<<< HEAD
               <th scope="col">Date of transaction</th>
             </tr>
           </thead>
@@ -98,6 +109,54 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
             </div>
           );
         })}
+=======
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+        </table>
+        <table className="table table-body-transaction">
+          <thead>
+            <tr>
+              <th scope="col">Name of categori</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody className="table-group-divider">
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+            </tr>
+          </tbody>
+        </table>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody className="table-group-divider">
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+            </tr>
+          </tbody>
+        </table>
+>>>>>>> 5ad8dd0 (First change)
       </div>
     </div>
   );

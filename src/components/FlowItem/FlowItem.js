@@ -17,7 +17,11 @@ export const FlowItem = ({ flow, onDeleteFlow, onDisableFlow, isDisabled, onFlow
       {isDisabled ? (
         <span className="flow-name" onClick={() => onFlowClick(flow.id)}>{flow.name}</span>
       ) : (
+<<<<<<< HEAD
         <Link to={`/detailflow/${flow.id}`} className="flow-name">
+=======
+        <Link to="/detailflow" className="flow-name">
+>>>>>>> 5ad8dd0 (First change)
           {flow.name}
         </Link>
       )}
