@@ -54,7 +54,7 @@ export const routes = [
     element: (
       <PrivateRoute>
         <Layout>
-          <Maintainer />
+          <FormMaintainer />
         </Layout>
       </PrivateRoute>
     ),
