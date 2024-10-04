@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Context } from "../../store/context";
 import "./DetailMovement.css";
 import React, { useContext, useEffect } from "react";
@@ -26,35 +24,10 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
     <div className="container mt-4 mb-4">
       <div className="style-movement">
         <table className="table style-table-head mb-1">
-=======
-=======
-import { Context } from "../../store/context";
->>>>>>> 57ccb23 (Second change)
-import "./DetailMovement.css";
-import { useContext, useEffect } from "react";
-
-
-export const DetailMovement = ({ accountId }) => {
-  const state = useContext(Context);
-
-  console.log(accountId);
-
-  useEffect(() => {
-    if (accountId) { 
-        state.actions.getMovements(accountId); 
-      }
-  },[accountId]);
-
-  return (
-    <div className="container mt-4 mb-4">
-      <div className="style-movement">
-        <table className="table table-head">
->>>>>>> 5ad8dd0 (First change)
           <thead>
             <tr>
               <th scope="col">Category</th>
               <th scope="col">Amount</th>
-<<<<<<< HEAD
               <th scope="col">Date of transaction</th>
             </tr>
           </thead>
@@ -125,81 +98,6 @@ export const DetailMovement = ({ accountId }) => {
             </div>
           );
         })}
-=======
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-        </table>
-<<<<<<< HEAD
-        <table className="table table-body-transaction">
-          <thead>
-            <tr>
-              <th scope="col">Name of categori</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-          </tbody>
-        </table>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Category</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-          </tbody>
-        </table>
->>>>>>> 5ad8dd0 (First change)
-=======
-        {state.store.movementByAccount.length > 0 ? (
-          state.store.movementByAccount.map((item, index) => {
-            return (
-              <table className="table table-body-transaction">
-                <thead>
-                  <tr>
-                    <th scope="col">{item.category_id?.name}</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody className="table-group-divider">
-                  <tr>
-                    <th scope="row">{item.transaction_id?.name}</th>
-                    <td>{item?.amount}</td>
-                    <td>{item?.transaction_date}</td>
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })
-        ) : (
-          <h4>Nada que decir</h4>
-        )}
->>>>>>> 57ccb23 (Second change)
       </div>
     </div>
   );

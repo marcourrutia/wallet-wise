@@ -1,5 +1,3 @@
-import { TransactionTab } from "../components/Maintainer/TransactionTab";
-
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
@@ -13,10 +11,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
       userFullName: JSON.parse(localStorage.getItem("userFullName")) || "",
-
-      accessToken: localStorage.getItem("jwt-token") || null,
-      accessToken: localStorage.getItem("accessToken") || null,
-
       accessToken: localStorage.getItem("jwt-token") || null,
       movements: [],
       categories: [],
@@ -108,7 +102,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data")
+            console.log(data, "hola data");
             setStore({
               categories: data,
             });
@@ -130,7 +124,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data")
+            console.log(data, "hola data");
             setStore({
               transaction: data,
             });
@@ -239,7 +233,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           })
           .catch((error) => console.log(error));
       },
-      updateStateFlow: (flowId, stateAccount) => {
+      updateStateFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
@@ -276,14 +270,16 @@ const getState = ({ getActions, getStore, setStore }) => {
         console.log("Antes del account Id");
         console.log(accountId);
         try {
-          const response = await fetch(`http://localhost:5050/movement/${accountId}`,
+          const response = await fetch(
+            `http://localhost:5050/movement/${accountId}`,
             {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
               },
-            });
+            }
+          );
 
           if (!response.ok) {
             console.log(response);
@@ -292,78 +288,18 @@ const getState = ({ getActions, getStore, setStore }) => {
             throw new Error("There is an error");
           }
           const data = await response.json();
-        
+
           console.log("Movements data:", data);
-          setStore({ movementByAccount: data.movement, categorySave: data.category});
+          setStore({
+            movementByAccount: data.movement,
+            categorySave: data.category,
+          });
         } catch (error) {
           console.error("Error al enviar el token get:", error);
-        }  },
-      getMovements: () => {
-        fetch('http://localhost:5050/type_of_movements', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-            setStore({
-              movements:data,
-            });
-          })
-          .catch((error) => console.log(error));
-      },
-      createMovements: (movements) => {
-        console.log(movements)
-        fetch('http://localhost:5050/type_of_movement', {
-          method:"POST",
-          headers:{
-            "content-type":"application/json",
-            "accept": "application/json"
-          },
-          body: JSON.stringify(movements)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-          })
-        .catch((error) => console.log(error));
-      },
-      getMovements: () => {
-        fetch('http://localhost:5050/type_of_movements', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-            setStore({
-              movements:data,
-            });
-          })
-          .catch((error) => console.log(error));
-      },
-      createMovements: (movements) => {
-        console.log(movements)
-        fetch('http://localhost:5050/type_of_movement', {
-          method:"POST",
-          headers:{
-            "content-type":"application/json",
-            "accept": "application/json"
-          },
-          body: JSON.stringify(movements)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-          })
-        .catch((error) => console.log(error));
+        }
       },
     },
-  }
+  };
 };
 
 export default getState;
