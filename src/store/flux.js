@@ -4,6 +4,11 @@ const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
       accounts: [],
+      movementByAccount: [],
+      categorySave: [],
+      first_name: [],
+      last_name: [],
+      email: [],
       isAuthenticated:
         JSON.parse(localStorage.getItem("isAuthenticated")) || false,
       userId: JSON.parse(localStorage.getItem("userId")) || null,
@@ -99,7 +104,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data")
+            console.log(data, "hola data");
             setStore({
               categories: data,
             });
@@ -121,7 +126,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data")
+            console.log(data, "hola data");
             setStore({
               transaction: data,
             });
@@ -230,7 +235,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           })
           .catch((error) => console.log(error));
       },
-      updateStateFlow: (flowId, stateAccount) => {
+      updateStateFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
@@ -257,6 +262,43 @@ const getState = ({ getActions, getStore, setStore }) => {
           .catch((error) => {
             console.error("Error updating flow state:", error);
           });
+      },
+      getMovementsFlow: async (accountId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        console.log("Antes del account Id");
+        console.log(accountId);
+        try {
+          const response = await fetch(
+            `http://localhost:5050/movement/${accountId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            console.log(response);
+            console.log("Dentro del error");
+
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+
+          console.log("Movements data:", data);
+          setStore({
+            movementByAccount: data.movement,
+            categorySave: data.category,
+          });
+        } catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
       },
     },
   };
