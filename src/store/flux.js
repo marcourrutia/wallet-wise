@@ -1,3 +1,5 @@
+import { TransactionTab } from "../components/Maintainer/TransactionTab";
+
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
