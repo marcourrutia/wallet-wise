@@ -1,6 +1,7 @@
 import "./Home.css";
 import React from "react";
 import { AddMovement, Flow } from "../../components";
+import { imgGrafic } from "../../assets";
 
 export const Home = () => {
   return (

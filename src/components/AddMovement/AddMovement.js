@@ -138,6 +138,7 @@ export const AddMovement = () => {
   return (
     <>
       {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
+
       <button onClick={toggleModal}>Add Movement</button>
 
       {isModalOpen && (
