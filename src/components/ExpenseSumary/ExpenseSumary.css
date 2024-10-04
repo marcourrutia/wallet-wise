@@ -1,0 +1,45 @@
+.div-sumary {
+  background: hsl(214, 86%, 15%);
+  color: white;
+  border-radius: 10px;
+}
+
+.span-sumary {
+  margin-top: 20px !important;
+  margin-bottom: 25px;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.form-sumary {
+  display: flex;
+}
+
+.div-field-sumary {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+  padding-left: 35px;
+}
+
+.label-sumary {
+  display: flex;
+  flex-shrink: 0;
+  align-items: end;
+  margin-right: 10px;
+}
+
+.input-sumary {
+  background-color: transparent;
+  height: 40px;
+  justify-content: center;
+  width: 200px;
+  display: flex;
+  border-color: white;
+  border-bottom: 2px solid white;
+  color: white;
+  flex-grow: 0.2;
+  margin-left: 10px;
+  border-radius: 10px;
+  text-align: right;
+}

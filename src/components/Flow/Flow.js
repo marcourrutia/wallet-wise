@@ -3,6 +3,8 @@ import "./Flow.css";
 import { BtnFlow } from "../BtnFlow/BtnFlow";
 import { Context } from "../../store/context";
 import { FlowItem } from "../FlowItem/FlowItem";
+import { useNavigate } from "react-router-dom";
+
 
 export const Flow = () => {
   const state = useContext(Context);
@@ -11,6 +13,14 @@ export const Flow = () => {
   const [newFlow, setNewFlow] = useState("");
   const [flows, setFlows] = useState([]);
 
+  const [selectedAccountId, setSelectedAccountId] = useState(null);
+  const navigate = useNavigate();
+
+  const handleFlowClick = (flowId) => {
+    setSelectedAccountId(flowId);
+    navigate(`/detailflow/${flowId}`);
+  };
+  
   const handleAddOrSave = () => {
     if (isAdding && newFlow.trim() !== "") {
       setFlows([...flows, newFlow]);
@@ -62,6 +72,7 @@ export const Flow = () => {
                       flow={item}
                       isDisabled={!item.state}
                       onDeleteFlow={handleDeleteFlow}
+                      onFlowClick={handleFlowClick}
                       onDisableFlow={() =>
                         state.actions.updateStateFlow(item.id)
                       }

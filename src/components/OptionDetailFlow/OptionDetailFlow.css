@@ -1,0 +1,50 @@
+.card-option-detail {
+  background-color: rgb(216, 225, 235);
+}
+
+.breadcrumb-nav {
+  margin-bottom: 20px;
+  margin-top: 2px;
+}
+
+.breadcrumb-item a {
+  color: var(--text-primary);
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.breadcrumb-item::before {
+  color: rgb(79 104 129 / 75%);
+}
+
+.breadcrumb-item-better {
+  background-color: transparent;
+  padding: 0;
+}
+
+.breadcrumb-item-better.active {
+  color: var(--text-primary);
+  background-color: transparent;
+}
+
+.nav-option-ul {
+  margin-top: 20px;
+  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+}
+
+.nav-option-detail-a {
+  border: 1px solid white !important;
+  color: rgb(0, 110, 255) !important;
+}
+
+.nav-option-detail-a:hover {
+  background-color: #324e6e !important;
+}
+
+.calendar-expense-container {
+  display: flex;
+  align-items: center;
+}

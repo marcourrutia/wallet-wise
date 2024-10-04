@@ -1,6 +1,6 @@
 import { LogIn, SignUp, Principal, Home, Maintainer } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import { Layout } from "./components";
+import { Layout, OptionDetailFlow } from "./components";
 import {
   UseSignIn,
   LoadingSignOut,
@@ -58,13 +58,23 @@ export const routes = [
         </Layout>
       </PrivateRoute>
     ),
-  },
+  },,
   {
     path: "/home",
     element: (
       <PrivateRoute>
         <Layout>
           <Home />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/detailflow/:accountId",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <OptionDetailFlow />
         </Layout>
       </PrivateRoute>
     ),

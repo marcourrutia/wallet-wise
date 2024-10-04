@@ -14,6 +14,7 @@ export const AddMovement = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
+  const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",
@@ -80,17 +81,38 @@ export const AddMovement = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    if (name === "amount") {
+      let amount = parseInt(value.replace(/\D/g, ""), 10);
+      if (isNaN(amount) || amount <= 0) {
+        amount = "";
+      } else if (amount > 999999999) {
+        amount = 999999999;
+      }
+
+      const formattedAmount = new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+        minimumFractionDigits: 0,
+      }).format(amount);
+
+      setFormData({
+        ...formData,
+        [name]: amount ? formattedAmount : "",
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const movementData = {
-      amount: formData.amount,
+      amount: parseInt(formData.amount.replace(/\D/g, ""), 10),
       account_id: formData.accountId,
       transaction_date: formData.date,
       transaction_id: formData.transactionId,
@@ -119,7 +141,7 @@ export const AddMovement = () => {
       <button onClick={toggleModal}>Add Movement</button>
 
       {isModalOpen && (
-        <div className="modal">
+        <div className="modal-mv">
           <div className="modal-content">
             <div className="tabs">
               <button
@@ -145,11 +167,12 @@ export const AddMovement = () => {
               <div>
                 <label>Amount:</label>
                 <input
-                  type="number"
+                  type="text"
                   name="amount"
                   value={formData.amount}
                   onChange={handleInputChange}
                   required
+                  placeholder="0 CLP"
                 />
               </div>
 
@@ -178,6 +201,7 @@ export const AddMovement = () => {
                   value={formData.date}
                   onChange={handleInputChange}
                   required
+                  max={today}
                 />
               </div>
 
