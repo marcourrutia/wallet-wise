@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
-import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
 import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
 import { Mission } from "../Mission/Mission";
 import "./OptionDetailFlow.css";
@@ -70,7 +69,6 @@ export const OptionDetailFlow = () => {
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>
-            <ExpenseSumary accountId={accountId} />
             <DetailMovement
               accountId={accountId}
               selectedMonth={selectedMonth}
