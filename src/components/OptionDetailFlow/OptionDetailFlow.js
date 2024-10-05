@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
 import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
-import { Mission } from "../Mission/Mission";
+import { OverviewSuggestion } from "../OverviewSuggestion/OverviewSuggestion";
 import "./OptionDetailFlow.css";
 import { useParams } from "react-router-dom";
 
@@ -76,7 +76,7 @@ export const OptionDetailFlow = () => {
             />
           </>
         )}
-        {activeTab === "finance" && <Mission />}
+        {activeTab === "finance" && <OverviewSuggestion />}
       </div>
     </div>
   );
