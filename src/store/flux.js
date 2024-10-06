@@ -28,7 +28,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         localStorage.setItem("userId", JSON.stringify(value));
       },
       setUserFullName: (firstName, lastName) => {
-        setStore({ userFullName: firstName + "" + lastName });
+        setStore({ userFullName: firstName + " " + lastName });
         localStorage.setItem(
           "userFullName",
           JSON.stringify(firstName + " " + lastName)

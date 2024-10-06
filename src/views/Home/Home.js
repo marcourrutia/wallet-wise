@@ -1,7 +1,6 @@
 import "./Home.css";
 import React from "react";
-import { AddMovement, Flow } from "../../components";
-import { imgGrafic } from "../../assets";
+import { AddMovement, ChatGpt, Flow } from "../../components";
 
 export const Home = () => {
   return (
@@ -15,6 +14,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="options-section">
+        <ChatGpt />
         <div className="financial-flows">
           <Flow />
         </div>

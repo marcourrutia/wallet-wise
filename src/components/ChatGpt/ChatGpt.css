@@ -1,0 +1,16 @@
+.chatgpt-container {
+  border: 2px solid var(--text-primary);
+  border-radius: 7px;
+  width: fit-content;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-section-nav);
+}
+
+.chatgpt-container p {
+  font-family: var(--font-tertiary);
+  font-size: 0.9em;
+  color: var(--text-primary);
+  margin: 0;
+}
