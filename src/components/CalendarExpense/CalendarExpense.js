@@ -11,13 +11,13 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
 
   const today = new Date();
   const lastDayOfCurrentMonth = new Date(
-    today.getFullYear(),
-    today.getMonth() + 1,
+    today.getUTCFullYear(),
+    today.getUTCMonth() + 1,
     0
   );
 
-  const currentMonth = today.getMonth() + 1;
-  const currentYear = today.getFullYear();
+  const currentMonth = today.getUTCMonth() + 1;
+  const currentYear = today.getUTCFullYear();
 
   useEffect(() => {
     const monthYear = `${currentMonth}-${currentYear}`;
@@ -26,8 +26,8 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
   }, []);
 
   const handleChange = (date) => {
-    const selectedMonth = date.getMonth() + 1;
-    const selectedYear = date.getFullYear();
+    const selectedMonth = date.getUTCMonth() + 1;
+    const selectedYear = date.getUTCFullYear();
     setValue(date);
     const monthYear = `${selectedMonth}-${selectedYear}`;
     setInputValue(monthYear);

@@ -1,0 +1,40 @@
+.content-fluid-overview {
+  background: var(--bg-section-nav);
+  height: 500px;
+}
+
+.card-main-overview {
+  width: 60%;
+  height: 400px;
+  justify-content: center;
+  display: flex;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 8%;
+  align-items: center;
+  border-color: #008384;
+  
+}
+
+.img-overview {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-hover-overview:hover .card-main-overview {
+  box-shadow: 3px 3px 15px #008384;
+}
+
+.card-hover-overview {
+    text-decoration: none;
+  }
+  

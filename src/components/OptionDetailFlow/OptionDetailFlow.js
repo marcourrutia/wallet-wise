@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
-import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
 import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
-import { Mission } from "../Mission/Mission";
+import { OverviewSuggestion } from "../OverviewSuggestion/OverviewSuggestion";
 import "./OptionDetailFlow.css";
 import { useParams } from "react-router-dom";
 
@@ -70,7 +69,6 @@ export const OptionDetailFlow = () => {
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>
-            <ExpenseSumary accountId={accountId} />
             <DetailMovement
               accountId={accountId}
               selectedMonth={selectedMonth}
@@ -78,7 +76,7 @@ export const OptionDetailFlow = () => {
             />
           </>
         )}
-        {activeTab === "finance" && <Mission />}
+        {activeTab === "finance" && <OverviewSuggestion />}
       </div>
     </div>
   );
