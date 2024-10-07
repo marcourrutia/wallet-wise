@@ -42,6 +42,12 @@ export const AddMovement = () => {
 
     if (isModalOpen) {
       fetchAccountsAndTransaction();
+      setFormData({
+        amount: "",
+        accountId: store.flowSelected,
+        date: "",
+        transactionId: "",
+      });
     }
   }, [isModalOpen]);
 
@@ -69,7 +75,7 @@ export const AddMovement = () => {
   const clearForm = () => {
     setFormData({
       amount: "",
-      accountId: "",
+      accountId: store.flowSelected,
       date: "",
       transactionId: "",
     });
@@ -155,7 +161,7 @@ export const AddMovement = () => {
                 className={activeTab === "income" ? "active" : ""}
                 onClick={() => handleTabChange("income")}
               >
-                Income
+                Incomes
               </button>
               <button
                 className={activeTab === "saving" ? "active" : ""}

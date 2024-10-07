@@ -17,11 +17,16 @@ const getState = ({ getActions, getStore, setStore }) => {
       movements: [],
       categories: [],
       transaction: [],
+      flowSelected: localStorage.getItem("flowSelected") || "",
     },
     actions: {
       setIsAuthenticated: (value) => {
         setStore({ isAuthenticated: value });
         localStorage.setItem("isAuthenticated", JSON.stringify(value));
+      },
+      setFlowSelected: (value) => {
+        setStore({ flowSelected: value });
+        localStorage.setItem("flowSelected", value);
       },
       setUserId: (value) => {
         setStore({ userId: value });
@@ -82,7 +87,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               movements: data,
             });
@@ -104,7 +108,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data");
             setStore({
               categories: data,
             });
@@ -126,7 +129,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data");
             setStore({
               transaction: data,
             });
@@ -134,9 +136,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           .catch((error) => console.log(error));
       },
       createMovements: (movements) => {
-        console.log(movements);
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -151,7 +151,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => {
             response.json();
-            console.log(response);
             getActions().getMovements();
           })
           .then((data) => {
@@ -168,7 +167,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
         try {
-          console.log("entro al try");
           const response = await fetch("http://localhost:5050/account", {
             method: "POST",
             headers: {
@@ -189,7 +187,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       getFlow: async () => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -216,7 +213,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       deleteFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -256,7 +252,6 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .then((data) => {
-            console.log("Flow state updated successfully", data);
             getActions().getFlow();
           })
           .catch((error) => {
@@ -269,8 +264,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        console.log("Antes del account Id");
-        console.log(accountId);
         try {
           const response = await fetch(
             `http://localhost:5050/movement/${accountId}`,
@@ -284,14 +277,9 @@ const getState = ({ getActions, getStore, setStore }) => {
           );
 
           if (!response.ok) {
-            console.log(response);
-            console.log("Dentro del error");
-
             throw new Error("There is an error");
           }
           const data = await response.json();
-
-          console.log("Movements data:", data);
           setStore({
             movementByAccount: data.movement,
             categorySave: data.category,

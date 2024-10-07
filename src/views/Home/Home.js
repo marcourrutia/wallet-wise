@@ -1,11 +1,12 @@
 import "./Home.css";
 import React from "react";
-import { AddMovement, ChatGpt, Flow } from "../../components";
+import { AddMovement, ChatGpt, Flow, SelectFlow } from "../../components";
 
 export const Home = () => {
   return (
     <div className="container container-home">
       <div className="graph-section">
+        <SelectFlow />
         <div className="financial-overview">
           {/* Gráfica de ingresos y gastos  */}
         </div>

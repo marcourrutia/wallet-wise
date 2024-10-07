@@ -1,9 +1,10 @@
 export const sendPrompt = async (prompt) => {
   try {
+    console.log("se hace solicitud a api chat gpt");
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.API_KEY_CHAT_GPT}`,
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY_CHAT_GPT}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -12,7 +13,7 @@ export const sendPrompt = async (prompt) => {
           {
             role: "system",
             content:
-              "Eres un asesor financiero experto, especializado en ofrecer consejos breves y prácticos basados en los datos financieros del usuario.",
+              "You are a financial advisor expert, specialized in providing concise and practical advice based on the user's financial data.",
           },
           { role: "user", content: prompt },
         ],

@@ -16,6 +16,7 @@ export { Navbar } from "./Navbar/Navbar";
 export { NavDash } from "./NavDash/NavDash";
 export { NavOption } from "./NavOption/NavOption";
 export { OptionDetailFlow } from "./OptionDetailFlow/OptionDetailFlow";
+export { SelectFlow } from "./SelectFlow/SelectFlow";
 export { Service } from "./Service/Service";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { Support } from "./Support/Support";
