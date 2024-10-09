@@ -2,6 +2,7 @@ export { AddMovement } from "./AddMovement/AddMovement";
 export { BtnBack } from "./BtnBack/BtnBack";
 export { BtnFlow } from "./BtnFlow/BtnFlow";
 export { BtnLogOut } from "./BtnLogOut/BtnLogOut";
+export { BreadCrumb } from "./BreadCrumb/BreadCrumb";
 export { CalendarExpense} from "./CalendarExpense/CalendarExpense";
 export { DetailMovement } from "./DetailMovement/DetailMovement";
 export { ExpenseSumary } from "./ExpenseSumary/ExpenseSumary";

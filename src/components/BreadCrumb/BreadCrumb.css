@@ -1,0 +1,26 @@
+.breadcrumb-nav {
+    margin-bottom: 20px;
+    margin-top: 2px;
+  }
+  
+  .breadcrumb-item a {
+    color: var(--text-primary);
+  }
+  
+  .breadcrumb-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb-item.breadcrumb-item::before {
+    color: rgb(79 104 129 / 75%);
+  }
+  
+  .breadcrumb-item-better {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .breadcrumb-item-better.active {
+    color: var(--text-primary);
+    background-color: transparent;
+  }
