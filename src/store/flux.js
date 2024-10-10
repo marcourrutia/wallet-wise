@@ -217,7 +217,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       deleteFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -355,7 +354,30 @@ const getState = ({ getActions, getStore, setStore }) => {
         }catch (error) {
           console.error("Error al enviar el token get:", error);
         }
-      }
+      },
+      deleteGoal: (accountId, goalId) =>{
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        console.log("Account id del delete goal", accountId);
+        console.log("id del delete goal", goalId);
+
+        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              getActions().getGoal(accountId);
+            }
+          })
+          .catch((error) => console.log(error));
+      },
     },
   };
 };

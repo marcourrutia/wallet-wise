@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./AddGoal.css";
 import { Context } from "../../store/context";
 import { useParams } from "react-router-dom";
-
+import unidecode from "unidecode";
 
 export const AddGoal = ({ onClose }) => {
   const [goalName, setGoalName] = useState("");
@@ -10,7 +10,11 @@ export const AddGoal = ({ onClose }) => {
   const [goalMonths, setGoalMonths] = useState("");
   const [montlyContribution, setMonthlyContribution] = useState("");
   const [monthAchieve, setMonthgAchieve] = useState("");
-  const  { accountId }  = useParams();
+  const { accountId } = useParams();
+
+  const normalizeString = (str) => {
+    return unidecode(str).toLowerCase();
+  };
 
   const state = useContext(Context);
 
@@ -54,17 +58,33 @@ export const AddGoal = ({ onClose }) => {
 
   const isSaveEnabled = () => {
     return montlyContribution !== "" && monthAchieve !== "";
-  }
+  };
 
   const handleSave = () => {
-    state.actions.postGoal(accountId, goalName, goalAmount, monthAchieve, montlyContribution);
+    const normalizedGoalName = normalizeString(goalName);
+
+    const existingGoal = state.store.goals.find(
+      (goal) => normalizeString(goal.name) === normalizedGoalName
+    );
+    if (existingGoal) {
+      alert(
+        "A goal with this name already exists. Please choose a different name."
+      );
+      return;
+    }
+    state.actions.postGoal(
+      accountId,
+      goalName,
+      goalAmount,
+      monthAchieve,
+      montlyContribution
+    );
     setGoalName("");
     setGoalAmount("");
     setGoalMonths("");
     setMonthlyContribution("");
     setMonthgAchieve("");
-  }
-
+  };
 
   return (
     <div className="modal" tabIndex="-1">
@@ -88,7 +108,7 @@ export const AddGoal = ({ onClose }) => {
                   id="exampleFormControlInput1"
                   placeholder="goal name..."
                   onChange={handleGoalName}
-                  
+                  value={goalName}
                 />
               </div>
               <div className="mb-3">
@@ -179,7 +199,12 @@ export const AddGoal = ({ onClose }) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary btn-save-goal" disabled={!isSaveEnabled()} onClick={handleSave}>
+            <button
+              type="button"
+              className="btn btn-primary btn-save-goal"
+              disabled={!isSaveEnabled()}
+              onClick={handleSave}
+            >
               Save goal
             </button>
           </div>

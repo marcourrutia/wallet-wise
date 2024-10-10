@@ -52,11 +52,11 @@ export const AddMovement = () => {
   const filterTransactions = (transactions) => {
     const filtered =
       activeTab === "expense"
-        ? transactions.filter((t) => t.category_id === 1 || t.category_id === 2)
+        ? transactions.filter((t) => t.category_id === 3 || t.category_id === 4)
         : activeTab === "income"
-        ? transactions.filter((t) => t.category_id === 3 || t.category_id === 4)
+        ? transactions.filter((t) => t.category_id === 1)
         : activeTab === "saving"
-        ? transactions.filter((t) => t.category_id === 3 || t.category_id === 4)
+        ? transactions.filter((t) => t.category_id === 2)
         : [];
     filtered.sort((a, b) => a.name.localeCompare(b.name));
     setFilteredTransactions(filtered);

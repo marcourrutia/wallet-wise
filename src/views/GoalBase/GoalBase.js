@@ -28,13 +28,27 @@ export const GoalBase = () => {
     setModalOpen(false);
   };
 
+  const handleDeleteGoal = (goalId)=> {
+    const isConfirmed = window.confirm(
+        "Are you sure you want to delete this goal?"
+      );
+      if (isConfirmed) {
+        state.actions.deleteGoal(accountId, goalId);
+      }
+  }
+
+
   return (
     <div className="container">
       <BreadCrumb />
 
       <div className="container container-goal">
         <div className="style-button">
-          <button className="btn btn-primary button-goal" type="button" onClick={handledModalAddGoal}>
+          <button
+            className="btn btn-primary button-goal"
+            type="button"
+            onClick={handledModalAddGoal}
+          >
             Add goal
           </button>
         </div>
@@ -48,6 +62,7 @@ export const GoalBase = () => {
               <th scope="col">Goal</th>
               <th scope="col">Fulfillment amount</th>
               <th scope="col">Monthly contribution</th>
+              <th scope="col">Goal month</th>
               <th scope="col">Remaining time</th>
               <th scope="col">Goal status</th>
               <th scope="col">Action</th>
@@ -58,24 +73,35 @@ export const GoalBase = () => {
               goals.map((item, index) => {
                 const dateCreate = item.created_at;
                 const totalMonth = item.estimated_monthly;
+                const monthlyContribution = item.monthly_contribution;
                 const currentDate = new Date();
                 const start = new Date(dateCreate);
                 const months =
                   (currentDate.getFullYear() - start.getFullYear()) * 12 +
                   (currentDate.getMonth() - start.getMonth());
-
+                  
                 const remainingMonths = Math.max(totalMonth - months, 0);
+
+                const estimateContribution = months * monthlyContribution;
+
+
+                console.log("Aporte estimado a la fecha:", estimateContribution);
 
                 return (
                   <tr key={index}>
                     <th scope="row">{item.name}</th>
                     <td>{item.fulfillment_amount}</td>
                     <td>{item.monthly_contribution}</td>
+                    <td>{item.estimated_monthly}</td>
                     <td>{remainingMonths}</td>
                     <td>@</td>
-                    <td>
-                      <CiEdit />
-                      <BsTrash />
+                    <td className="td-action">
+                      <div className="icon-action">
+                        <CiEdit className="style-action" />
+                      </div>
+                      <div className="icon-action">
+                        <BsTrash className="style-action" onClick={() => handleDeleteGoal(item.id)}/>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -90,8 +116,7 @@ export const GoalBase = () => {
           </tbody>
         </table>
       </div>
-      {isModalOpen && <AddGoal onClose={closeModal} />} {/* Renderiza el modal si está abierto */}
-
+      {isModalOpen && <AddGoal onClose={closeModal} />}
     </div>
   );
 };
