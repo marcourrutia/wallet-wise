@@ -1,17 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/context";
 import "./GoalBase.css";
 import { BreadCrumb } from "../../components/BreadCrumb/BreadCrumb";
 import { BsTrash } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { useParams } from "react-router-dom";
+import { AddGoal } from "../../components/AddGoal/AddGoal";
 
 export const GoalBase = () => {
   const state = useContext(Context);
   const { accountId } = useParams();
-
-  console.log("State goals:", state.store.goals);
-  console.log("account Id", accountId);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (accountId) {
@@ -21,13 +20,21 @@ export const GoalBase = () => {
 
   const goals = state.store.goals;
 
+  const handledModalAddGoal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div className="container">
       <BreadCrumb />
 
       <div className="container container-goal">
         <div className="style-button">
-          <button className="btn btn-primary button-goal" type="button">
+          <button className="btn btn-primary button-goal" type="button" onClick={handledModalAddGoal}>
             Add goal
           </button>
         </div>
@@ -50,7 +57,6 @@ export const GoalBase = () => {
             {goals.length > 0 ? (
               goals.map((item, index) => {
                 const dateCreate = item.created_at;
-                console.log("fecha de creación", dateCreate);
                 const totalMonth = item.estimated_monthly;
                 const currentDate = new Date();
                 const start = new Date(dateCreate);
@@ -84,6 +90,8 @@ export const GoalBase = () => {
           </tbody>
         </table>
       </div>
+      {isModalOpen && <AddGoal onClose={closeModal} />} {/* Renderiza el modal si está abierto */}
+
     </div>
   );
 };

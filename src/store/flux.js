@@ -306,8 +306,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        console.log("Antes del account Id en getGoal");
-        console.log(accountId);
         try{
           const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
             method: "GET",
@@ -317,15 +315,43 @@ const getState = ({ getActions, getStore, setStore }) => {
             },
           });
           if(!response.ok){
-            console.log("Dentro del error", response);
             throw new Error("There is an error");
           }
           const data = await response.json();
-          console.log("Data received from backend:", data);
           setStore({
             goals: data,
           });
 
+        }catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
+      },
+      postGoal: async (accountId, goalName, goalAmount, monthAchieve, montlyContribution) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try{
+          console.log("Valores e el fetch", accountId);
+          const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: goalName,
+              fulfillment_amount: goalAmount,
+              estimated_monthly: monthAchieve,
+              monthly_contribution: montlyContribution,
+            }),
+          });
+          if(!response.ok){
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          getActions().getGoal(accountId);
         }catch (error) {
           console.error("Error al enviar el token get:", error);
         }
