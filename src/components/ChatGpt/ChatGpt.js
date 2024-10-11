@@ -27,15 +27,19 @@ export const ChatGpt = () => {
       let variableExpenses = 0;
       let savings = 0;
 
-      const currentMonth = new Date().getMonth();
-      const currentYear = new Date().getFullYear();
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+
+      const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+      const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
       store.movementByAccount.forEach((movement) => {
         const movementDate = new Date(movement.transaction_date);
-        if (
-          movementDate.getMonth() === currentMonth &&
-          movementDate.getFullYear() === currentYear
-        ) {
+        const movementMonth = movementDate.getUTCMonth();
+        const movementYear = movementDate.getUTCFullYear();
+
+        if (movementMonth === previousMonth && movementYear === previousYear) {
           switch (movement.category) {
             case "Incomes":
               incomes += movement.amount;
@@ -81,7 +85,7 @@ export const ChatGpt = () => {
       totalVariableExpenses ||
       totalSavings
     ) {
-      const prompt = `The user is named ${store.userFullName}, and has a financial history for the current month: incomes: ${totalIncomes} CLP, fixed expenses: ${totalFixedExpenses} CLP, variable expenses: ${totalVariableExpenses} CLP, savings: ${totalSavings} CLP. Provide a brief, personalized financial advice based on this historical data for the current month (max 350 characters).`;
+      const prompt = `The user is named ${store.userFullName}, and has a financial history for the previous month: incomes: ${totalIncomes} CLP, fixed expenses: ${totalFixedExpenses} CLP, variable expenses: ${totalVariableExpenses} CLP, savings: ${totalSavings} CLP. Provide a brief, personalized financial advice based on this historical data for the previous month (max 350 characters).`;
 
       sendPrompt(prompt).then((advice) => {
         if (advice) {
@@ -94,6 +98,8 @@ export const ChatGpt = () => {
 
   return (
     <div className="chatgpt-container">
+      <span>Last Month's Financial Advice</span>
+      <hr></hr>
       <p>{adviceChatGpt}</p>
     </div>
   );

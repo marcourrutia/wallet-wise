@@ -5,6 +5,7 @@
   max-width: 500px;
   padding: 15px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: var(--bg-section-nav);
 }
@@ -14,4 +15,14 @@
   font-size: 0.9em;
   color: var(--text-primary);
   margin: 0;
+}
+
+.chatgpt-container span {
+  font-family: var(--font-tertiary);
+  color: var(--text-primary);
+}
+
+.chatgpt-container hr {
+  border: 1px solid var(--text-primary);
+  width: 80%;
 }

@@ -14,7 +14,9 @@ export const AddMovement = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
-  const today = new Date().toISOString().split("T")[0];
+  const preToday = new Date().toLocaleDateString("es-CL");
+  const [day, month, year] = preToday.split("-");
+  const today = `${year}-${month}-${day}`;
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",

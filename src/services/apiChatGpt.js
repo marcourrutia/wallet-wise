@@ -1,6 +1,6 @@
 export const sendPrompt = async (prompt) => {
   try {
-    console.log("se hace solicitud a api chat gpt");
+    console.log("se hace solicitud a api chat gpt", prompt);
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {

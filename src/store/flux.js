@@ -64,7 +64,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           const data = await response.json();
           if (data.access_token) {
             localStorage.setItem("jwt-token", data.access_token);
-            setStore(data.accessToken);
+            setStore({ accessToken: data.access_token });
           } else {
             console.error("Token not received in response");
           }
