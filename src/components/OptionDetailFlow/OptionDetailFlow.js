@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DetailMovement } from "../DetailMovement/DetailMovement";
 import { CalendarExpense } from "../CalendarExpense/CalendarExpense";
 import { OverviewSuggestion } from "../OverviewSuggestion/OverviewSuggestion";
+import { BreadCrumb } from "../BreadCrumb/BreadCrumb";
 import "./OptionDetailFlow.css";
 import { useParams } from "react-router-dom";
 
@@ -19,23 +20,7 @@ export const OptionDetailFlow = () => {
 
   return (
     <div className="container">
-      <nav
-        style={{ "--bs-breadcrumb-divider": "'>'" }}
-        aria-label="breadcrumb"
-        className="breadcrumb-nav"
-      >
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item ">
-            <a href="/home">Home</a>
-          </li>
-          <li
-            className="breadcrumb-item active breadcrumb-item-better"
-            aria-current="page"
-          >
-            Detail Flow
-          </li>
-        </ol>
-      </nav>
+      <BreadCrumb />
       <ul className="nav nav-tabs nav-option-ul">
         <div className="d-flex">
           <li className="nav-item nav-option-detail">
@@ -44,7 +29,6 @@ export const OptionDetailFlow = () => {
                 activeTab === "expense" ? "active" : ""
               } nav-option-detail-a`}
               aria-current="page"
-              href="#"
               onClick={() => setActiveTab("expense")}
             >
               Expense Tracker
@@ -55,7 +39,6 @@ export const OptionDetailFlow = () => {
               className={`nav-link ${
                 activeTab === "finance" ? "active" : ""
               } nav-option-detail-a`}
-              href="#"
               onClick={() => setActiveTab("finance")}
             >
               Finance Overview & Suggestions
