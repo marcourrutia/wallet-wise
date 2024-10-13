@@ -135,7 +135,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           .catch((error) => console.log(error));
       },
       createMovements: (movements) => {
-        console.log(movements);
         const token = localStorage.getItem("jwt-token");
         console.log(token);
         if (!token) {
@@ -195,7 +194,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
         try {
-          console.log("entro al try");
           const response = await fetch("http://localhost:5050/account", {
             method: "POST",
             headers: {
@@ -216,7 +214,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       getFlow: async () => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -295,8 +292,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-       // console.log("Antes del account Id");
-        console.log(accountId);
         try {
           const response = await fetch(
             `http://localhost:5050/movement/${accountId}`,
@@ -310,14 +305,9 @@ const getState = ({ getActions, getStore, setStore }) => {
           );
 
           if (!response.ok) {
-            console.log(response);
-            console.log("Dentro del error");
-
             throw new Error("There is an error");
           }
           const data = await response.json();
-
-          console.log("Movements data:", data);
           setStore({
             movementByAccount: data.movement,
 
