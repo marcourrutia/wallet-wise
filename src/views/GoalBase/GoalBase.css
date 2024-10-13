@@ -64,3 +64,26 @@
 .style-action {
   margin: 5px;
 }
+
+.happy-face{
+  width: 30px;
+  height: 30px;
+  align-items: center;
+}
+
+.style-row-goal{
+  height: 40px;
+  overflow: hidden;
+}
+
+.style-row-goal th,
+.style-row-goal td {
+  height: 80px;
+  overflow: hidden;
+  vertical-align: middle; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  font-size: medium;
+}
+
+

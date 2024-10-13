@@ -18,6 +18,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       movements: [],
       categories: [],
       transaction: [],
+      totalContribution: [],
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -377,6 +378,32 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .catch((error) => console.log(error));
+      },
+      getTotalContribution: async (accountId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try {
+          const response = await fetch(
+            `http://localhost:5050/total-contributed/${accountId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          setStore({totalContribution: data});
+        } catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
       },
     },
   };

@@ -6,6 +6,9 @@ import { BsTrash } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import { AddGoal } from "../../components/AddGoal/AddGoal";
+import { FaRegFaceGrinStars } from "react-icons/fa6";
+import { FaRegFaceGrinWide } from "react-icons/fa6";
+import { FaRegFaceFrownOpen } from "react-icons/fa6";
 
 export const GoalBase = () => {
   const state = useContext(Context);
@@ -18,7 +21,7 @@ export const GoalBase = () => {
     }
   }, [accountId]);
 
-  const goals = state.store.goals;
+  const goals = state.store.totalContribution;
 
   const handledModalAddGoal = () => {
     setModalOpen(true);
@@ -28,15 +31,18 @@ export const GoalBase = () => {
     setModalOpen(false);
   };
 
-  const handleDeleteGoal = (goalId)=> {
+  const handleDeleteGoal = (goalId) => {
     const isConfirmed = window.confirm(
-        "Are you sure you want to delete this goal?"
-      );
-      if (isConfirmed) {
-        state.actions.deleteGoal(accountId, goalId);
-      }
-  }
+      "Are you sure you want to delete this goal?"
+    );
+    if (isConfirmed) {
+      state.actions.deleteGoal(accountId, goalId);
+    }
+  };
 
+  useEffect(() => {
+    state.actions.getTotalContribution(accountId);
+  }, []);
 
   return (
     <div className="container">
@@ -71,36 +77,45 @@ export const GoalBase = () => {
           <tbody className="table-group-divider">
             {goals.length > 0 ? (
               goals.map((item, index) => {
-                const dateCreate = item.created_at;
-                const totalMonth = item.estimated_monthly;
-                const monthlyContribution = item.monthly_contribution;
-                const currentDate = new Date();
-                const start = new Date(dateCreate);
-                const months =
-                  (currentDate.getFullYear() - start.getFullYear()) * 12 +
-                  (currentDate.getMonth() - start.getMonth());
-                  
-                const remainingMonths = Math.max(totalMonth - months, 0);
+                const totalRemainingMonth = item.remaining_time;
+                const totalContribution = item.total_contributed;
+                const estimateContribution = item.estimated_contribution;
 
-                const estimateContribution = months * monthlyContribution;
-
-
-                console.log("Aporte estimado a la fecha:", estimateContribution);
+                const faceStatus = () => {
+                  if (totalContribution == estimateContribution) {
+                    return (
+                      <FaRegFaceGrinWide className="happy-face mouth eye" />
+                    );
+                  } else if (totalContribution > estimateContribution) {
+                    return (
+                      <FaRegFaceGrinStars className="happy-face mouth eye" />
+                    );
+                  } else {
+                    return (
+                      <FaRegFaceFrownOpen className="happy-face mouth eye" />
+                    );
+                  }
+                };
 
                 return (
-                  <tr key={index}>
-                    <th scope="row">{item.name}</th>
+                  <tr key={index} className="style-row-goal">
+                    <th scope="row" className="style-name">
+                      {item.name}
+                    </th>
                     <td>{item.fulfillment_amount}</td>
                     <td>{item.monthly_contribution}</td>
                     <td>{item.estimated_monthly}</td>
-                    <td>{remainingMonths}</td>
-                    <td>@</td>
+                    <td>{totalRemainingMonth}</td>
+                    <td>{faceStatus()}</td>
                     <td className="td-action">
                       <div className="icon-action">
                         <CiEdit className="style-action" />
                       </div>
                       <div className="icon-action">
-                        <BsTrash className="style-action" onClick={() => handleDeleteGoal(item.id)}/>
+                        <BsTrash
+                          className="style-action"
+                          onClick={() => handleDeleteGoal(item.id)}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -108,7 +123,7 @@ export const GoalBase = () => {
               })
             ) : (
               <tr>
-                <td colSpan="6" style={{ textAlign: "center" }}>
+                <td colSpan="7" style={{ textAlign: "center" }}>
                   No goals have been created yet.
                 </td>
               </tr>
