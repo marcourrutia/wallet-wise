@@ -320,7 +320,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.log("Movements data:", data);
           setStore({
             movementByAccount: data.movement,
-            
+
             categorySave: data.category,
           });
         } catch (error) {
@@ -333,64 +333,72 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        try{
-          const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          if(!response.ok){
+        try {
+          const response = await fetch(
+            `http://localhost:5050/goal/${accountId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
             throw new Error("There is an error");
           }
           const data = await response.json();
           setStore({
             goals: data,
           });
-
-        }catch (error) {
+        } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
       },
-      postGoal: async (accountId, goalName, goalAmount, monthAchieve, montlyContribution) => {
+      postGoal: async (
+        accountId,
+        goalName,
+        goalAmount,
+        monthAchieve,
+        montlyContribution
+      ) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        try{
-          console.log("Valores e el fetch", accountId);
-          const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              name: goalName,
-              fulfillment_amount: goalAmount,
-              estimated_monthly: monthAchieve,
-              monthly_contribution: montlyContribution,
-            }),
-          });
-          if(!response.ok){
+        try {
+          const response = await fetch(
+            `http://localhost:5050/goal/${accountId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                name: goalName,
+                fulfillment_amount: goalAmount,
+                estimated_monthly: monthAchieve,
+                monthly_contribution: montlyContribution,
+              }),
+            }
+          );
+          if (!response.ok) {
             throw new Error("There is an error");
           }
           const data = await response.json();
           getActions().getGoal(accountId);
-        }catch (error) {
+        } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
       },
-      deleteGoal: (accountId, goalId) =>{
+      deleteGoal: (accountId, goalId) => {
         const token = localStorage.getItem("jwt-token");
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        console.log("Account id del delete goal", accountId);
-        console.log("id del delete goal", goalId);
 
         fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
           method: "DELETE",
@@ -427,10 +435,50 @@ const getState = ({ getActions, getStore, setStore }) => {
             throw new Error("There is an error");
           }
           const data = await response.json();
-          setStore({totalContribution: data});
+          setStore({ totalContribution: data });
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
+      },
+      updateGoal: async (
+        accountId,
+        goalId,
+        goalName,
+        goalAmount,
+        monthAchieve,
+        montlyContribution
+      ) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: goalName,
+            fulfillment_amount: goalAmount,
+            estimated_monthly: monthAchieve,
+            monthly_contribution: montlyContribution,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to update goal state");
+            }
+          })
+          .then((data) => {
+            getActions().getGoal(accountId);
+          })
+          .catch((error) => {
+            console.error("Error updating goal state:", error);
+          });
       },
     },
   };

@@ -9,11 +9,14 @@ import { AddGoal } from "../../components/AddGoal/AddGoal";
 import { FaRegFaceGrinStars } from "react-icons/fa6";
 import { FaRegFaceGrinWide } from "react-icons/fa6";
 import { FaRegFaceFrownOpen } from "react-icons/fa6";
+import { Tooltip } from 'bootstrap';
 
 export const GoalBase = () => {
   const state = useContext(Context);
   const { accountId } = useParams();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [editGoal, setGoalToEdit] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     if (accountId) {
@@ -25,8 +28,15 @@ export const GoalBase = () => {
 
   const handledModalAddGoal = () => {
     setModalOpen(true);
+    setIsEditMode(false);
+    setGoalToEdit(null);
   };
 
+  const handleEditGoal = (goal) => {
+    setGoalToEdit(goal);
+    setIsEditMode(true);
+    setModalOpen(true);
+  };
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -42,7 +52,17 @@ export const GoalBase = () => {
 
   useEffect(() => {
     state.actions.getTotalContribution(accountId);
-  }, []);
+  }, [state.store.goals]);
+
+  //Este useEffect es de un codigo que vi el ejemplo, 
+  //no funcionaba sin esto el ejemplo que queria hacer, lo dejo temporalmente
+  useEffect(() => {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
+    return () => {
+      tooltipList.forEach(tooltip => tooltip.dispose());
+    };
+  }, [goals]);
 
   return (
     <div className="container">
@@ -99,7 +119,13 @@ export const GoalBase = () => {
 
                 return (
                   <tr key={index} className="style-row-goal">
-                    <th scope="row" className="style-name">
+                    <th
+                      scope="row"
+                      className="style-name"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      data-bs-title={item.name}
+                    >
                       {item.name}
                     </th>
                     <td>{item.fulfillment_amount}</td>
@@ -109,7 +135,10 @@ export const GoalBase = () => {
                     <td>{faceStatus()}</td>
                     <td className="td-action">
                       <div className="icon-action">
-                        <CiEdit className="style-action" />
+                        <CiEdit
+                          className="style-action"
+                          onClick={() => handleEditGoal(item)}
+                        />
                       </div>
                       <div className="icon-action">
                         <BsTrash
@@ -131,7 +160,9 @@ export const GoalBase = () => {
           </tbody>
         </table>
       </div>
-      {isModalOpen && <AddGoal onClose={closeModal} />}
+      {isModalOpen && (
+        <AddGoal onClose={closeModal} isEditMode={isEditMode} goal={editGoal} />
+      )}
     </div>
   );
 };
