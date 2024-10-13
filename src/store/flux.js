@@ -1,4 +1,3 @@
-import { TransactionTab } from "../components/Maintainer/TransactionTab";
 
 const getState = ({ getActions, getStore, setStore }) => {
   return {
@@ -84,7 +83,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            console.log("hola datos 1", data);
             setStore({
               movements: data,
             });
@@ -106,7 +105,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data");
+            console.log(data, "hola datos");
             setStore({
               categories: data,
             });
@@ -155,6 +154,32 @@ const getState = ({ getActions, getStore, setStore }) => {
             response.json();
             console.log(response);
             getActions().getMovements();
+          })
+          .then((data) => {
+            getActions().getMovements();
+          })
+          .catch((error) => console.log(error));
+      },
+      createTransaction: (transaction) => {
+        console.log(transaction);
+        const token = localStorage.getItem("jwt-token");
+        console.log(token);
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/transaction", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(transaction),
+        })
+          .then((response) => {
+            response.json();
+            console.log(response);
+            getActions().getTransaction();
           })
           .then((data) => {
             getActions().getMovements();
@@ -270,6 +295,8 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
+       // console.log("Antes del account Id");
+        console.log(accountId);
         try {
           const response = await fetch(
             `http://localhost:5050/movement/${accountId}`,

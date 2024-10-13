@@ -10,7 +10,6 @@ export const MovemenTab = () => {
   });
   const handleSubmit = () => {
     actions.createMovements(username);
-    console.log("hola");
   };
 
   const handleonChange = (event) => {
@@ -19,8 +18,8 @@ export const MovemenTab = () => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(username);
   useEffect(() => {
+    console.log(actions.getMovements());
     actions.getMovements();
   }, []);
 
@@ -40,7 +39,7 @@ export const MovemenTab = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Agregar
+            Add
           </button>
 
           <div
@@ -54,7 +53,7 @@ export const MovemenTab = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Agrega movimiento
+                  Add Movement Type
                   </h1>
                   <button
                     type="button"
@@ -64,13 +63,15 @@ export const MovemenTab = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <label className="form-label">Agrega un Movimiento:</label>
+                  <label className="form-label">Add a Movement:</label>
                   <input
                     className="form-control"
                     type="text"
                     name="name"
                     onChange={handleonChange}
-                    placeholder="Agrega un nombre"
+                    placeholder="Disabled input"
+                    aria-label="Disabled input example" 
+                    disabled
                     value={username.name}
                   />
                 </div>
@@ -87,7 +88,7 @@ export const MovemenTab = () => {
                     type="button"
                     className="btn btn-primary"
                   >
-                    Save changes
+                    Save
                   </button>
                 </div>
               </div>
@@ -108,7 +109,7 @@ export const MovemenTab = () => {
                   />
                 </th>
                 <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Movement</th>
               </tr>
             </thead>
             <tbody>

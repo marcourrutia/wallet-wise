@@ -9,6 +9,7 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
 
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
+  console.log("estoy por aqui");
 
   console.log("total income", totalIncome);
   console.log("movement by account", state.store.movementByAccount);

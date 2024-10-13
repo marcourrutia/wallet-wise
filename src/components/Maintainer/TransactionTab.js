@@ -4,14 +4,26 @@ import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
 
 export const TransactionTab = () => {
-  const [selectedOption, setSelectedOption] = useState("Opción 1");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { store, actions } = useContext(Context);
   const [username, setUsername] = useState({
     name: "",
+    category_id: "",
   });
-  const handleSubmit = () => {
-    console.log("hola");
+
+  const handleSubmit = (event) => {
+    actions.createTransaction(username);
+    setUsername({
+      name: "",
+      category_id: "",
+    });
+    setSuccessMessage("Transaction added successfully!");
+
+    // Clear the success message after 3 seconds
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
   };
 
   const handleonChange = (event) => {
@@ -33,6 +45,11 @@ export const TransactionTab = () => {
       aria-labelledby="contact-tab"
       tabIndex="0"
     >
+      {successMessage && (
+  <div className="alert alert-success" role="alert">
+    {successMessage}
+  </div>
+)}
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
         <div className="hstack gap-2 justify-content-sm-end p-2">
           <button
@@ -42,7 +59,7 @@ export const TransactionTab = () => {
             data-bs-target="#exampleModal3"
             data-bs-whatever="@mdo"
           >
-            Agregar
+            Add
           </button>
         </div>
         <div
@@ -56,7 +73,7 @@ export const TransactionTab = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Agrega Transacción
+                  Add Transactions
                 </h1>
                 <button
                   type="button"
@@ -68,27 +85,34 @@ export const TransactionTab = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label className="col-form-label">
-                      Agrega una Categoría:
-                    </label>
+                    <label className="col-form-label">Add Category:</label>
                     <input
                       className="form-control"
                       type="text"
                       name="name"
                       onChange={handleonChange}
-                      placeholder="Agrega un nombre"
+                      placeholder="Add a name"
                       value={username.name}
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="col-form-label">Categoría:</label>
+                    <label className="col-form-label">Category:</label>
                     <select
-                      value={selectedOption}
-                      onChange={(e) => setSelectedOption(e.target.value)}
+                      name="category_id"
+                      value={username.category_id}
+                      onChange={(e) =>
+                        setUsername({
+                          ...username,
+                          category_id: e.target.value,
+                        })
+                      }
                     >
-                      <option value="Opción 1">Rent Payment</option>
-                      <option value="Opción 2">Electricity Bill</option>
-                      <option value="Opción 3">Water Bill</option>
+                      {Array.isArray(store.categories) &&
+                        store.categories.map((movement) => (
+                          <option key={movement.id} value={movement.id}>
+                            {movement.name}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </form>
@@ -105,8 +129,9 @@ export const TransactionTab = () => {
                   onClick={handleSubmit}
                   type="button"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                 >
-                  Send message
+                  Send
                 </button>
               </div>
             </div>
@@ -126,8 +151,8 @@ export const TransactionTab = () => {
                   />
                 </th>
                 <th scope="col">ID</th>
-                <th scope="col">Transacción</th>
-                <th scope="col">Categoría</th>
+                <th scope="col">Transactions</th>
+                <th scope="col">Category ID</th>
               </tr>
             </thead>
             <tbody>
