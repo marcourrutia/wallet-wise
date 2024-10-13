@@ -9,14 +9,6 @@ export const SelectFlow = () => {
   useEffect(() => {
     const activeFlows = store.accounts.filter((c) => c.state === true);
     setFlowData(activeFlows);
-
-    if (!activeFlows.find((flow) => flow.id === store.flowSelected)) {
-      if (activeFlows.length > 0) {
-        actions.setFlowSelected(activeFlows[0].id);
-      } else {
-        actions.setFlowSelected("");
-      }
-    }
   }, [store.accounts]);
 
   const handleOnChange = (e) => {

@@ -18,6 +18,8 @@ const getState = ({ getActions, getStore, setStore }) => {
       categories: [],
       transaction: [],
       flowSelected: localStorage.getItem("flowSelected") || "",
+      dataMovement: [],
+      isNewData: localStorage.getItem("isNewData") || false,
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -42,6 +44,13 @@ const getState = ({ getActions, getStore, setStore }) => {
       setAccessToken: (value) => {
         setStore({ accessToken: value });
         localStorage.setItem("jwt-token", value);
+      },
+      setDataMovement: (data) => {
+        setStore({ dataMovement: data });
+      },
+      setIsNewData: (value) => {
+        setStore({ isNewData: value });
+        localStorage.setItem("isNewData", value);
       },
       postToken: async (firstName, lastName, email) => {
         try {

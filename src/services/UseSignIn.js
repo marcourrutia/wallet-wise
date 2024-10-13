@@ -13,6 +13,7 @@ export const UseSignIn = () => {
     const email = emailAddresses[0].emailAddress;
     await actions.postToken(firstName, lastName, email);
     actions.setIsAuthenticated(true);
+    actions.setUserFullName(firstName, lastName);
     navigate("/home");
   };
 
@@ -20,5 +21,5 @@ export const UseSignIn = () => {
     if (isSignedIn) {
       sendToken();
     }
-  }, [isSignedIn]); 
+  }, [isSignedIn]);
 };

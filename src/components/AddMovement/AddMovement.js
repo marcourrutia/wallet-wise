@@ -10,7 +10,7 @@ export const AddMovement = () => {
   const [accounts, setAccounts] = useState([]);
   const [transaction, setTransaction] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
@@ -137,6 +137,7 @@ export const AddMovement = () => {
         setShowModal(true);
         clearForm();
         toggleModal();
+        actions.setIsNewData(true);
       }
     } catch (error) {
       console.error("Error adding movement:", error);

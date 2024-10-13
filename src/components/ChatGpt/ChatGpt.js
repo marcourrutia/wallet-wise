@@ -2,6 +2,8 @@ import "./ChatGpt.css";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/context";
 import { sendPrompt } from "../../services/apiChatGpt";
+import { get } from "../../services";
+import { FiRefreshCw } from "react-icons/fi";
 
 export const ChatGpt = () => {
   const { store, actions } = useContext(Context);
@@ -15,13 +17,34 @@ export const ChatGpt = () => {
     return `advice-${store.flowSelected}-${totalIncomes}-${totalFixedExpenses}-${totalVariableExpenses}-${totalSavings}`;
   };
 
+  const getMovements = async (id) => {
+    const { data, status, error } = await get(
+      `/movement/${id}`,
+      store.accessToken
+    );
+    if (status === 200) actions.setDataMovement(data.movement);
+    if (error) console.log("an error has occurred: ", error);
+  };
+
+  const newAdvice = (fullname, incomes, fixed, variable, savings, cacheKey) => {
+    const prompt = `The user is named ${fullname}, and has a financial history for the previous month: incomes: ${incomes} CLP, fixed expenses: ${fixed} CLP, variable expenses: ${variable} CLP, savings: ${savings} CLP. Provide a brief, personalized financial advice based on this historical data for the previous month (max 350 characters).`;
+
+    sendPrompt(prompt).then((advice) => {
+      if (advice) {
+        setAdviceChatGpt(advice);
+        localStorage.setItem(cacheKey, advice);
+        actions.setIsNewData(false);
+      }
+    });
+  };
+
   useEffect(() => {
-    if (store.flowSelected) actions.getMovementsFlow(store.flowSelected);
+    if (store.flowSelected) getMovements(store.flowSelected);
     else setAdviceChatGpt("No flows...");
   }, [store.flowSelected]);
 
   useEffect(() => {
-    if (store.flowSelected) {
+    if (store.dataMovement) {
       let incomes = 0;
       let fixedExpenses = 0;
       let variableExpenses = 0;
@@ -34,7 +57,7 @@ export const ChatGpt = () => {
       const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
       const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
-      store.movementByAccount.forEach((movement) => {
+      store.dataMovement.forEach((movement) => {
         const movementDate = new Date(movement.transaction_date);
         const movementMonth = movementDate.getUTCMonth();
         const movementYear = movementDate.getUTCFullYear();
@@ -64,7 +87,7 @@ export const ChatGpt = () => {
       setTotalVariableExpenses(variableExpenses);
       setTotalSavings(savings);
     }
-  }, [store.movementByAccount]);
+  }, [store.dataMovement]);
 
   useEffect(() => {
     const cacheKey = generateCacheKey();
@@ -85,20 +108,25 @@ export const ChatGpt = () => {
       totalVariableExpenses ||
       totalSavings
     ) {
-      const prompt = `The user is named ${store.userFullName}, and has a financial history for the previous month: incomes: ${totalIncomes} CLP, fixed expenses: ${totalFixedExpenses} CLP, variable expenses: ${totalVariableExpenses} CLP, savings: ${totalSavings} CLP. Provide a brief, personalized financial advice based on this historical data for the previous month (max 350 characters).`;
-
-      sendPrompt(prompt).then((advice) => {
-        if (advice) {
-          setAdviceChatGpt(advice);
-          localStorage.setItem(cacheKey, advice);
-        }
-      });
+      newAdvice(
+        store.fullname,
+        totalIncomes,
+        totalFixedExpenses,
+        totalVariableExpenses,
+        totalSavings,
+        cacheKey
+      );
     }
   }, [totalIncomes, totalFixedExpenses, totalVariableExpenses, totalSavings]);
 
   return (
     <div className="chatgpt-container">
-      <span>Last Month's Financial Advice</span>
+      <div className="chatgpt-container-header">
+        <span>Last Month's Financial Advice</span>
+        <button className={store.isNewData ? "visible" : ""}>
+          <FiRefreshCw />
+        </button>
+      </div>
       <hr></hr>
       <p>{adviceChatGpt}</p>
     </div>
