@@ -7,6 +7,7 @@ import {
   PrivateRoute,
   PublicRoute,
 } from "./services";
+import { FinanceChartView } from "./views/Graphics/FinanceChartView";
 
 export const routes = [
   {
@@ -75,6 +76,16 @@ export const routes = [
       <PrivateRoute>
         <Layout>
           <OptionDetailFlow />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/detailflow/BasicFinancial/:accountId",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <FinanceChartView />
         </Layout>
       </PrivateRoute>
     ),

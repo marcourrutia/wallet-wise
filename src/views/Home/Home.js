@@ -1,6 +1,7 @@
 import "./Home.css";
 import React from "react";
 import { AddMovement, ChatGpt, Flow, SelectFlow } from "../../components";
+import { GraphicsPieChart } from "../../components/Graphics/GraphicsPieChart";
 
 export const Home = () => {
   return (
@@ -9,6 +10,7 @@ export const Home = () => {
         <SelectFlow />
         <div className="financial-overview">
           {/* Gráfica de ingresos y gastos  */}
+          <GraphicsPieChart />
         </div>
         <div className="add-movement">
           <AddMovement />

@@ -22,3 +22,7 @@ export { SelectFlow } from "./SelectFlow/SelectFlow";
 export { Service } from "./Service/Service";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { Support } from "./Support/Support";
+export { GraphicsPieChart } from "./Graphics/GraphicsPieChart";
+export { GraphicsPieChartTwo } from "./Graphics/GraphicsPieChartTwo";
+export { DetailMovementTwo } from "./DetailMovementTwo/DetailMovementTwo"
+

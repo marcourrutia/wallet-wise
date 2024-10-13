@@ -42,7 +42,7 @@ export const CategoryTab = () => {
             data-bs-target="#exampleModal1"
             data-bs-whatever="@mdo"
           >
-            Agregar
+            Add
           </button>
         </div>
         <div
@@ -56,7 +56,7 @@ export const CategoryTab = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Agrega Categoría
+                  Add Category
                 </h1>
                 <button
                   type="button"
@@ -69,25 +69,31 @@ export const CategoryTab = () => {
                 <form>
                   <div className="mb-3">
                     <label className="col-form-label">
-                      Agrega una Categoría:
+                    Add Category:
                     </label>
                     <input
                       className="form-control"
                       type="text"
                       name="name"
                       onChange={handleonChange}
-                      placeholder="Agrega un nombre"
+                      placeholder="Disabled input"
+                      aria-label="Disabled input example" 
+                      disabled
                       value={username.name}
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="col-form-label">Movimiento:</label>
+                    <label className="col-form-label">Movement:</label>
                     <select
                       value={selectedOption}
                       onChange={(e) => setSelectedOption(e.target.value)}
                     >
-                      <option value="Opción 1">Expense</option>
-                      <option value="Opción 2">Income</option>
+                      {Array.isArray(store.movements) &&
+                        store.movements.map((movement) => (
+                          <option key={movement.id} value={movement.id}>
+                            {movement.name}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </form>
@@ -105,7 +111,7 @@ export const CategoryTab = () => {
                   onClick={handleSubmit}
                   className="btn btn-primary"
                 >
-                  Send message
+                  Send
                 </button>
               </div>
             </div>
@@ -125,8 +131,8 @@ export const CategoryTab = () => {
                   />
                 </th>
                 <th scope="col">ID</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Movimiento</th>
+                <th scope="col">Category</th>
+                <th scope="col">Movement ID</th>
               </tr>
             </thead>
             <tbody>

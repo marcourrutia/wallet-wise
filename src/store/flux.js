@@ -1,5 +1,3 @@
-import { TransactionTab } from "../components/Maintainer/TransactionTab";
-
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
@@ -163,6 +161,32 @@ const getState = ({ getActions, getStore, setStore }) => {
           .then((response) => {
             response.json();
             getActions().getMovements();
+          })
+          .then((data) => {
+            getActions().getMovements();
+          })
+          .catch((error) => console.log(error));
+      },
+      createTransaction: (transaction) => {
+        console.log(transaction);
+        const token = localStorage.getItem("jwt-token");
+        console.log(token);
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch("http://localhost:5050/transaction", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(transaction),
+        })
+          .then((response) => {
+            response.json();
+            console.log(response);
+            getActions().getTransaction();
           })
           .then((data) => {
             getActions().getMovements();
