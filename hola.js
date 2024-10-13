@@ -2,21 +2,23 @@ import { Context } from "../../store/context";
 import "./DetailMovement.css";
 import React, { useContext, useEffect, useState } from "react";
 import { ImCircleUp } from "react-icons/im";
-import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
 
-export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
+export const DetailMovementTwo = ({
+  accountId,
+  selectedMonth,
+  selectedYear,
+}) => {
   const state = useContext(Context);
-
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
-  console.log("estoy por aqui");
 
   useEffect(() => {
     let incomeTotal = 0;
     let expenseTotal = 0;
 
     state.store.movementByAccount.forEach((item) => {
-      const transactionMonth = new Date(item.transaction_date).getUTCMonth() + 1;
+      const transactionMonth =
+        new Date(item.transaction_date).getUTCMonth() + 1;
       const transactionYear = new Date(item.transaction_date).getUTCFullYear();
 
       if (
@@ -53,38 +55,13 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
 
   return (
     <div>
-      <ExpenseSumary totalIncome={totalIncome} totalExpense={totalExpense} />
       <div className="container mt-4 mb-4">
         <div className="style-movement">
-          <table className="table style-table-head mb-1">
-            <thead>
-              <tr>
-                <th scope="col">Category</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Date of transaction</th>
-              </tr>
-            </thead>
-          </table>
           {state.store.categorySave.map((category, index) => {
             const collapseId = `collapse-${index}`;
             let totalAmount = 0;
             return (
               <div className="accordion-item accordion-style" key={index}>
-                <h2 className="accordion-header">
-                  <button
-                    className="accordion-button button-style-category"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={`#${collapseId}`}
-                    aria-expanded="true"
-                    aria-controls="panelsStayOpen-collapseOne"
-                  >
-                    <div className="icon-accordion">
-                      {category.name}
-                      <ImCircleUp className={`icon-colap ${collapseId}`} />
-                    </div>
-                  </button>
-                </h2>
                 <div
                   id={collapseId}
                   className="accordion-collapse collapse show"
@@ -96,7 +73,6 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
                       const transactionYear = new Date(
                         item.transaction_date
                       ).getUTCFullYear();
-
                       if (
                         item.category == category.name &&
                         (selectedMonth == null ||
@@ -105,37 +81,10 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
                           transactionYear === selectedYear)
                       ) {
                         totalAmount += item.amount;
-                        const formattedAmount = item.amount.toLocaleString(
-                          "es-CL",
-                          {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          }
-                        );
-                        return (
-                          <table
-                            className="table table-body-transaction"
-                            key={index2}
-                          >
-                            <tbody>
-                              <tr>
-                                <th scope="col">{item.transaction}</th>
-                                <td>{formattedAmount}</td>
-                                <td>{formatDate(item?.transaction_date)}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        );
+                        console.log(totalAmount);
+                        return;
                       }
-                    })}{" "}
-                    <h4>
-                      Total:{" "}
-                      {totalAmount.toLocaleString("es-CL", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}{" "}
-                      CLP
-                    </h4>
+                    })}
                   </div>
                 </div>
               </div>

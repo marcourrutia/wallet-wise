@@ -19,7 +19,7 @@ export const Maintainer = () => {
                 aria-controls="home-tab-pane"
                 aria-selected="true"
               >
-                Tipo movimiento
+                 Type of Movement
               </button>
             </li>
             <li className="nav-item" role="presentation">
@@ -33,7 +33,7 @@ export const Maintainer = () => {
                 aria-controls="profile-tab-pane"
                 aria-selected="false"
               >
-                Categoría
+                Category
               </button>
             </li>
             <li className="nav-item" role="presentation">
@@ -47,7 +47,7 @@ export const Maintainer = () => {
                 aria-controls="contact-tab-pane"
                 aria-selected="false"
               >
-                Transacciones
+                Transaction
               </button>
             </li>
           </ul>
