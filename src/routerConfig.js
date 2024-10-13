@@ -1,4 +1,4 @@
-import { LogIn, SignUp, Principal, Home, Maintainer } from "./views";
+import { LogIn, SignUp, Principal, Home, Maintainer, GoalBase } from "./views";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Layout, OptionDetailFlow } from "./components";
 import {
@@ -86,6 +86,16 @@ export const routes = [
       <PrivateRoute>
         <Layout>
           <FinanceChartView />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/detailflow/:accountId/goalbase",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <GoalBase />
         </Layout>
       </PrivateRoute>
     ),

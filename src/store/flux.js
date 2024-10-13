@@ -3,6 +3,7 @@ const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
       accounts: [],
+      goals: [],
       movementByAccount: [],
       categorySave: [],
       first_name: [],
@@ -16,6 +17,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       movements: [],
       categories: [],
       transaction: [],
+      totalContribution: [],
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -241,7 +243,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       deleteFlow: (flowId) => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -319,8 +320,114 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.log("Movements data:", data);
           setStore({
             movementByAccount: data.movement,
+            
             categorySave: data.category,
           });
+        } catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
+      },
+      getGoal: async (accountId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try{
+          const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if(!response.ok){
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          setStore({
+            goals: data,
+          });
+
+        }catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
+      },
+      postGoal: async (accountId, goalName, goalAmount, monthAchieve, montlyContribution) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try{
+          console.log("Valores e el fetch", accountId);
+          const response = await fetch(`http://localhost:5050/goal/${accountId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: goalName,
+              fulfillment_amount: goalAmount,
+              estimated_monthly: monthAchieve,
+              monthly_contribution: montlyContribution,
+            }),
+          });
+          if(!response.ok){
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          getActions().getGoal(accountId);
+        }catch (error) {
+          console.error("Error al enviar el token get:", error);
+        }
+      },
+      deleteGoal: (accountId, goalId) =>{
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        console.log("Account id del delete goal", accountId);
+        console.log("id del delete goal", goalId);
+
+        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              getActions().getGoal(accountId);
+            }
+          })
+          .catch((error) => console.log(error));
+      },
+      getTotalContribution: async (accountId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        try {
+          const response = await fetch(
+            `http://localhost:5050/total-contributed/${accountId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            throw new Error("There is an error");
+          }
+          const data = await response.json();
+          setStore({totalContribution: data});
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }

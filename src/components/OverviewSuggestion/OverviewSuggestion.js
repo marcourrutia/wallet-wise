@@ -1,8 +1,11 @@
 import "./OverviewSuggestion.css";
 import { Link, useParams } from "react-router-dom";
 
+
 export const OverviewSuggestion = () => {
   const { accountId } = useParams();
+  console.log(accountId);
+
   return (
     <div className="content-fluid content-fluid-overview" id="mission-view">
       <div className="row row-overview">
@@ -16,14 +19,14 @@ export const OverviewSuggestion = () => {
           </div>
           </Link>
         </a>
-        <a className="col-6 justify-content-center d-flex card-hover-overview">
+        <Link className="col-6 justify-content-center d-flex card-hover-overview" to={`/detailflow/${accountId}/goalbase`}>
           <div className="card card-main-overview">
             <div>
               <img src="../metas.jpg" alt="metas" className="img-overview" />
             </div>
             <p className="card-title">Goal-Based Financial Management</p>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );

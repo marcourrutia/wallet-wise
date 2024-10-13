@@ -11,10 +11,12 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
   const [totalExpense, setTotalExpense] = useState(0);
   console.log("estoy por aqui");
 
+  console.log("total income", totalIncome);
+  console.log("movement by account", state.store.movementByAccount);
+
   useEffect(() => {
     let incomeTotal = 0;
     let expenseTotal = 0;
-
     state.store.movementByAccount.forEach((item) => {
       const transactionMonth = new Date(item.transaction_date).getUTCMonth() + 1;
       const transactionYear = new Date(item.transaction_date).getUTCFullYear();
@@ -23,11 +25,10 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
         (selectedMonth == null || transactionMonth === selectedMonth) &&
         (selectedYear == null || transactionYear === selectedYear)
       ) {
-        if (item.category == "Income" || item.category == "Savings") {
+        if (["incomes", "savings"].includes(item.category.toLowerCase())) {
           incomeTotal += item.amount;
         } else if (
-          item.category == "Fixed Expenses" ||
-          item.category == "Variable Expenses"
+          ["fixed expenses", "variable expenses"].includes(item.category.toLowerCase())
         ) {
           expenseTotal += item.amount;
         }
