@@ -1,8 +1,8 @@
 .chatgpt-container {
   border: 2px solid var(--text-primary);
   border-radius: 7px;
-  width: fit-content;
-  max-width: 500px;
+  min-width: fit-content;
+  max-width: 100%;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
   position: relative;
 }
 
-.chatgpt-container-header h6 {
+.chatgpt-container-header h5 {
   font-family: var(--font-tertiary);
   color: var(--text-primary);
   margin: 0;

@@ -1,83 +1,80 @@
-.style-flow-general{
-    margin-top: 2cm;
-    width: 40%;
-    height: 300px;
-    display: flex;
-    overflow-y: auto;
-    background-color: #e9ecef;
-
+.style-flow-general {
+  min-width: 400px;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  overflow-y: auto;
+  background-color: #e9ecef;
 }
 
-.financial-flow-title{
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: var(--bg-section-nav);
-    margin: 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
+.financial-flow-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: var(--bg-section-nav);
+  margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.span-title{
-    color: white;
-    display: flex;
-    align-items: center;
-    margin-left: 1cm;
-    font-size: 1.4em;
-    font-weight: bold;
+.span-title {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 1cm;
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
-.group-flow{
-    display: flex;
-    justify-content: flex-end;
+.group-flow {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.li-flow{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.li-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.icon-flow{
-    display: flex;
-    justify-content: space-between;
+.icon-flow {
+  display: flex;
+  justify-content: space-between;
 }
 
-.icon-circle{
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: var(--btn-primary);
-    color: white;
-    border-radius: 50%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0.3cm;
+.icon-circle {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: var(--btn-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.3cm;
 }
 
 .icon-circle:hover {
-    background-color: var(--bg-section-nav);
-    transform: scale(1.1);
-  }
-  
-  .icon-circle:active {
-    transform: scale(0.9);
-  }
-  
-.input-flow{
-    width: 100%;
-    
+  background-color: var(--bg-section-nav);
+  transform: scale(1.1);
 }
 
-.flow-name{
-    text-decoration: none;
-    transition: box-shadow 0.3s ease;
-    color: var(--bg-section-nav);
+.icon-circle:active {
+  transform: scale(0.9);
+}
+
+.input-flow {
+  width: 100%;
+}
+
+.flow-name {
+  text-decoration: none;
+  transition: box-shadow 0.3s ease;
+  color: var(--bg-section-nav);
 }
 
 .flow-name:hover {
-    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.2);
-  }
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.2);
+}

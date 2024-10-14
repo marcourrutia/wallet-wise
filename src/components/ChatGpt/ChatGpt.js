@@ -136,7 +136,10 @@ export const ChatGpt = () => {
   return (
     <div className="chatgpt-container">
       <div className="chatgpt-container-header">
-        <h6>Last Month's Financial Advice</h6>
+        <div>
+          <h5>Last Month's Financial Advice</h5>
+          <p>Powered by ChatGPT</p>
+        </div>
         <button
           onClick={() => {
             getMovements(store.flowSelected);
