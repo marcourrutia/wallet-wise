@@ -7,26 +7,36 @@ import {
   Legend,
   Cell,
 } from "recharts";
+import "./Graphics.css";
 
 export const GraphicsPieChart = ({ ASavings, AFExpenses, AVExpenses }) => {
   const total =
     Number(ASavings) + Number(AFExpenses) + Number(AVExpenses) || 100;
 
   const data = [
-    { name: "Gastos Fijos", value: 50, actualValue: Number(AFExpenses) },
-    { name: "Gastos Variables", value: 30, actualValue: Number(AVExpenses) },
-    { name: "Ahorros", value: 20, actualValue: Number(ASavings) },
+    { name: "Fixed expenses", value: 50 },
+    { name: "Variable expenses", value: 30 },
+    { name: "Savings & Investments", value: 20 },
   ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
+  const renderLabel = ({ name, value }) => {
+    return `${name}: ${value}%`;
+  };
+
   return (
-    <div className="w-full max-w-3xl mx-auto p-4">
-      
-      <ResponsiveContainer width="100%" height={400}>
-        <PieChart>
+    <div className="container-graphic-general">
+      <div className="title-by-graphic">
+        <span>Ideal basic rule</span>
+      </div>
+      <ResponsiveContainer width="100%" height={300}>
+        <PieChart className="style-render">
           <Pie
             data={data}
+            label={renderLabel}
+            labelLine={true}
+            outerRadius={100}
           >
             {data.map((entry, index) => (
               <Cell
@@ -35,15 +45,7 @@ export const GraphicsPieChart = ({ ASavings, AFExpenses, AVExpenses }) => {
               />
             ))}
           </Pie>
-          <Tooltip
-            formatter={(value, name, props) => [
-              `${props.payload.actualValue.toFixed(2)} (${(
-                (props.payload.actualValue / total) *
-                100
-              ).toFixed(2)}%)`,
-              `${name} (Ideal: ${value}%)`,
-            ]}
-          />
+          <Tooltip formatter={(value, name) => [`${value}%`, name]} />
           <Legend />
         </PieChart>
       </ResponsiveContainer>

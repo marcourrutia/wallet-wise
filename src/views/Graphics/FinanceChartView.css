@@ -1,0 +1,22 @@
+.container-grafic {
+  width: 100%;
+  justify-content: center;
+  margin-top: 1cm;
+  margin-bottom: 15px;
+}
+
+.calendar-graffic {
+  display: flex;
+  align-items: center;
+}
+
+.title-grafic{
+  color: white;
+  background-color: #052145;
+  height: 1.5cm;
+  font-size: larger;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
