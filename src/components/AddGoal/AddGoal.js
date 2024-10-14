@@ -3,6 +3,7 @@ import "./AddGoal.css";
 import { Context } from "../../store/context";
 import { useParams } from "react-router-dom";
 import unidecode from "unidecode";
+import { MsgModal } from "../MsgModal/MsgModal";
 
 export const AddGoal = ({ onClose, isEditMode, goal }) => {
   const state = useContext(Context);
@@ -13,6 +14,11 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
   const [goalMonths, setGoalMonths] = useState(goal ? goal.estimated_monthly : "");
   const [montlyContribution, setMonthlyContribution] = useState(goal ? goal.monthly_contribution : "");
   const [monthAchieve, setMonthgAchieve] = useState(goal ? goal.estimated_monthly : "");
+  const [modalMessageGoal, setModalMessageGoal] = useState("");
+  const [showModalGoal, setShowModalGoal] = useState(false);
+  const closeModalGoal = () => setShowModalGoal(false);
+
+
 
   const goalId = goal ? goal.id : null;
 
@@ -62,7 +68,7 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
     return montlyContribution !== "" && monthAchieve !== "";
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const normalizedGoalName = normalizeString(goalName);
 
     const existingGoal = state.store.goals.find(
@@ -75,8 +81,9 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
       );
       return;
     }
+    let status;
     if (!isEditMode){
-      state.actions.postGoal(
+      status = await state.actions.postGoal(
         accountId,
         goalName,
         goalAmount,
@@ -84,7 +91,7 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
         montlyContribution
       );
     }else{
-      state.actions.updateGoal(
+      status = await state.actions.updateGoal(
         accountId,
         goalId,
         goalName,
@@ -93,6 +100,14 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
         montlyContribution
       );
     }
+    if (status === 201 || status === 200) {
+      setModalMessageGoal(isEditMode ? "Goal updated successfully" : "Goal added successfully");
+      setShowModalGoal(true);
+    } else {
+      setModalMessageGoal("Error adding goal");
+      setShowModalGoal(true);
+    }
+
     setGoalName("");
     setGoalAmount("");
     setGoalMonths("");
@@ -102,6 +117,8 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
 
 
   return (
+    <>
+    {showModalGoal && <MsgModal message={modalMessageGoal} onClose={closeModalGoal} />}
     <div className="modal modal-goal" tabIndex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
@@ -226,5 +243,6 @@ export const AddGoal = ({ onClose, isEditMode, goal }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };

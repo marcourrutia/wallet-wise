@@ -9,7 +9,7 @@ import { AddGoal } from "../../components/AddGoal/AddGoal";
 import { FaRegFaceGrinStars } from "react-icons/fa6";
 import { FaRegFaceGrinWide } from "react-icons/fa6";
 import { FaRegFaceFrownOpen } from "react-icons/fa6";
-import { Tooltip } from 'bootstrap';
+import { Tooltip } from "bootstrap";
 
 export const GoalBase = () => {
   const state = useContext(Context);
@@ -54,13 +54,17 @@ export const GoalBase = () => {
     state.actions.getTotalContribution(accountId);
   }, [state.store.goals]);
 
-  //Este useEffect es de un codigo que vi el ejemplo, 
+  //Este useEffect es de un codigo que vi el ejemplo,
   //no funcionaba sin esto el ejemplo que queria hacer, lo dejo temporalmente
   useEffect(() => {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    const tooltipList = tooltipTriggerList.map(
+      (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
+    );
     return () => {
-      tooltipList.forEach(tooltip => tooltip.dispose());
+      tooltipList.forEach((tooltip) => tooltip.dispose());
     };
   }, [goals]);
 
@@ -104,32 +108,43 @@ export const GoalBase = () => {
                 const faceStatus = () => {
                   if (totalContribution == estimateContribution) {
                     return (
-                      <FaRegFaceGrinWide className="happy-face mouth eye" />
+                      <FaRegFaceGrinWide className="happy-face mouth eye face-happy" />
                     );
                   } else if (totalContribution > estimateContribution) {
                     return (
-                      <FaRegFaceGrinStars className="happy-face mouth eye" />
+                      <FaRegFaceGrinStars className="happy-face face-very-happy" />
                     );
                   } else {
                     return (
-                      <FaRegFaceFrownOpen className="happy-face mouth eye" />
+                      <FaRegFaceFrownOpen className="happy-face face-sad" />
                     );
                   }
                 };
+                const formattedAmount = Number(
+                  item.fulfillment_amount
+                ).toLocaleString("es-CL", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                });
 
+                const formattedAmountMonthly = Number(
+                  item.monthly_contribution
+                ).toLocaleString("es-CL", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                });
                 return (
                   <tr key={index} className="style-row-goal">
                     <th
                       scope="row"
-                      className="style-name"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       data-bs-title={item.name}
                     >
                       {item.name}
                     </th>
-                    <td>{item.fulfillment_amount}</td>
-                    <td>{item.monthly_contribution}</td>
+                    <td>{formattedAmount}</td>
+                    <td>{formattedAmountMonthly}</td>
                     <td>{item.estimated_monthly}</td>
                     <td>{totalRemainingMonth}</td>
                     <td>{faceStatus()}</td>
