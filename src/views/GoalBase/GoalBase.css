@@ -69,6 +69,19 @@
   width: 30px;
   height: 30px;
   align-items: center;
+  color: inherit;
+}
+
+.face-happy{
+  color: green;
+}
+
+.face-very-happy{
+  color: rgb(216, 176, 17);
+}
+
+.face-sad{
+  color: red
 }
 
 .style-row-goal{
@@ -84,6 +97,7 @@
   text-overflow: ellipsis; 
   white-space: nowrap;
   font-size: medium;
+  padding: 15px;
 }
 
 

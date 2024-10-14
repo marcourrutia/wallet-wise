@@ -386,6 +386,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           }
           const data = await response.json();
           getActions().getGoal(accountId);
+          return response.status;
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
@@ -450,32 +451,32 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            name: goalName,
-            fulfillment_amount: goalAmount,
-            estimated_monthly: monthAchieve,
-            monthly_contribution: montlyContribution,
-          }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("Failed to update goal state");
+        try {
+          const response = await fetch(
+            `http://localhost:5050/goal-by-account/${goalId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                name: goalName,
+                fulfillment_amount: goalAmount,
+                estimated_monthly: monthAchieve,
+                monthly_contribution: montlyContribution,
+              }),
             }
-          })
-          .then((data) => {
-            getActions().getGoal(accountId);
-          })
-          .catch((error) => {
-            console.error("Error updating goal state:", error);
-          });
+          );
+          if (!response.ok) {
+            throw new Error("Failed to update goal state");
+          }
+          const data = await response.json();
+          getActions().getGoal(accountId);
+          return response.status;
+        } catch (error) {
+          console.error("Error updating goal state:", error);
+        }
       },
     },
   };
