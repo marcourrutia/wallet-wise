@@ -7,8 +7,13 @@ export const SelectFlow = () => {
   const [flowData, setFlowData] = useState([]);
 
   useEffect(() => {
-    const activeFlows = store.accounts.filter((c) => c.state === true);
-    setFlowData(activeFlows);
+    if (store.accounts.length > 0) {
+      const activeFlows = store.accounts.filter((c) => c.state === true);
+      setFlowData(activeFlows);
+      if (!store.flowSelected) {
+        actions.setFlowSelected(activeFlows[0].id);
+      }
+    }
   }, [store.accounts]);
 
   const handleOnChange = (e) => {
