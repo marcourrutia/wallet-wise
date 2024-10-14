@@ -123,7 +123,7 @@ export const ChatGpt = () => {
       totalSavings
     ) {
       newAdvice(
-        store.fullname,
+        store.userFullName,
         totalIncomes,
         totalFixedExpenses,
         totalVariableExpenses,
