@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Context } from "../../store/context";
 import { CalendarExpense } from "../../components/CalendarExpense/CalendarExpense";
 import { DetailMovementTwo } from "../../components/DetailMovementTwo/DetailMovementTwo";
+import "./FinanceChartView.css";
 
 
 export const FinanceChartView = () => {
@@ -26,13 +27,15 @@ export const FinanceChartView = () => {
 
   
   return (
-    <div>
-      <div>
-        <li className="calendar-expense-container">
+    <div className="container">
+      <div className="container container-grafic">
+        <li className="calendar-graffic">
           <CalendarExpense onMonthSelect={handleMonthSelect} />
         </li>
       </div>
-      <h3 className="text-xl font-bold mb-4 text-center">Distribución de Gastos y Ahorros</h3>
+      <div className="title-grafic">
+          <span>Basic Financial Management (50/30/20 Rule)</span>
+      </div>
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
           <>

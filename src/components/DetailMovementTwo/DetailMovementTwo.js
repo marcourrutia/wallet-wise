@@ -2,7 +2,7 @@ import { Context } from "../../store/context";
 import "./DetailMovement.css";
 import React, { useContext, useEffect, useState } from "react";
 import { GraphicsPieChart } from "../../components/Graphics/GraphicsPieChart";
-import { GraphicsPieChartTwo } from "../../components/Graphics/GraphicsPieChartTwo"
+import { GraphicsPieChartTwo } from "../../components/Graphics/GraphicsPieChartTwo";
 
 export const DetailMovementTwo = ({
   accountId,
@@ -101,22 +101,28 @@ export const DetailMovementTwo = ({
   ]);
 
   return (
-    <div>
-      <div className="container mt-4 mb-4">
-        <GraphicsPieChart
-          AIncomes={AIncomes}
-          ASavings={ASavings}
-          AFExpenses={AFExpenses}
-          AVExpenses={AVExpenses}
-        />
-      </div>
-      <div className="container mt-4 mb-4">
-        <GraphicsPieChartTwo
-          AIncomes={AIncomes}
-          ASavings={ASavings}
-          AFExpenses={AFExpenses}
-          AVExpenses={AVExpenses}
-        />
+    <div className="container">
+      <div className="row">
+        <div className="col-6">
+          <div className="container mt-4 mb-4">
+            <GraphicsPieChart
+              AIncomes={AIncomes}
+              ASavings={ASavings}
+              AFExpenses={AFExpenses}
+              AVExpenses={AVExpenses}
+            />
+          </div>
+        </div>
+        <div className="col-6">
+          <div className="container mt-4 mb-4">
+            <GraphicsPieChartTwo
+              AIncomes={AIncomes}
+              ASavings={ASavings}
+              AFExpenses={AFExpenses}
+              AVExpenses={AVExpenses}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
