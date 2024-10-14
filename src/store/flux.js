@@ -365,7 +365,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
         try {
-          console.log("Valores e el fetch", accountId);
           const response = await fetch(
             `http://localhost:5050/goal/${accountId}`,
             {
@@ -397,8 +396,6 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        console.log("Account id del delete goal", accountId);
-        console.log("id del delete goal", goalId);
 
         fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
           method: "DELETE",
@@ -439,6 +436,46 @@ const getState = ({ getActions, getStore, setStore }) => {
         } catch (error) {
           console.error("Error al enviar el token get:", error);
         }
+      },
+      updateGoal: async (
+        accountId,
+        goalId,
+        goalName,
+        goalAmount,
+        monthAchieve,
+        montlyContribution
+      ) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: goalName,
+            fulfillment_amount: goalAmount,
+            estimated_monthly: monthAchieve,
+            monthly_contribution: montlyContribution,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to update goal state");
+            }
+          })
+          .then((data) => {
+            getActions().getGoal(accountId);
+          })
+          .catch((error) => {
+            console.error("Error updating goal state:", error);
+          });
       },
     },
   };

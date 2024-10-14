@@ -4,19 +4,21 @@ import { Context } from "../../store/context";
 import { useParams } from "react-router-dom";
 import unidecode from "unidecode";
 
-export const AddGoal = ({ onClose }) => {
-  const [goalName, setGoalName] = useState("");
-  const [goalAmount, setGoalAmount] = useState("");
-  const [goalMonths, setGoalMonths] = useState("");
-  const [montlyContribution, setMonthlyContribution] = useState("");
-  const [monthAchieve, setMonthgAchieve] = useState("");
+export const AddGoal = ({ onClose, isEditMode, goal }) => {
+  const state = useContext(Context);
+
   const { accountId } = useParams();
+  const [goalName, setGoalName] = useState(goal ? goal.name : "");
+  const [goalAmount, setGoalAmount] = useState(goal ? goal.fulfillment_amount : "");
+  const [goalMonths, setGoalMonths] = useState(goal ? goal.estimated_monthly : "");
+  const [montlyContribution, setMonthlyContribution] = useState(goal ? goal.monthly_contribution : "");
+  const [monthAchieve, setMonthgAchieve] = useState(goal ? goal.estimated_monthly : "");
+
+  const goalId = goal ? goal.id : null;
 
   const normalizeString = (str) => {
     return unidecode(str).toLowerCase();
   };
-
-  const state = useContext(Context);
 
   const isCalculateButtonEnabled = () => {
     return goalName.trim() !== "" && goalAmount !== "" && goalMonths !== "";
@@ -64,7 +66,8 @@ export const AddGoal = ({ onClose }) => {
     const normalizedGoalName = normalizeString(goalName);
 
     const existingGoal = state.store.goals.find(
-      (goal) => normalizeString(goal.name) === normalizedGoalName
+      (goal) => normalizeString(goal.name) === normalizedGoalName &&
+      goal.id !== goalId
     );
     if (existingGoal) {
       alert(
@@ -72,13 +75,24 @@ export const AddGoal = ({ onClose }) => {
       );
       return;
     }
-    state.actions.postGoal(
-      accountId,
-      goalName,
-      goalAmount,
-      monthAchieve,
-      montlyContribution
-    );
+    if (!isEditMode){
+      state.actions.postGoal(
+        accountId,
+        goalName,
+        goalAmount,
+        monthAchieve,
+        montlyContribution
+      );
+    }else{
+      state.actions.updateGoal(
+        accountId,
+        goalId,
+        goalName,
+        goalAmount,
+        monthAchieve,
+        montlyContribution
+      );
+    }
     setGoalName("");
     setGoalAmount("");
     setGoalMonths("");
@@ -86,12 +100,13 @@ export const AddGoal = ({ onClose }) => {
     setMonthgAchieve("");
   };
 
+
   return (
-    <div className="modal" tabIndex="-1">
+    <div className="modal modal-goal" tabIndex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header modal-header-goal">
-            <h5 className="modal-title">Add goal</h5>
+            <h5 className="modal-title">{isEditMode ? "Edit goal" : "Add goal"}</h5>
           </div>
           <div className="modal-body">
             <form>
