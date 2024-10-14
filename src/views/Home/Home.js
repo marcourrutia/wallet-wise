@@ -5,23 +5,25 @@ import { GraphicsPieChart } from "../../components/Graphics/GraphicsPieChart";
 
 export const Home = () => {
   return (
-    <div className="container container-home">
-      <div className="graph-section">
-        <SelectFlow />
+    <div className="container-home">
+      <section className="graph-section">
+        <div className="graph-section-header">
+          <span>Monthly Income vs. Expenses Overview</span>
+          <div>
+            <SelectFlow />
+          </div>
+        </div>
         <div className="financial-overview">
-          {/* Gráfica de ingresos y gastos  */}
           <GraphicsPieChart />
         </div>
-        <div className="add-movement">
-          <AddMovement />
-        </div>
-      </div>
-      <div className="options-section">
         <ChatGpt />
-        <div className="financial-flows">
-          <Flow />
-        </div>
-      </div>
+      </section>
+      <section className="btn-add-movement-section">
+        <AddMovement />
+      </section>
+      <section className="flows-section">
+        <Flow />
+      </section>
     </div>
   );
 };
