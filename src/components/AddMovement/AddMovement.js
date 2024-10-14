@@ -10,11 +10,14 @@ export const AddMovement = () => {
   const [accounts, setAccounts] = useState([]);
   const [transaction, setTransaction] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const closeModal = () => setShowModal(false);
-  const today = new Date().toISOString().split("T")[0];
+  const preToday = new Date().toLocaleDateString("es-CL");
+  const [day, month, year] = preToday.split("-");
+  const today = `${year}-${month}-${day}`;
+  const [isPreviousMonth, setIsPreviousMonth] = useState(false);
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",
@@ -42,6 +45,12 @@ export const AddMovement = () => {
 
     if (isModalOpen) {
       fetchAccountsAndTransaction();
+      setFormData({
+        amount: "",
+        accountId: store.flowSelected,
+        date: "",
+        transactionId: "",
+      });
     }
   }, [isModalOpen]);
 
@@ -69,14 +78,31 @@ export const AddMovement = () => {
   const clearForm = () => {
     setFormData({
       amount: "",
-      accountId: "",
+      accountId: store.flowSelected,
       date: "",
       transactionId: "",
     });
+    setIsPreviousMonth(false);
   };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+  };
+
+  const checkIfPreviousMonth = (date) => {
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+    const selectedMonth = selectedDate.getUTCMonth();
+    const selectedYear = selectedDate.getUTCFullYear();
+
+    return selectedMonth === previousMonth && selectedYear === previousYear;
   };
 
   const handleInputChange = (e) => {
@@ -100,6 +126,13 @@ export const AddMovement = () => {
         ...formData,
         [name]: amount ? formattedAmount : "",
       });
+    } else if (name === "date") {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+      const isPrevMonth = checkIfPreviousMonth(value);
+      setIsPreviousMonth(isPrevMonth);
     } else {
       setFormData({
         ...formData,
@@ -119,7 +152,7 @@ export const AddMovement = () => {
     };
 
     try {
-      const { data, status } = await post(
+      const { status } = await post(
         "/add-movement",
         movementData,
         store.accessToken
@@ -127,8 +160,14 @@ export const AddMovement = () => {
       if (status === 201) {
         setModalMessage("Movement added successfully");
         setShowModal(true);
-        clearForm();
         toggleModal();
+        if (isPreviousMonth) {
+          actions.setIsNewData(
+            store?.isNewData + "-" + movementData.account_id
+          );
+          console.log(store.isNewData);
+        }
+        clearForm();
       }
     } catch (error) {
       console.error("Error adding movement:", error);
@@ -138,6 +177,7 @@ export const AddMovement = () => {
   return (
     <>
       {showModal && <MsgModal message={modalMessage} onClose={closeModal} />}
+
       <button onClick={toggleModal}>Add Movement</button>
 
       {isModalOpen && (
@@ -154,7 +194,7 @@ export const AddMovement = () => {
                 className={activeTab === "income" ? "active" : ""}
                 onClick={() => handleTabChange("income")}
               >
-                Income
+                Incomes
               </button>
               <button
                 className={activeTab === "saving" ? "active" : ""}

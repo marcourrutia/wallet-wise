@@ -1,0 +1,11 @@
+.dash-select-flow {
+  width: fit-content;
+  font-family: var(--font-primery);
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--btn-primary);
+}
+
+.dash-select-flow option {
+  color: black;
+}

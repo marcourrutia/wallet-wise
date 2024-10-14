@@ -11,7 +11,7 @@ export const LoadingSignOut = () => {
   useEffect(() => {
     if (!isSignedIn) {
       actions.setIsAuthenticated(false);
-      localStorage.removeItem("isAuthenticated");
+      localStorage.clear();
       navigate("/");
     }
   }, [isSignedIn]);

@@ -7,10 +7,7 @@ export const BtnLogOut = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userFullName");
-    localStorage.removeItem("accessToken");
+    localStorage.clear();
     actions.setIsAuthenticated(false);
     navigate("/");
   };

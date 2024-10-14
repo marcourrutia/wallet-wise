@@ -1,4 +1,3 @@
-
 const getState = ({ getActions, getStore, setStore }) => {
   return {
     store: {
@@ -18,18 +17,25 @@ const getState = ({ getActions, getStore, setStore }) => {
       categories: [],
       transaction: [],
       totalContribution: [],
+      flowSelected: localStorage.getItem("flowSelected") || "",
+      dataMovement: [],
+      isNewData: JSON.parse(localStorage.getItem("isNewData")) || false,
     },
     actions: {
       setIsAuthenticated: (value) => {
         setStore({ isAuthenticated: value });
         localStorage.setItem("isAuthenticated", JSON.stringify(value));
       },
+      setFlowSelected: (value) => {
+        setStore({ flowSelected: value });
+        localStorage.setItem("flowSelected", value);
+      },
       setUserId: (value) => {
         setStore({ userId: value });
         localStorage.setItem("userId", JSON.stringify(value));
       },
       setUserFullName: (firstName, lastName) => {
-        setStore({ userFullName: firstName + "" + lastName });
+        setStore({ userFullName: firstName + " " + lastName });
         localStorage.setItem(
           "userFullName",
           JSON.stringify(firstName + " " + lastName)
@@ -38,6 +44,13 @@ const getState = ({ getActions, getStore, setStore }) => {
       setAccessToken: (value) => {
         setStore({ accessToken: value });
         localStorage.setItem("jwt-token", value);
+      },
+      setDataMovement: (data) => {
+        setStore({ dataMovement: data });
+      },
+      setIsNewData: (value) => {
+        setStore({ isNewData: value });
+        localStorage.setItem("isNewData", JSON.stringify(value));
       },
       postToken: async (firstName, lastName, email) => {
         try {
@@ -60,7 +73,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           const data = await response.json();
           if (data.access_token) {
             localStorage.setItem("jwt-token", data.access_token);
-            setStore(data.accessToken);
+            setStore({ accessToken: data.access_token });
           } else {
             console.error("Token not received in response");
           }
@@ -83,7 +96,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("hola datos 1", data);
             setStore({
               movements: data,
             });
@@ -105,7 +117,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola datos");
             setStore({
               categories: data,
             });
@@ -127,7 +138,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data, "hola data");
             setStore({
               transaction: data,
             });
@@ -136,7 +146,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       createMovements: (movements) => {
         const token = localStorage.getItem("jwt-token");
-        console.log(token);
         if (!token) {
           console.error("Token not found. User might not be authenticated.");
           return;
@@ -151,7 +160,6 @@ const getState = ({ getActions, getStore, setStore }) => {
         })
           .then((response) => {
             response.json();
-            console.log(response);
             getActions().getMovements();
           })
           .then((data) => {
@@ -279,7 +287,6 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .then((data) => {
-            console.log("Flow state updated successfully", data);
             getActions().getFlow();
           })
           .catch((error) => {
