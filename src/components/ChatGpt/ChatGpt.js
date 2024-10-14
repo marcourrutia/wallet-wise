@@ -12,6 +12,7 @@ export const ChatGpt = () => {
   const [totalVariableExpenses, setTotalVariableExpenses] = useState(0);
   const [totalSavings, setTotalSavings] = useState(0);
   const [adviceChatGpt, setAdviceChatGpt] = useState("Advice by Chat GPT...");
+  const [newDataAccount, setNewDataAccount] = useState(false);
 
   const generateCacheKey = () => {
     return `advice-${store.flowSelected}-${totalIncomes}-${totalFixedExpenses}-${totalVariableExpenses}-${totalSavings}`;
@@ -37,6 +38,19 @@ export const ChatGpt = () => {
       }
     });
   };
+
+  useEffect(() => {
+    if (store.isNewData) {
+      const aux = store.isNewData.includes(store.flowSelected);
+      if (aux) {
+        setNewDataAccount(true);
+      } else {
+        setNewDataAccount(false);
+      }
+    } else {
+      setNewDataAccount(false);
+    }
+  }, [store.isNewData, store.flowSelected]);
 
   useEffect(() => {
     if (store.flowSelected) getMovements(store.flowSelected);
@@ -122,8 +136,13 @@ export const ChatGpt = () => {
   return (
     <div className="chatgpt-container">
       <div className="chatgpt-container-header">
-        <span>Last Month's Financial Advice</span>
-        <button className={store.isNewData ? "visible" : ""}>
+        <h6>Last Month's Financial Advice</h6>
+        <button
+          onClick={() => {
+            getMovements(store.flowSelected);
+          }}
+          className={newDataAccount ? "visible" : ""}
+        >
           <FiRefreshCw />
         </button>
       </div>

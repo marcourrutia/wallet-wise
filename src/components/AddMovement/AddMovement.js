@@ -17,6 +17,7 @@ export const AddMovement = () => {
   const preToday = new Date().toLocaleDateString("es-CL");
   const [day, month, year] = preToday.split("-");
   const today = `${year}-${month}-${day}`;
+  const [isPreviousMonth, setIsPreviousMonth] = useState(false);
   const [formData, setFormData] = useState({
     amount: "",
     accountId: "",
@@ -81,10 +82,27 @@ export const AddMovement = () => {
       date: "",
       transactionId: "",
     });
+    setIsPreviousMonth(false);
   };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+  };
+
+  const checkIfPreviousMonth = (date) => {
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+    const selectedMonth = selectedDate.getUTCMonth();
+    const selectedYear = selectedDate.getUTCFullYear();
+
+    return selectedMonth === previousMonth && selectedYear === previousYear;
   };
 
   const handleInputChange = (e) => {
@@ -108,6 +126,13 @@ export const AddMovement = () => {
         ...formData,
         [name]: amount ? formattedAmount : "",
       });
+    } else if (name === "date") {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+      const isPrevMonth = checkIfPreviousMonth(value);
+      setIsPreviousMonth(isPrevMonth);
     } else {
       setFormData({
         ...formData,
@@ -135,9 +160,14 @@ export const AddMovement = () => {
       if (status === 201) {
         setModalMessage("Movement added successfully");
         setShowModal(true);
-        clearForm();
         toggleModal();
-        actions.setIsNewData(true);
+        if (isPreviousMonth) {
+          actions.setIsNewData(
+            store?.isNewData + "-" + movementData.account_id
+          );
+          console.log(store.isNewData);
+        }
+        clearForm();
       }
     } catch (error) {
       console.error("Error adding movement:", error);
