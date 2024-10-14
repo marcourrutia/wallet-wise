@@ -1,0 +1,25 @@
+.container-graphic-general{
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 1rem; 
+    border: 2px solid white;;
+    box-sizing: border-box;
+    border-radius: 2%;
+    background-color: #243a53;
+}
+
+.title-by-graphic{
+    color: white;
+    margin-bottom: 1cm;
+    font-size: large;
+
+}
+
+.style-render{
+    font-size: 70%;
+}
+
+.no-data-message{
+    color: #0088FE;
+}
