@@ -20,6 +20,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       flowSelected: localStorage.getItem("flowSelected") || "",
       dataMovement: JSON.parse(localStorage.getItem("dataMovement")) || [],
       isNewData: JSON.parse(localStorage.getItem("isNewData")) || false,
+      newMovement: false,
     },
     actions: {
       setIsAuthenticated: (value) => {
@@ -52,6 +53,9 @@ const getState = ({ getActions, getStore, setStore }) => {
       setIsNewData: (value) => {
         setStore({ isNewData: value });
         localStorage.setItem("isNewData", JSON.stringify(value));
+      },
+      setNewMovement: (value) => {
+        setStore({ newMovement: value });
       },
       postToken: async (firstName, lastName, email) => {
         try {
@@ -498,7 +502,7 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .catch((error) => console.log(error));
-      }
+      },
     },
   };
 };

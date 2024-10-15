@@ -40,7 +40,7 @@ export const TransactionTab = () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this transaction?"
     );
-    console.log("transaction id",transactionId);
+    console.log("transaction id", transactionId);
     if (isConfirmed) {
       actions.deleteTransaction(transactionId);
     }
@@ -52,10 +52,10 @@ export const TransactionTab = () => {
 
   return (
     <div
-      className="tab-pane fade p-2"
-      id="contact-tab-pane"
+      className="tab-pane fade p-2 show active"
+      id="home-tab-pane"
       role="tabpanel"
-      aria-labelledby="contact-tab"
+      aria-labelledby="home-tab"
       tabIndex="0"
     >
       {successMessage && (
@@ -98,7 +98,7 @@ export const TransactionTab = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label className="col-form-label">Add Category:</label>
+                    <label className="col-form-label">Add Transaction:</label>
                     <input
                       className="form-control"
                       type="text"
@@ -182,7 +182,9 @@ export const TransactionTab = () => {
                     <td>
                       <div>
                         <span>
-                          <FaRegTrashAlt onClick={() => handleDelete(movement.id)}/>
+                          <FaRegTrashAlt
+                            onClick={() => handleDelete(movement.id)}
+                          />
                         </span>
                       </div>
                     </td>

@@ -1,5 +1,6 @@
 .dash-select-flow {
   width: fit-content;
+  max-width: 185px;
   font-family: var(--font-primery);
   background-color: transparent;
   color: var(--text-primary);

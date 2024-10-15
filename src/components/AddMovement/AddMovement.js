@@ -165,6 +165,8 @@ export const AddMovement = () => {
           actions.setIsNewData(
             store?.isNewData + "-" + movementData.account_id
           );
+        } else {
+          actions.setNewMovement(!store.newMovement);
         }
         clearForm();
       }

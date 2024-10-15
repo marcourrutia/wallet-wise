@@ -8,16 +8,20 @@ export const Maintainer = () => {
     <div className="container">
       <div className="row">
         <div className="card-body p-2 mt-5">
-          <ul className="nav nav-tabs nav-pills nav-fill" id="myTab" role="tablist">
+          <ul
+            className="nav nav-tabs nav-pills nav-fill"
+            id="myTab"
+            role="tablist"
+          >
             <li className="nav-item">
               <button
                 className="nav-link nav-option-maintainer-a active"
-                id="contact-tab"
+                id="home-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#contact-tab-pane"
+                data-bs-target="#home-tab-pane"
                 type="button"
                 role="tab"
-                aria-controls="contact-tab-pane"
+                aria-controls="home-tab-pane"
                 aria-selected="true"
               >
                 Transaction
@@ -26,12 +30,12 @@ export const Maintainer = () => {
             <li className="nav-item">
               <button
                 className="nav-link nav-option-maintainer-a"
-                id="home-tab"
+                id="contact-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#home-tab-pane"
+                data-bs-target="#contact-tab-pane"
                 type="button"
                 role="tab"
-                aria-controls="home-tab-pane"
+                aria-controls="contact-tab-pane"
                 aria-selected="false"
               >
                 Type of Movement
