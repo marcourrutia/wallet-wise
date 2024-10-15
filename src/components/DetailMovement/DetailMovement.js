@@ -3,6 +3,7 @@ import "./DetailMovement.css";
 import React, { useContext, useEffect, useState } from "react";
 import { ImCircleUp } from "react-icons/im";
 import { ExpenseSumary } from "../ExpenseSumary/ExpenseSumary";
+import { AddMovement } from "../AddMovement/AddMovement";
 
 export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
   const state = useContext(Context);
@@ -10,12 +11,12 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
 
-
   useEffect(() => {
     let incomeTotal = 0;
     let expenseTotal = 0;
     state.store.movementByAccount.forEach((item) => {
-      const transactionMonth = new Date(item.transaction_date).getUTCMonth() + 1;
+      const transactionMonth =
+        new Date(item.transaction_date).getUTCMonth() + 1;
       const transactionYear = new Date(item.transaction_date).getUTCFullYear();
 
       if (
@@ -25,7 +26,9 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
         if (["incomes", "savings"].includes(item.category.toLowerCase())) {
           incomeTotal += item.amount;
         } else if (
-          ["fixed expenses", "variable expenses"].includes(item.category.toLowerCase())
+          ["fixed expenses", "variable expenses"].includes(
+            item.category.toLowerCase()
+          )
         ) {
           expenseTotal += item.amount;
         }
@@ -51,6 +54,9 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
 
   return (
     <div>
+      <div className="style-button-add-movement">
+        <AddMovement />
+      </div>
       <ExpenseSumary totalIncome={totalIncome} totalExpense={totalExpense} />
       <div className="container mt-4 mb-4">
         <div className="style-movement">

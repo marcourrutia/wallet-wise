@@ -41,6 +41,7 @@ export const CategoryTab = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal1"
             data-bs-whatever="@mdo"
+            disabled
           >
             Add
           </button>
@@ -68,16 +69,14 @@ export const CategoryTab = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label className="col-form-label">
-                    Add Category:
-                    </label>
+                    <label className="col-form-label">Add Category:</label>
                     <input
                       className="form-control"
                       type="text"
                       name="name"
                       onChange={handleonChange}
                       placeholder="Disabled input"
-                      aria-label="Disabled input example" 
+                      aria-label="Disabled input example"
                       disabled
                       value={username.name}
                     />
@@ -122,31 +121,17 @@ export const CategoryTab = () => {
         <div className="table-responsive">
           <table className="table table-hover table-nowrap">
             <thead className="table-light">
-              <tr>
-                <th>
-                  <input
-                    className="form-check-input me-1"
-                    type="checkbox"
-                    value=""
-                  />
-                </th>
+              <tr className="style-maintainer-title">
                 <th scope="col">ID</th>
                 <th scope="col">Category</th>
                 <th scope="col">Movement ID</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(store.categories) &&
                 store.categories.map((movement, index) => (
                   <tr key={index}>
-                    <td>
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id={`checkbox-${index}`}
-                      />
-                    </td>
                     <td>{movement.id}</td>
                     <td>{movement.name}</td>
                     <td>
@@ -154,14 +139,13 @@ export const CategoryTab = () => {
                         <div className="flex-grow-1">
                           {movement.type_of_movement_id}
                         </div>
-                        <div>
-                          <span className="p-2">
-                            <TbEdit />
-                          </span>
-                          <span>
-                            <FaRegTrashAlt />
-                          </span>
-                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <span>
+                          <FaRegTrashAlt />
+                        </span>
                       </div>
                     </td>
                   </tr>

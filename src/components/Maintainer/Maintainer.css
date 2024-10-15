@@ -1,0 +1,19 @@
+.style-maintainer-title th{
+    background-color: #008384;
+    color: white;
+}
+
+.tab-pane{
+    background-color: var( --bg-section-nav);
+
+}
+
+.nav-option-maintainer-a{
+    border: 1px solid white !important;
+    color: rgb(230, 235, 240) !important;
+}
+
+.nav-option-maintainer-a:hover {
+    background-color: #324e6e !important;
+  }
+
