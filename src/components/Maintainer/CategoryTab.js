@@ -34,18 +34,7 @@ export const CategoryTab = () => {
       tabIndex="0"
     >
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
-        <div className="hstack gap-2 justify-content-sm-end p-2">
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal1"
-            data-bs-whatever="@mdo"
-            disabled
-          >
-            Add
-          </button>
-        </div>
+        <div className="hstack gap-2 justify-content-sm-end p-2"></div>
         <div
           className="modal fade"
           id="exampleModal1"
@@ -125,7 +114,6 @@ export const CategoryTab = () => {
                 <th scope="col">ID</th>
                 <th scope="col">Category</th>
                 <th scope="col">Movement ID</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -139,13 +127,6 @@ export const CategoryTab = () => {
                         <div className="flex-grow-1">
                           {movement.type_of_movement_id}
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div>
-                        <span>
-                          <FaRegTrashAlt />
-                        </span>
                       </div>
                     </td>
                   </tr>
