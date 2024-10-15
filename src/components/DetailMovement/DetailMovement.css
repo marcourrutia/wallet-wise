@@ -50,3 +50,8 @@
 .accordion-button:not(.collapsed) .icon-colap {
     transform: rotate(180deg);
 }
+
+.style-button-add-movement{
+    display: flex;
+    justify-content: end;
+}

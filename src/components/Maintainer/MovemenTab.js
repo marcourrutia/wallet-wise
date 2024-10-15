@@ -19,7 +19,6 @@ export const MovemenTab = () => {
     });
   };
   useEffect(() => {
-    console.log(actions.getMovements());
     actions.getMovements();
   }, []);
 
@@ -38,6 +37,7 @@ export const MovemenTab = () => {
             className="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
+            disabled
           >
             Add
           </button>
@@ -53,7 +53,7 @@ export const MovemenTab = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Add Movement Type
+                    Add Movement Type
                   </h1>
                   <button
                     type="button"
@@ -70,7 +70,7 @@ export const MovemenTab = () => {
                     name="name"
                     onChange={handleonChange}
                     placeholder="Disabled input"
-                    aria-label="Disabled input example" 
+                    aria-label="Disabled input example"
                     disabled
                     value={username.name}
                   />
@@ -100,42 +100,27 @@ export const MovemenTab = () => {
         <div className="table-responsive">
           <table className="table table-hover table-nowrap">
             <thead className="table-light">
-              <tr>
-                <th>
-                  <input
-                    className="form-check-input me-1"
-                    type="checkbox"
-                    value=""
-                  />
-                </th>
+              <tr className="style-maintainer-title">
                 <th scope="col">ID</th>
                 <th scope="col">Movement</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(store.movements) &&
                 store.movements.map((movement, index) => (
                   <tr key={index}>
-                    <td>
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id={`checkbox-${index}`}
-                      />
-                    </td>
                     <td>{movement.id}</td>
                     <td>
                       <div className="d-flex">
                         <div className="flex-grow-1">{movement.name}</div>
-                        <div>
-                          <span className="p-2">
-                            <TbEdit />
-                          </span>
-                          <span>
-                            <FaRegTrashAlt />
-                          </span>
-                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <span>
+                          <FaRegTrashAlt />
+                        </span>
                       </div>
                     </td>
                   </tr>

@@ -2,6 +2,7 @@ import { TbEdit } from "react-icons/tb";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Context } from "../../store/context";
 import { useContext, useEffect, useState } from "react";
+import "./Maintainer.css";
 
 export const TransactionTab = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -13,14 +14,16 @@ export const TransactionTab = () => {
   });
 
   const handleSubmit = (event) => {
+    if (!username.category_id) {
+      alert("Please select a category.");
+      return;
+    }
     actions.createTransaction(username);
     setUsername({
       name: "",
-      category_id: "",
+      category_id: store.categories?.[0]?.id || "",
     });
     setSuccessMessage("Transaction added successfully!");
-
-    // Clear the success message after 3 seconds
     setTimeout(() => {
       setSuccessMessage("");
     }, 3000);
@@ -32,7 +35,17 @@ export const TransactionTab = () => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(username);
+
+  const handleDelete = (transactionId) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this transaction?"
+    );
+    console.log("transaction id",transactionId);
+    if (isConfirmed) {
+      actions.deleteTransaction(transactionId);
+    }
+  };
+
   useEffect(() => {
     actions.getTransaction();
   }, []);
@@ -46,10 +59,10 @@ export const TransactionTab = () => {
       tabIndex="0"
     >
       {successMessage && (
-  <div className="alert alert-success" role="alert">
-    {successMessage}
-  </div>
-)}
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
         <div className="hstack gap-2 justify-content-sm-end p-2">
           <button
@@ -107,9 +120,13 @@ export const TransactionTab = () => {
                         })
                       }
                     >
+                      <option value="" disabled>
+                        Select a category
+                      </option>
+
                       {Array.isArray(store.categories) &&
-                        store.categories.map((movement) => (
-                          <option key={movement.id} value={movement.id}>
+                        store.categories.map((movement, index) => (
+                          <option key={index} value={movement.id}>
                             {movement.name}
                           </option>
                         ))}
@@ -142,31 +159,17 @@ export const TransactionTab = () => {
         <div className="table-responsive">
           <table className="table table-hover table-nowrap">
             <thead className="table-light">
-              <tr>
-                <th>
-                  <input
-                    className="form-check-input me-1"
-                    type="checkbox"
-                    value=""
-                  />
-                </th>
+              <tr className="style-maintainer-title">
                 <th scope="col">ID</th>
                 <th scope="col">Transactions</th>
                 <th scope="col">Category ID</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(store.transaction) &&
                 store.transaction.map((movement, index) => (
                   <tr key={index}>
-                    <td>
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id={`checkbox-${index}`}
-                      />
-                    </td>
                     <td>{movement.id}</td>
                     <td>{movement.name}</td>
                     <td>
@@ -174,14 +177,13 @@ export const TransactionTab = () => {
                         <div className="flex-grow-1">
                           {movement.category_id}
                         </div>
-                        <div>
-                          <span className="p-2">
-                            <TbEdit />
-                          </span>
-                          <span>
-                            <FaRegTrashAlt />
-                          </span>
-                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <span>
+                          <FaRegTrashAlt onClick={() => handleDelete(movement.id)}/>
+                        </span>
                       </div>
                     </td>
                   </tr>

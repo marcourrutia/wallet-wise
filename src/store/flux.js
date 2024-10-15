@@ -479,6 +479,26 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Error updating goal state:", error);
         }
       },
+      deleteTransaction: async (transactionId) => {
+        const token = localStorage.getItem("jwt-token");
+        if (!token) {
+          console.error("Token not found. User might not be authenticated.");
+          return;
+        }
+        fetch(`http://localhost:5050/transaction/${transactionId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              getActions().getTransaction();
+            }
+          })
+          .catch((error) => console.log(error));
+      },
     },
   };
 };
