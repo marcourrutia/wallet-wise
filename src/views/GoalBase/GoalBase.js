@@ -68,6 +68,16 @@ export const GoalBase = () => {
     };
   }, [goals]);
 
+  const faceStatus = (totalContribution, estimateContribution) => {
+    if (totalContribution === estimateContribution) {
+      return <FaRegFaceGrinWide className="happy-face mouth eye face-happy" />;
+    } else if (totalContribution > estimateContribution) {
+      return <FaRegFaceGrinStars className="happy-face face-very-happy" />;
+    } else {
+      return <FaRegFaceFrownOpen className="happy-face face-sad" />;
+    }
+  };
+
   return (
     <div className="container">
       <BreadCrumb />
@@ -104,22 +114,6 @@ export const GoalBase = () => {
                 const totalRemainingMonth = item.remaining_time;
                 const totalContribution = item.total_contributed;
                 const estimateContribution = item.estimated_contribution;
-
-                const faceStatus = () => {
-                  if (totalContribution == estimateContribution) {
-                    return (
-                      <FaRegFaceGrinWide className="happy-face mouth eye face-happy" />
-                    );
-                  } else if (totalContribution > estimateContribution) {
-                    return (
-                      <FaRegFaceGrinStars className="happy-face face-very-happy" />
-                    );
-                  } else {
-                    return (
-                      <FaRegFaceFrownOpen className="happy-face face-sad" />
-                    );
-                  }
-                };
                 const formattedAmount = Number(
                   item.fulfillment_amount
                 ).toLocaleString("es-CL", {
@@ -147,7 +141,9 @@ export const GoalBase = () => {
                     <td>{formattedAmountMonthly}</td>
                     <td>{item.estimated_monthly}</td>
                     <td>{totalRemainingMonth}</td>
-                    <td>{faceStatus()}</td>
+                    <td>
+                      {faceStatus(totalContribution, estimateContribution)}
+                    </td>
                     <td className="td-action">
                       <div className="icon-action">
                         <CiEdit
