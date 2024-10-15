@@ -1,7 +1,12 @@
 import "./Home.css";
 import React from "react";
-import { AddMovement, ChatGpt, Flow, SelectFlow } from "../../components";
-import { GraphicsPieChart } from "../../components/Graphics/GraphicsPieChart";
+import {
+  AddMovement,
+  ChatGpt,
+  Flow,
+  GraphicBar,
+  SelectFlow,
+} from "../../components";
 
 export const Home = () => {
   return (
@@ -13,9 +18,7 @@ export const Home = () => {
             <SelectFlow />
           </div>
         </div>
-        <div className="financial-overview">
-          <GraphicsPieChart />
-        </div>
+        <GraphicBar />
         <ChatGpt />
       </section>
       <section className="btn-add-movement-section">

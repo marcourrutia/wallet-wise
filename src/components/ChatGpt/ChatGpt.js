@@ -55,7 +55,7 @@ export const ChatGpt = () => {
   useEffect(() => {
     if (store.flowSelected) getMovements(store.flowSelected);
     else setAdviceChatGpt("No flows...");
-  }, [store.flowSelected]);
+  }, [store.flowSelected, store.accounts]);
 
   useEffect(() => {
     if (store.dataMovement) {

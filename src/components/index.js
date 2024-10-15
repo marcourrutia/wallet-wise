@@ -10,6 +10,7 @@ export { DetailMovement } from "./DetailMovement/DetailMovement";
 export { ExpenseSumary } from "./ExpenseSumary/ExpenseSumary";
 export { Flow } from "./Flow/Flow";
 export { FlowItem } from "./FlowItem/FlowItem";
+export { GraphicBar } from "./GraphicBar/GraphicBar";
 export { Layout } from "./Layout/Layout";
 export { MainLogo } from "./MainLogo/MainLogo";
 export { Mission } from "./Mission/Mission";
@@ -24,5 +25,4 @@ export { Sidebar } from "./Sidebar/Sidebar";
 export { Support } from "./Support/Support";
 export { GraphicsPieChart } from "./Graphics/GraphicsPieChart";
 export { GraphicsPieChartTwo } from "./Graphics/GraphicsPieChartTwo";
-export { DetailMovementTwo } from "./DetailMovementTwo/DetailMovementTwo"
-
+export { DetailMovementTwo } from "./DetailMovementTwo/DetailMovementTwo";

@@ -16,7 +16,7 @@ export const Principal = () => {
         <video autoPlay muted loop src={backgroundHomeVideo}></video>
       </div>
       <section className="main-text">
-        <p className="main-title">Management your finances wisely</p>
+        <p className="main-title">Manage your finances wisely</p>
         <p className="main-subtitle">
           Track, save, and grow your finances with ease
         </p>

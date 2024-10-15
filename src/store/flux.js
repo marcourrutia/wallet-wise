@@ -18,7 +18,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       transaction: [],
       totalContribution: [],
       flowSelected: localStorage.getItem("flowSelected") || "",
-      dataMovement: [],
+      dataMovement: JSON.parse(localStorage.getItem("dataMovement")) || [],
       isNewData: JSON.parse(localStorage.getItem("isNewData")) || false,
     },
     actions: {
@@ -47,6 +47,7 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       setDataMovement: (data) => {
         setStore({ dataMovement: data });
+        localStorage.setItem("dataMovement", JSON.stringify(data));
       },
       setIsNewData: (value) => {
         setStore({ isNewData: value });

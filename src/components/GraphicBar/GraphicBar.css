@@ -1,0 +1,12 @@
+.graphic-bar-container {
+  background-color: transparent;
+  padding: 20px 0;
+  border: 2px solid var(--text-primary);
+  border-radius: 10px;
+  width: 100%;
+}
+
+.graphic-bar-container h4,
+.graphic-bar-container h3 {
+  color: var(--text-primary);
+}
