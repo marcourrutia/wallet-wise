@@ -32,15 +32,6 @@ export const MovemenTab = () => {
     >
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
         <div className="hstack gap-2 justify-content-sm-end p-2">
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            disabled
-          >
-            Add
-          </button>
 
           <div
             className="modal fade"
@@ -103,7 +94,7 @@ export const MovemenTab = () => {
               <tr className="style-maintainer-title">
                 <th scope="col">ID</th>
                 <th scope="col">Movement</th>
-                <th scope="col">Action</th>
+         
               </tr>
             </thead>
             <tbody>
@@ -116,13 +107,7 @@ export const MovemenTab = () => {
                         <div className="flex-grow-1">{movement.name}</div>
                       </div>
                     </td>
-                    <td>
-                      <div>
-                        <span>
-                          <FaRegTrashAlt />
-                        </span>
-                      </div>
-                    </td>
+              
                   </tr>
                 ))}
             </tbody>
