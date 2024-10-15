@@ -498,7 +498,7 @@ const getState = ({ getActions, getStore, setStore }) => {
             }
           })
           .catch((error) => console.log(error));
-      },
+      }
     },
   };
 };
