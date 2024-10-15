@@ -13,6 +13,8 @@ export const SelectFlow = () => {
       if (!store.flowSelected) {
         actions.setFlowSelected(activeFlows[0].id);
       }
+    } else {
+      setFlowData([]);
     }
   }, [store.accounts]);
 

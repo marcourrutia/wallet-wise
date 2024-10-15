@@ -1,6 +1,8 @@
 .container-home {
   width: 100%;
   height: 100%;
+  min-width: 612px;
+  min-height: 850px;
   padding: 20px 30px;
   gap: 30px;
   display: grid;
@@ -10,7 +12,7 @@
 
 .graph-section {
   grid-row: 1/7;
-  justify-content: space-between !important;
+  justify-content: space-around !important;
 }
 
 .flows-section {
@@ -25,6 +27,9 @@
 }
 
 @media (width < 1633px) {
+  .graph-section {
+    gap: 20px;
+  }
   .graph-section-header {
     justify-content: space-between !important;
   }
@@ -64,8 +69,4 @@
 
 .btn-add-movement-section {
   align-items: end !important;
-}
-
-.financial-overview {
-  width: 100%;
 }
