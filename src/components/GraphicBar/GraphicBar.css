@@ -6,6 +6,7 @@
   width: 100%;
 }
 
-.graphic-bar-container h4 {
+.graphic-bar-container h4,
+.graphic-bar-container h3 {
   color: var(--text-primary);
 }
