@@ -7,9 +7,10 @@ import { AddMovement } from "../AddMovement/AddMovement";
 
 export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
   const state = useContext(Context);
-
+  
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
+  const [openAccordions, setOpenAccordions] = useState({});
 
   useEffect(() => {
     let incomeTotal = 0;
@@ -52,6 +53,13 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
     }
   }, [accountId]);
 
+  const toggleAccordion = (index) => {
+    setOpenAccordions((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return (
     <div>
       <div className="style-button-add-movement">
@@ -72,26 +80,27 @@ export const DetailMovement = ({ accountId, selectedMonth, selectedYear }) => {
           {state.store.categorySave.map((category, index) => {
             const collapseId = `collapse-${index}`;
             let totalAmount = 0;
+            const isOpen = openAccordions[index];
             return (
               <div className="accordion-item accordion-style" key={index}>
                 <h2 className="accordion-header">
                   <button
                     className="accordion-button button-style-category"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={`#${collapseId}`}
-                    aria-expanded="true"
-                    aria-controls="panelsStayOpen-collapseOne"
+                    onClick={() => toggleAccordion(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={`collapse-${index}`}
                   >
                     <div className="icon-accordion">
                       {category.name}
-                      <ImCircleUp className={`icon-colap ${collapseId}`} />
+                      <ImCircleUp className={`icon-colap ${isOpen ? "rotated" : ""}`} />
                     </div>
                   </button>
                 </h2>
                 <div
-                  id={collapseId}
-                  className="accordion-collapse collapse show"
+                   id={`collapse-${index}`}
+                   className={`accordion-collapse collapse ${isOpen ? "" : "show"}`}
+                  
                 >
                   <div className="accordion-body">
                     {state.store.movementByAccount.map((item, index2) => {

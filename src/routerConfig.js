@@ -81,7 +81,7 @@ export const routes = [
     ),
   },
   {
-    path: "/detailflow/BasicFinancial/:accountId",
+    path: "/detailflow/:accountId/basicfinancial",
     element: (
       <PrivateRoute>
         <Layout>

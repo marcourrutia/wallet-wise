@@ -5,6 +5,8 @@ import { Context } from "../../store/context";
 import { CalendarExpense } from "../../components/CalendarExpense/CalendarExpense";
 import { DetailMovementTwo } from "../../components/DetailMovementTwo/DetailMovementTwo";
 import "./FinanceChartView.css";
+import { BreadCrumb } from "../../components/BreadCrumb/BreadCrumb";
+
 
 
 export const FinanceChartView = () => {
@@ -28,6 +30,7 @@ export const FinanceChartView = () => {
   
   return (
     <div className="container">
+       <BreadCrumb />
       <div className="container container-grafic">
         <li className="calendar-graffic">
           <CalendarExpense onMonthSelect={handleMonthSelect} />

@@ -18,6 +18,7 @@ export const SelectFlow = () => {
       }
     } else {
       setFlowData([]);
+      actions.setFlowSelected("");
     }
   }, [store.accounts]);
 

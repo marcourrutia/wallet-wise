@@ -44,7 +44,7 @@
 }
 
 .icon-colap{
-    transition: transform 0.3s ease;
+    transition: transform 0.7s ease;
 }
 
 .accordion-button:not(.collapsed) .icon-colap {
