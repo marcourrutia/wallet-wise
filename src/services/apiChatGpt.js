@@ -12,7 +12,7 @@ export const sendPrompt = async (instruction, prompt) => {
           { role: "system", content: instruction },
           { role: "user", content: prompt },
         ],
-        max_tokens: 100,
+        max_tokens: 200,
       }),
     });
     const data = await response.json();

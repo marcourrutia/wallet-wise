@@ -6,6 +6,7 @@ export { BtnLogOut } from "./BtnLogOut/BtnLogOut";
 export { BreadCrumb } from "./BreadCrumb/BreadCrumb";
 export { CalendarExpense } from "./CalendarExpense/CalendarExpense";
 export { ChatGpt } from "./ChatGpt/ChatGpt";
+export { ChatGpt2 } from "./ChatGpt/ChatGpt2";
 export { DetailMovement } from "./DetailMovement/DetailMovement";
 export { ExpenseSumary } from "./ExpenseSumary/ExpenseSumary";
 export { Flow } from "./Flow/Flow";
