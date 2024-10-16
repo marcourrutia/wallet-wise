@@ -39,7 +39,7 @@ export const GraphicBar = () => {
   };
 
   useEffect(() => {
-    if (store.flowSelected) {
+    if (store.flowSelected > 0) {
       getMovements(store.flowSelected);
     } else {
       setData([]);

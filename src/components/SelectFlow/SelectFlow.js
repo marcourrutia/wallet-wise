@@ -14,10 +14,11 @@ export const SelectFlow = () => {
         actions.setFlowSelected(activeFlows[0].id);
       } else {
         setFlowData([]);
-        actions.setFlowSelected(null);
+        actions.setFlowSelected("");
       }
     } else {
       setFlowData([]);
+      actions.setFlowSelected("");
     }
   }, [store.accounts]);
 

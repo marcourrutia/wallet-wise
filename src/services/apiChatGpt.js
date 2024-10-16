@@ -1,4 +1,4 @@
-export const sendPrompt = async (prompt) => {
+export const sendPrompt = async (instruction, prompt) => {
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -9,11 +9,7 @@ export const sendPrompt = async (prompt) => {
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
-          {
-            role: "system",
-            content:
-              "You are a financial advisor expert, specialized in providing concise and practical advice based on the user's financial data.",
-          },
+          { role: "system", content: instruction },
           { role: "user", content: prompt },
         ],
         max_tokens: 100,

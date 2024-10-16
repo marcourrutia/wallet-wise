@@ -13,6 +13,7 @@ export const ChatGpt = () => {
   const [totalSavings, setTotalSavings] = useState(0);
   const [adviceChatGpt, setAdviceChatGpt] = useState("Advice by Chat GPT...");
   const [newDataAccount, setNewDataAccount] = useState(false);
+  const [movementData, setMovementData] = useState([]);
 
   const generateCacheKey = () => {
     return `advice-${store.flowSelected}-${totalIncomes}-${totalFixedExpenses}-${totalVariableExpenses}-${totalSavings}`;
@@ -23,14 +24,17 @@ export const ChatGpt = () => {
       `/movement/${id}`,
       store.accessToken
     );
-    if (status === 200) actions.setDataMovement(data.movement);
+    if (status === 200) setMovementData(data.movement);
     if (error) console.log("an error has occurred: ", error);
   };
 
   const newAdvice = (fullname, incomes, fixed, variable, savings, cacheKey) => {
+    const instruction =
+      "You are a financial advisor expert, specialized in providing concise and practical advice based on the user's financial data.";
+
     const prompt = `The user is named ${fullname}, and has a financial history for the previous month: incomes: ${incomes} CLP, fixed expenses: ${fixed} CLP, variable expenses: ${variable} CLP, savings: ${savings} CLP. Provide a brief, personalized financial advice based on this historical data for the previous month (max 350 characters).`;
 
-    sendPrompt(prompt).then((advice) => {
+    sendPrompt(instruction, prompt).then((advice) => {
       if (advice) {
         setAdviceChatGpt(advice);
         localStorage.setItem(cacheKey, advice);
@@ -55,10 +59,10 @@ export const ChatGpt = () => {
   useEffect(() => {
     if (store.flowSelected) getMovements(store.flowSelected);
     else setAdviceChatGpt("No flows...");
-  }, [store.flowSelected, store.accounts]);
+  }, [store.flowSelected]);
 
   useEffect(() => {
-    if (store.dataMovement) {
+    if (movementData) {
       let incomes = 0;
       let fixedExpenses = 0;
       let variableExpenses = 0;
@@ -71,7 +75,7 @@ export const ChatGpt = () => {
       const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
       const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
-      store.dataMovement.forEach((movement) => {
+      movementData.forEach((movement) => {
         const movementDate = new Date(movement.transaction_date);
         const movementMonth = movementDate.getUTCMonth();
         const movementYear = movementDate.getUTCFullYear();
@@ -101,35 +105,37 @@ export const ChatGpt = () => {
       setTotalVariableExpenses(variableExpenses);
       setTotalSavings(savings);
     }
-  }, [store.dataMovement]);
+  }, [movementData]);
 
   useEffect(() => {
-    const cacheKey = generateCacheKey();
-    const cachedAdvice = localStorage.getItem(cacheKey);
+    if (store.flowSelected) {
+      const cacheKey = generateCacheKey();
+      const cachedAdvice = localStorage.getItem(cacheKey);
 
-    if (
-      totalIncomes === 0 &&
-      totalFixedExpenses === 0 &&
-      totalVariableExpenses === 0 &&
-      totalSavings === 0
-    ) {
-      setAdviceChatGpt("No flows...");
-    } else if (cachedAdvice) {
-      setAdviceChatGpt(cachedAdvice);
-    } else if (
-      totalIncomes ||
-      totalFixedExpenses ||
-      totalVariableExpenses ||
-      totalSavings
-    ) {
-      newAdvice(
-        store.userFullName,
-        totalIncomes,
-        totalFixedExpenses,
-        totalVariableExpenses,
-        totalSavings,
-        cacheKey
-      );
+      if (
+        totalIncomes === 0 &&
+        totalFixedExpenses === 0 &&
+        totalVariableExpenses === 0 &&
+        totalSavings === 0
+      ) {
+        setAdviceChatGpt("No flows...");
+      } else if (cachedAdvice) {
+        setAdviceChatGpt(cachedAdvice);
+      } else if (
+        totalIncomes ||
+        totalFixedExpenses ||
+        totalVariableExpenses ||
+        totalSavings
+      ) {
+        newAdvice(
+          store.userFullName,
+          totalIncomes,
+          totalFixedExpenses,
+          totalVariableExpenses,
+          totalSavings,
+          cacheKey
+        );
+      }
     }
   }, [totalIncomes, totalFixedExpenses, totalVariableExpenses, totalSavings]);
 

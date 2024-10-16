@@ -18,7 +18,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       transaction: [],
       totalContribution: [],
       flowSelected: localStorage.getItem("flowSelected") || "",
-      dataMovement: JSON.parse(localStorage.getItem("dataMovement")) || [],
       isNewData: JSON.parse(localStorage.getItem("isNewData")) || false,
       newMovement: false,
     },
@@ -45,10 +44,6 @@ const getState = ({ getActions, getStore, setStore }) => {
       setAccessToken: (value) => {
         setStore({ accessToken: value });
         localStorage.setItem("jwt-token", value);
-      },
-      setDataMovement: (data) => {
-        setStore({ dataMovement: data });
-        localStorage.setItem("dataMovement", JSON.stringify(data));
       },
       setIsNewData: (value) => {
         setStore({ isNewData: value });
