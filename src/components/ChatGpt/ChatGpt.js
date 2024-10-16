@@ -34,6 +34,8 @@ export const ChatGpt = () => {
 
     const prompt = `The user is named ${fullname}, and has a financial history for the previous month: incomes: ${incomes} CLP, fixed expenses: ${fixed} CLP, variable expenses: ${variable} CLP, savings: ${savings} CLP. Provide a brief, personalized financial advice based on this historical data for the previous month (max 350 characters).`;
 
+    setAdviceChatGpt("Loading...");
+
     sendPrompt(instruction, prompt).then((advice) => {
       if (advice) {
         setAdviceChatGpt(advice);
