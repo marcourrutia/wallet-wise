@@ -5,3 +5,6 @@ export { default as misionLeftImg } from "./media/img-mision-left-img.png";
 export { default as visionLogo } from "./media/img-vision-png.png";
 export { default as imgVision } from "./media/img-section-vision.jpeg";
 export { default as imgGrafic } from "./media/grafico.jpg";
+export { default as imgWebDevelopment } from "./media/web-development.png";
+export { default as imgFullStack } from "./media/full-stack.png";
+export { default as imgSupport } from "./media/support.jpg";

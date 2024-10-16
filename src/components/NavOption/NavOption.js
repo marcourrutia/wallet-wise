@@ -15,7 +15,6 @@ export const NavOption = () => {
     <nav className="nav-container">
       <MainLogo />
       <div className="nav-btns-container">
-        <span className="login-span">Support</span>
         <div className="dropdown">
           <span className="login-span">About us</span>
           <div className="dropdown-content">
@@ -23,7 +22,15 @@ export const NavOption = () => {
             <span onClick={() => scrollToSection("vision")}>Vision</span>
           </div>
         </div>
-        <span className="login-span">Services</span>
+        <span
+          className="login-span"
+          onClick={() => scrollToSection("services")}
+        >
+          Services
+        </span>
+        <span className="login-span" onClick={() => scrollToSection("contact")}>
+          Contact us
+        </span>
         <button className="signup-btn-form" onClick={() => navigate("/signup")}>
           Sign up
         </button>
