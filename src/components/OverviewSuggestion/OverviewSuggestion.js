@@ -8,7 +8,7 @@ export const OverviewSuggestion = () => {
   return (
     <div className="content-fluid content-fluid-overview" id="mission-view">
       <div className="row row-overview">
-        <Link to={"/detailflow/BasicFinancial/"+accountId} className="col-6 justify-content-center d-flex card-hover-overview" >
+        <Link to={`/detailflow/${accountId}/basicfinancial`} className="col-6 justify-content-center d-flex card-hover-overview" >
           <div className="card card-main-overview">
             <div>
               <img src="../basic.jpg" alt="basic" className="img-overview" />
