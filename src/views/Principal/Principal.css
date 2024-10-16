@@ -99,3 +99,79 @@
 .mision-left-img img {
   width: 100%;
 }
+
+.main-services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 60%;
+  border-radius: 20px;
+  box-shadow: 13px 13px 10px rgba(0, 0, 0, 0.3);
+  background-color: whitesmoke;
+}
+
+.main-services h1 {
+  text-align: center;
+  margin: auto;
+}
+
+.services-img {
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.services-img img {
+  width: 100%;
+}
+
+.services-container {
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.services-container > div {
+  box-shadow: 13px 13px 10px rgba(0, 0, 0, 0.3);
+  width: 30%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-paragraph);
+  padding: 20px;
+  gap: 10px;
+}
+
+.services-container p {
+  font-family: var(--font-tertiary);
+}
+
+.main-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 20%;
+  border-radius: 20px;
+  box-shadow: 13px 13px 10px rgba(0, 0, 0, 0.3);
+  background-color: whitesmoke;
+  padding: 10px;
+  gap: 30px;
+}
+
+.contact-container {
+  font-size: 1.4em;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.contact-container a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
