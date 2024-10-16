@@ -5,9 +5,8 @@ import { Context } from "../../store/context";
 import { CalendarExpense } from "../../components/CalendarExpense/CalendarExpense";
 import { DetailMovementTwo } from "../../components/DetailMovementTwo/DetailMovementTwo";
 import "./FinanceChartView.css";
+import { ChatGpt2 } from "../../components/ChatGpt/ChatGpt2";
 import { BreadCrumb } from "../../components/BreadCrumb/BreadCrumb";
-
-
 
 export const FinanceChartView = () => {
   const state = useContext(Context);
@@ -27,17 +26,16 @@ export const FinanceChartView = () => {
     }
   }, [accountId]);
 
-  
   return (
     <div className="container">
-       <BreadCrumb />
+      <BreadCrumb />
       <div className="container container-grafic">
         <li className="calendar-graffic">
           <CalendarExpense onMonthSelect={handleMonthSelect} />
         </li>
       </div>
       <div className="title-grafic">
-          <span>Basic Financial Management (50/30/20 Rule)</span>
+        <span>Basic Financial Management (50/30/20 Rule)</span>
       </div>
       <div className="tab-content mt-4">
         {activeTab === "expense" && (
@@ -46,10 +44,16 @@ export const FinanceChartView = () => {
               selectedMonth={selectedMonth}
               selectedYear={selectedYear}
             />
+            <div className="fc-chatgpt-container">
+              <ChatGpt2
+                selectMonth={selectedMonth}
+                selectYear={selectedYear}
+                accountId={accountId}
+              />
+            </div>
           </>
         )}
       </div>
-      
     </div>
   );
 };

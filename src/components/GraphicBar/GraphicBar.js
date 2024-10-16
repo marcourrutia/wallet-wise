@@ -39,7 +39,7 @@ export const GraphicBar = () => {
   };
 
   useEffect(() => {
-    if (store.flowSelected) {
+    if (store.flowSelected > 0) {
       getMovements(store.flowSelected);
     } else {
       setData([]);
@@ -86,7 +86,7 @@ export const GraphicBar = () => {
           const dateB = new Date(`${b.month} 1, ${b.year}`);
           return dateA - dateB;
         })
-        .slice(-5);
+        .slice(-4);
 
       if (formattedData.length > 0) {
         setYear(formattedData[formattedData.length - 1].year);

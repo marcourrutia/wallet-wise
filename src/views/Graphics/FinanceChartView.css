@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.title-grafic{
+.title-grafic {
   color: white;
   background-color: #052145;
   height: 1.5cm;
@@ -19,4 +19,9 @@
   display: flex;
   justify-content: center;
   border-radius: 10px;
+}
+
+.fc-chatgpt-container {
+  max-width: 600px;
+  margin: auto;
 }
