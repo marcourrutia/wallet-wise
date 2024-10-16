@@ -5,6 +5,8 @@ export const BreadCrumb = () => {
   const { accountId } = useParams();
   const location = useLocation();
   const isGoalBaseView = location.pathname.endsWith("/goalbase");
+  const isBasicFinancialView = location.pathname.endsWith("/basicfinancial");
+
   const navigate = useNavigate();
 
   return (
@@ -34,6 +36,14 @@ export const BreadCrumb = () => {
               aria-current="page"
             >
               Goal Base
+            </li>
+          )}
+          {isBasicFinancialView && (
+            <li
+              className="breadcrumb-item active breadcrumb-item-better"
+              aria-current="page"
+            >
+              Basic Financial
             </li>
           )}
         </ol>

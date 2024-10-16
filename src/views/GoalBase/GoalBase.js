@@ -42,6 +42,13 @@ export const GoalBase = () => {
   };
 
   const handleDeleteGoal = (goalId) => {
+    const goalToDelete = goals.find((goal) => goal.id === goalId);
+    const canDelete = goalToDelete.total_contributed === 0;
+
+    if (!canDelete) {
+      alert("Cannot delete this goal because it has associated contributions.");
+      return;
+    }
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this goal?"
     );

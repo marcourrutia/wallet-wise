@@ -6,6 +6,7 @@ import { CalendarExpense } from "../../components/CalendarExpense/CalendarExpens
 import { DetailMovementTwo } from "../../components/DetailMovementTwo/DetailMovementTwo";
 import "./FinanceChartView.css";
 import { ChatGpt2 } from "../../components/ChatGpt/ChatGpt2";
+import { BreadCrumb } from "../../components/BreadCrumb/BreadCrumb";
 
 export const FinanceChartView = () => {
   const state = useContext(Context);
@@ -27,6 +28,7 @@ export const FinanceChartView = () => {
 
   return (
     <div className="container">
+      <BreadCrumb />
       <div className="container container-grafic">
         <li className="calendar-graffic">
           <CalendarExpense onMonthSelect={handleMonthSelect} />
