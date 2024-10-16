@@ -24,11 +24,11 @@ export const MovemenTab = () => {
 
   return (
     <div
-      className="tab-pane fade show active"
-      id="home-tab-pane"
+      className="tab-pane fade"
+      id="contact-tab-pane"
       role="tabpanel"
-      aria-labelledby="home-tab"
-      tabIndex="0"
+      aria-labelledby="contact-tab"
+      tabIndex="1"
     >
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
         <div className="hstack gap-2 justify-content-sm-end p-2">

@@ -11,18 +11,46 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
+import { get } from "../../services";
 
 export const GraphicBar = () => {
   const [data, setData] = useState([]);
   const [year, setYear] = useState("Year");
   const { store } = useContext(Context);
+  const [dataMovement, setDataMovement] = useState([]);
+
+  const getMovements = async (id) => {
+    const { data, status, error } = await get(
+      `/movement/${id}`,
+      store.accessToken
+    );
+    if (status === 200) setDataMovement(data.movement);
+    if (error) console.log("an error has occurred: ", error);
+  };
+
+  const formattedAmount = (amount) => {
+    return new Intl.NumberFormat("es-CL", {
+      style: "currency",
+      currency: "CLP",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
 
   useEffect(() => {
-    if (store.dataMovement) {
+    if (store.flowSelected) {
+      getMovements(store.flowSelected);
+    } else {
+      setData([]);
+    }
+  }, [store.flowSelected, store.isNewData, store.newMovement]);
+
+  useEffect(() => {
+    if (dataMovement) {
       let tempData = {};
 
-      store.dataMovement.forEach((movement) => {
+      dataMovement.forEach((movement) => {
         const movementDate = new Date(movement.transaction_date);
         const movementMonth = movementDate.toLocaleString("default", {
           month: "long",
@@ -50,15 +78,14 @@ export const GraphicBar = () => {
           default:
             break;
         }
-      }, []);
+      });
 
       const formattedData = Object.values(tempData)
         .sort((a, b) => {
           const dateA = new Date(`${a.month} 1, ${a.year}`);
           const dateB = new Date(`${b.month} 1, ${b.year}`);
-          return dateB - dateA;
+          return dateA - dateB;
         })
-        .reverse()
         .slice(-5);
 
       if (formattedData.length > 0) {
@@ -70,11 +97,12 @@ export const GraphicBar = () => {
           name: item.month,
           incomes: item.incomes,
           expenses: item.expenses,
+          incomesF: formattedAmount(item.incomes),
+          expensesF: formattedAmount(item.expenses),
         }))
       );
     }
-    console.log(data);
-  }, [store.dataMovement]);
+  }, [dataMovement]);
 
   return (
     <div className="graphic-bar-container">
@@ -87,7 +115,7 @@ export const GraphicBar = () => {
               height={300}
               data={data}
               margin={{
-                top: 5,
+                top: 25,
                 right: 30,
                 left: 20,
                 bottom: 5,
@@ -100,14 +128,18 @@ export const GraphicBar = () => {
               <Legend />
               <Bar
                 dataKey="incomes"
-                fill="#8884d8"
-                activeBar={<Rectangle fill="pink" stroke="blue" />}
-              />
+                fill="#2E86C1"
+                activeBar={<Rectangle fill="#4682B4" stroke="blue" />}
+              >
+                <LabelList dataKey="incomesF" position="top" fill="#fff" />
+              </Bar>
               <Bar
                 dataKey="expenses"
-                fill="#82ca9d"
-                activeBar={<Rectangle fill="gold" stroke="purple" />}
-              />
+                fill="#8E44AD"
+                activeBar={<Rectangle fill="#9B59B6" stroke="purple" />}
+              >
+                <LabelList dataKey="expensesF" position="top" fill="#fff" />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </>

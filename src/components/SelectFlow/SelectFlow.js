@@ -10,8 +10,11 @@ export const SelectFlow = () => {
     if (store.accounts.length > 0) {
       const activeFlows = store.accounts.filter((c) => c.state === true);
       setFlowData(activeFlows);
-      if (!store.flowSelected) {
+      if (activeFlows.length > 0) {
         actions.setFlowSelected(activeFlows[0].id);
+      } else {
+        setFlowData([]);
+        actions.setFlowSelected(null);
       }
     } else {
       setFlowData([]);

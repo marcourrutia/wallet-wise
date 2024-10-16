@@ -1,10 +1,11 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import "./BreadCrumb.css";
 
 export const BreadCrumb = () => {
   const { accountId } = useParams();
   const location = useLocation();
   const isGoalBaseView = location.pathname.endsWith("/goalbase");
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -15,7 +16,14 @@ export const BreadCrumb = () => {
       >
         <ol className="breadcrumb">
           <li className="breadcrumb-item ">
-            <a href="/home">Home</a>
+            <span
+              className="span-bread-crumb"
+              onClick={() => {
+                navigate("/home");
+              }}
+            >
+              Home
+            </span>
           </li>
           <li className="breadcrumb-item active breadcrumb-item-better">
             <a href={`/detailflow/${accountId}`}>Detail Flow</a>

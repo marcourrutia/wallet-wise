@@ -31,7 +31,7 @@ export const CategoryTab = () => {
       id="profile-tab-pane"
       role="tabpanel"
       aria-labelledby="profile-tab"
-      tabIndex="0"
+      tabIndex="2"
     >
       <div className="col-sm-auto col-12 mt-4 mt-sm-0">
         <div className="hstack gap-2 justify-content-sm-end p-2"></div>
