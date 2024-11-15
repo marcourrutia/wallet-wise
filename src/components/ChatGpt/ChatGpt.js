@@ -146,7 +146,6 @@ export const ChatGpt = () => {
       <div className="chatgpt-container-header">
         <div>
           <h5>Last Month's Financial Advice</h5>
-          <p>Powered by ChatGPT</p>
         </div>
         <button
           onClick={() => {

@@ -33,7 +33,7 @@ export const Principal = () => {
           <div className="mision-left-img">
             <img src={misionLeftImg} />
           </div>
-          <h1 className="mision-title">Our mision</h1>
+          <h1 className="mision-title">Our mission</h1>
           <p>
             Empowering people to take control of their financial well-being
             through simple, visual, and personalized tools that allow them to

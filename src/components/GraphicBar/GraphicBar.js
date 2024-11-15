@@ -52,7 +52,7 @@ export const GraphicBar = () => {
 
       dataMovement.forEach((movement) => {
         const movementDate = new Date(movement.transaction_date);
-        const movementMonth = movementDate.toLocaleString("default", {
+        const movementMonth = movementDate.toLocaleString("en-US", {
           month: "long",
         });
         const movementYear = movementDate.getUTCFullYear();
