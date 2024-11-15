@@ -20,9 +20,7 @@ export const FlowItem = ({
       className={`list-group-item li-flow ${isDisabled ? "disabled-item" : ""}`}
     >
       {isDisabled ? (
-        <span className="flow-name" onClick={() => onFlowClick(flow.id)}>
-          {flow.name}
-        </span>
+        <span className="flow-name">{flow.name}</span>
       ) : (
         <Link to={`/detailflow/${flow.id}`} className="flow-name">
           {flow.name}

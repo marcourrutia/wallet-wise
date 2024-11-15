@@ -133,7 +133,6 @@ export const ChatGpt2 = ({ selectMonth, selectYear, accountId }) => {
       <div className="chatgpt-container-header">
         <div>
           <h5>50/30/20 Rule advice</h5>
-          <p>Powered by ChatGPT</p>
         </div>
       </div>
       <hr></hr>

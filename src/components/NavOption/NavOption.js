@@ -18,7 +18,7 @@ export const NavOption = () => {
         <div className="dropdown">
           <span className="login-span">About us</span>
           <div className="dropdown-content">
-            <span onClick={() => scrollToSection("mision")}>Mision</span>
+            <span onClick={() => scrollToSection("mision")}>Mission</span>
             <span onClick={() => scrollToSection("vision")}>Vision</span>
           </div>
         </div>

@@ -62,6 +62,7 @@ export const CalendarExpense = ({ onMonthSelect = () => {} }) => {
             showNavigation={true}
             maxDate={lastDayOfCurrentMonth}
             className="calendar-style"
+            locale="en-US"
           />
         </div>
       )}
