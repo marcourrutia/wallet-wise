@@ -1,23 +1,15 @@
 export const sendPrompt = async (instruction, prompt) => {
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("http://localhost:5050/chatgpt", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY_CHAT_GPT}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: instruction },
-          { role: "user", content: prompt },
-        ],
-        max_tokens: 200,
-      }),
+      body: JSON.stringify({ instruction, prompt }),
     });
     const data = await response.json();
-    return data.choices[0].message.content;
+    return data.response;
   } catch (error) {
-    console.error("Error al conectar con OpenAI:", error);
+    console.error("Error al conectar con API:", error);
   }
 };
