@@ -1,6 +1,6 @@
 export const sendPrompt = async (instruction, prompt) => {
   try {
-    const response = await fetch("http://localhost:5050/chatgpt", {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/chatgpt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -54,17 +54,20 @@ const getState = ({ getActions, getStore, setStore }) => {
       },
       postToken: async (firstName, lastName, email) => {
         try {
-          const response = await fetch("http://localhost:5050/login_google", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              first_name: firstName,
-              last_name: lastName,
-              email: email,
-            }),
-          });
+          const response = await fetch(
+            `${process.env.REACT_APP_BASE_URL}/login_google`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+              }),
+            }
+          );
 
           if (!response.ok) {
             throw new Error("There is an error");
@@ -87,7 +90,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch("http://localhost:5050/type_of_movements", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/type_of_movements`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -108,7 +111,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch("http://localhost:5050/categorys", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/categorys`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -129,7 +132,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch("http://localhost:5050/transactions", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/transactions`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +153,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch("http://localhost:5050/type_of_movement", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/type_of_movement`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -175,7 +178,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch("http://localhost:5050/transaction", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/transaction`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -202,16 +205,19 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
         try {
-          const response = await fetch("http://localhost:5050/account", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              name: nameFlow,
-            }),
-          });
+          const response = await fetch(
+            `${process.env.REACT_APP_BASE_URL}/account`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                name: nameFlow,
+              }),
+            }
+          );
           if (!response.ok) {
             throw new Error("There is an error");
           }
@@ -227,13 +233,16 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
         try {
-          const response = await fetch("http://localhost:5050/account", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await fetch(
+            `${process.env.REACT_APP_BASE_URL}/account`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
           if (!response.ok) {
             throw new Error("There is an error");
@@ -252,7 +261,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch(`http://localhost:5050/account/${flowId}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/account/${flowId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -272,7 +281,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch(`http://localhost:5050/account/state/${flowId}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/account/state/${flowId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -301,7 +310,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         }
         try {
           const response = await fetch(
-            `http://localhost:5050/movement/${accountId}`,
+            `${process.env.REACT_APP_BASE_URL}/movement/${accountId}`,
             {
               method: "GET",
               headers: {
@@ -332,7 +341,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         }
         try {
           const response = await fetch(
-            `http://localhost:5050/goal/${accountId}`,
+            `${process.env.REACT_APP_BASE_URL}/goal/${accountId}`,
             {
               method: "GET",
               headers: {
@@ -366,7 +375,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         }
         try {
           const response = await fetch(
-            `http://localhost:5050/goal/${accountId}`,
+            `${process.env.REACT_APP_BASE_URL}/goal/${accountId}`,
             {
               method: "POST",
               headers: {
@@ -398,7 +407,7 @@ const getState = ({ getActions, getStore, setStore }) => {
           return;
         }
 
-        fetch(`http://localhost:5050/goal-by-account/${goalId}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/goal-by-account/${goalId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -420,7 +429,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         }
         try {
           const response = await fetch(
-            `http://localhost:5050/total-contributed/${accountId}`,
+            `${process.env.REACT_APP_BASE_URL}/total-contributed/${accountId}`,
             {
               method: "GET",
               headers: {
@@ -453,7 +462,7 @@ const getState = ({ getActions, getStore, setStore }) => {
         }
         try {
           const response = await fetch(
-            `http://localhost:5050/goal-by-account/${goalId}`,
+            `${process.env.REACT_APP_BASE_URL}/goal-by-account/${goalId}`,
             {
               method: "PUT",
               headers: {
@@ -484,13 +493,16 @@ const getState = ({ getActions, getStore, setStore }) => {
           console.error("Token not found. User might not be authenticated.");
           return;
         }
-        fetch(`http://localhost:5050/transaction/${transactionId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        fetch(
+          `${process.env.REACT_APP_BASE_URL}/transaction/${transactionId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
           .then((response) => {
             if (response.ok) {
               getActions().getTransaction();

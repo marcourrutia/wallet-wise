@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:5050";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const handleFetch = async (endpoint, method, body, token) => {
   const url = `${baseUrl}${endpoint}`;
